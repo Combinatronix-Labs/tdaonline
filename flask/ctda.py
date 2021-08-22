@@ -123,7 +123,7 @@ def getBetti(dgms, nontrivd, totald):
 #The extractExcel function extracts and prepares data from Excel files.
 #Accepts data held in a BufferedReader(BytesIO) wrapper stack.
 def extractExcel(file):
-  wb = openpyxl.load_workbook(file)
+  wb = load_workbook(file)
   sheet = wb[wb.sheetnames[0]]
   data = array(list(sheet.values))
   return data
