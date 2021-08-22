@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+  <head><title>TDA Online</title></head>
+  <body>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for i in messages %}
+    {{ i }}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <form action="" method="POST" enctype="multipart/form-data" novalidate>
+      {{ form.hidden_tag() }}
+      <p>
+        {{ form.file.label }}<br>
+        {{ form.file }}<br>
+      </p>
+      <p>
+        {{ form.maxdim.label }}<br>
+        {{ form.maxdim }}<br>
+      </p>
+      <p>
+        {{ form.coeff.label }}<br>
+        {{ form.coeff }}<br>
+      </p>
+      <p>
+        {{ form.delimiter.label }}<br>
+        {{ form.delimiter }}<br>
+      </p>
+      <p>
+        {{ form.lineterminator.label }}<br>
+        {{ form.lineterminator }}<br>
+      </p>
+      <p>
+        {{ form.submit }}
+      </p>
+    </form>
+  </body>
+</html>
