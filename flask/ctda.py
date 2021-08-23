@@ -12,6 +12,7 @@ from statistics import mean, median
 import numpy
 from ripser import ripser
 import matplotlib
+import matplotlib.pyplot
 from csv import reader
 from openpyxl import load_workbook
 matplotlib.use('Agg')
