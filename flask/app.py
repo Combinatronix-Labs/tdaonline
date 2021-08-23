@@ -29,11 +29,11 @@ def index():
   if form.submit.data:
     upload = form.file.data.read()
     co = copy(upload)
-    type = from_buffer(co)
-    if 'ASCII' in type:
+    type = from_buffer(co).upper()
+    if 'ASCII' in type or 'CSV' in type or 'TEXT' in type:
       t = 'csv'
       f = io.TextIOWrapper(io.BufferedReader(io.BytesIO(upload)))
-    if 'Excel' in type:
+    if 'EXCEL' in type:
       t = 'xls'
       f = io.BufferedReader(io.BytesIO(upload))
     try:
