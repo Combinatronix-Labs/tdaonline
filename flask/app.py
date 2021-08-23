@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, flash
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, SelectField, FileField
-from wtforms.validators import DataRequired
+from wtforms import SubmitField, SelectField, FileField, BooleanField
 from copy import copy
 from magic import from_buffer
 import os, io, base64, ctda
@@ -14,6 +13,8 @@ class MainForm(FlaskForm):
   file = FileField('Select file')
   maxdim = SelectField('Maximum dimension', choices=[(2, '2'), (1, '1'), (0, '0')])
   coeff = SelectField('Field Coefficient (7 is recommended for 3-dimensional data)', choices=[(7, '7'), (3, '3'), (2, '2')])
+  igLabels = BooleanField('Ignore first row (check this if the first row contains, say, labels)')
+  igEnum = BooleanField('Ignore first column (check this if the first column contains, say, the enumeration index)')
   delimiter = SelectField('Delimiter (if applicable; the comma is the most common delimiter if unsure)', choices=[(',', ','), (';', ';'), (':', ':'),(' ', ' '), ('|','|'), ('\t', 'tab')])
   lineterminator = SelectField('Line terminator (if applicable; the new line is the most common line terminator if unsure)', choices=[('\n', 'new line'), ('\n\n', 'double new line')])
   submit = SubmitField('Submit')
@@ -36,7 +37,7 @@ def index():
       t = 'xls'
       f = io.BufferedReader(io.BytesIO(upload))
     try:
-      result = ctda.analyze(f, t, int(form.maxdim.data), int(form.coeff.data), form.delimiter.data, form.lineterminator.data)
+      result = ctda.analyze(f, t, int(form.maxdim.data), int(form.coeff.data), form.delimiter.data, form.lineterminator.data, form.igLabels.data, form.igEnum.data)
       image = base64.b64encode(result[0].getvalue()).decode('utf-8')
       bar = base64.b64encode(result[1].getvalue()).decode('utf-8')
       return render_template('results.html', diagram=image, barcode=bar, betti=result[2], stats=result[3], raw=result[4], dim=result[5])

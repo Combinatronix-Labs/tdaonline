@@ -9,7 +9,7 @@
 from io import BytesIO
 from copy import copy
 from statistics import mean, median
-from numpy import array
+import numpy
 from ripser import ripser
 import matplotlib
 from csv import reader
@@ -24,11 +24,13 @@ matplotlib.use('Agg')
 #A variable is prepared as a BytesIO object to accept a byte stream. This is where the plot will be written so that it can be served to the client without being first written to any non-volatile server storage.
 #The data is plotted and the final plot written to the BytesIO variable, then the plot is cleared.
 #The data is returned to the Flask app as a list in the following way: [persistence diagram, persistence barcode, betti numbers and Euler characteristics, statistics, simplicial complex, list of dimensions with features]
-def analyze(file, type, maxdim=3, coeff=7, delimiter=',', lineterminator='\n'):
+def analyze(file, type, maxdim=3, coeff=7, delimiter=',', lineterminator='\n', igLabels=False, igEnum=False):
   try:
     if type == 'csv': data = extractCSV(file, delimiter, lineterminator)
     if type == 'xls': data = extractExcel(file)
   except: return
+  if igLabels: data = numpy.delete(data, (0), axis=0)
+  if igEnum: data = numpy.delete(data, (0), axis=1)
   maxd = len(data[0])
   if maxdim < maxd: maxd = maxdim
   dgms = ripser(data, coeff=coeff, maxdim=maxd)['dgms']
@@ -125,7 +127,7 @@ def getBetti(dgms, nontrivd, totald):
 def extractExcel(file):
   wb = load_workbook(file)
   sheet = wb[wb.sheetnames[0]]
-  data = array(list(sheet.values))
+  data = numpy.array(list(sheet.values))
   return data
 
 #The extractCVS function extracts and prepares data from CSV files.
@@ -140,5 +142,5 @@ def extractCSV(file, delimiter, lineterminator):
     for j in range(d):
       coordinates.append(table[i][j])
     data.append(coordinates)
-  data = array(data)
+  data = numpy.array(data)
   return data
