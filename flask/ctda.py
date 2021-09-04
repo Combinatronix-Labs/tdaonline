@@ -51,7 +51,7 @@ def analyze(file, type, maxdim=3, coeff=7, delimiter=',', lineterminator='\n', i
     m = max(m, max(dgms[i][:,1]))
   matplotlib.pyplot.legend(totald, loc='lower right')
   matplotlib.pyplot.plot((0, m), (0, m), color ='black', linestyle='dashed')
-  matplotlib.pyplot.savefig(buf, bbox_inches='tight')
+  matplotlib.pyplot.savefig(buf, bbox_inches='tight', format='svg')
   matplotlib.pyplot.clf()
   colours=['black', 'blue', 'red', 'purple', 'green']
   bar = BytesIO()
@@ -64,7 +64,7 @@ def analyze(file, type, maxdim=3, coeff=7, delimiter=',', lineterminator='\n', i
   for i in range(len(totald)):
     legend.append(matplotlib.patches.Patch(color=colours[totald[i]], label=totald[i]))
   matplotlib.pyplot.legend(handles=legend)
-  matplotlib.pyplot.savefig(bar, bbox_inches='tight')
+  matplotlib.pyplot.savefig(bar, bbox_inches='tight', format='svg')
   matplotlib.pyplot.clf()
   return [buf, bar, betti, stats, dgms, totald]
 
