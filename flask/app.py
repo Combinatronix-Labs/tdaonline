@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, redirect, flash
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, SelectField, FileField, BooleanField
+from flask_sessionstore import Session
+from flask_session_captcha import FlaskSessionCaptcha
+from flask_sqlalchemy import SQLAlchemy
 from copy import copy
 from magic import from_buffer
 import os, io, base64, ctda
@@ -8,6 +11,12 @@ import os, io, base64, ctda
 basedir = os.path.abspath(os.path.dirname(__file__))
 class Config(object):
   SECRET_KEY = os.urandom(12).hex()
+  CAPTCHA_ENABLE = True
+  CAPTCHA_LENGTH = 7
+  CAPTCHA_WIDTH = 200
+  CAPTCHA_HEIGHT = 60
+  SQLALCHEMY_DATABASE_URI = 'sqlite://'
+  SESSION_TYPE = 'sqlalchemy'
 
 try: maxSize = int(os.environ['MAXSIZE'])
 except: maxSize = 200
@@ -24,34 +33,40 @@ class MainForm(FlaskForm):
 
 app = Flask(__name__)
 app.config.from_object(Config)
+Session(app)
+captcha = FlaskSessionCaptcha(app)
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index():
   form = MainForm()
   if form.submit.data:
-    upload = form.file.data.read()
-    co = copy(upload)
-    type = from_buffer(co).upper()
-    if 'ASCII' in type or 'CSV' in type or 'TEXT' in type:
-      t = 'csv'
-      f = io.TextIOWrapper(io.BufferedReader(io.BytesIO(upload)))
-    elif 'EXCEL' in type:
-      t = 'xls'
-      f = io.BufferedReader(io.BytesIO(upload))
-    else:
-      flash('File type not yet supported or file format error.')
-      return render_template('index.html', form=form)
-    try:
-      result = ctda.analyze(f, t, int(form.maxdim.data), int(form.coeff.data), form.delimiter.data, form.lineterminator.data, form.igLabels.data, form.igEnum.data, maxSize)
-      if len(result) == 1:
-        flash(result[0])
+    if captcha.validate():
+      upload = form.file.data.read()
+      co = copy(upload)
+      type = from_buffer(co).upper()
+      if 'ASCII' in type or 'CSV' in type or 'TEXT' in type:
+        t = 'csv'
+        f = io.TextIOWrapper(io.BufferedReader(io.BytesIO(upload)))
+      elif 'EXCEL' in type:
+        t = 'xls'
+        f = io.BufferedReader(io.BytesIO(upload))
+      else:
+        flash('File type not yet supported or file format error.')
         return render_template('index.html', form=form)
-      image = base64.b64encode(result[0].getvalue()).decode('utf-8')
-      bar = base64.b64encode(result[1].getvalue()).decode('utf-8')
-      return render_template('results.html', diagram=image, barcode=bar, betti=result[2], stats=result[3], raw=result[4], dim=result[5])
-    except:
-      flash('There seems to a miscalculation.')
+      try:
+        result = ctda.analyze(f, t, int(form.maxdim.data), int(form.coeff.data), form.delimiter.data, form.lineterminator.data, form.igLabels.data, form.igEnum.data, maxSize)
+        if len(result) == 1:
+          flash(result[0])
+          return render_template('index.html', form=form)
+        image = base64.b64encode(result[0].getvalue()).decode('utf-8')
+        bar = base64.b64encode(result[1].getvalue()).decode('utf-8')
+        return render_template('results.html', diagram=image, barcode=bar, betti=result[2], stats=result[3], raw=result[4], dim=result[5])
+      except:
+        flash('There seems to a miscalculation.')
+        return render_template('index.html', form=form)
+    else:
+      flash('Captcha incorrect.')
       return render_template('index.html', form=form)
   return render_template('index.html', form=form)
 

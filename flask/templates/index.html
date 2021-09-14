@@ -37,6 +37,11 @@
         {{ form.lineterminator }}<br>
       </p>
       <p>
+         {{ captcha() }}<br>
+         Please type the numbers above in the box below.<br>
+         <input type="text" name="captcha">
+      <p>
+      <p>
         {{ form.submit }}
       </p>
     </form>
