@@ -9,8 +9,11 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config(object):
   SECRET_KEY = os.urandom(12).hex()
 
+try: maxSize = int(os.environ['MAXSIZE'])
+except: maxSize = 200
+
 class MainForm(FlaskForm):
-  file = FileField('Select file')
+  file = FileField('Select file. Currently supported file types are CSV and Excel; maximum data size accepted has been set to ' + str(maxSize) + ' points.')
   maxdim = SelectField('Maximum dimension', choices=[(2, '2'), (1, '1'), (0, '0')])
   coeff = SelectField('Field Coefficient (7 is recommended for 3-dimensional data)', choices=[(7, '7'), (3, '3'), (2, '2')])
   igLabels = BooleanField('Ignore first row (check this if the first row contains, say, labels)')
@@ -21,8 +24,6 @@ class MainForm(FlaskForm):
 
 app = Flask(__name__)
 app.config.from_object(Config)
-try: maxSize = int(os.environ['MAXSIZE'])
-except: maxSize = 200
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
