@@ -17,6 +17,7 @@ class Config(object):
   CAPTCHA_HEIGHT = 60
   SQLALCHEMY_DATABASE_URI = 'sqlite://'
   SESSION_TYPE = 'sqlalchemy'
+  SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 try: maxSize = int(os.environ['MAXSIZE'])
 except: maxSize = 200
