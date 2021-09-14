@@ -25,12 +25,13 @@ matplotlib.use('Agg')
 #A variable is prepared as a BytesIO object to accept a byte stream. This is where the plot will be written so that it can be served to the client without being first written to any non-volatile server storage.
 #The data is plotted and the final plot written to the BytesIO variable, then the plot is cleared.
 #The data is returned to the Flask app as a list in the following way: [persistence diagram, persistence barcode, betti numbers and Euler characteristics, statistics, simplicial complex, list of dimensions with features]
-def analyze(file, type, maxdim=3, coeff=7, delimiter=',', lineterminator='\n', igLabels=False, igEnum=False):
+def analyze(file, type, maxdim=3, coeff=7, delimiter=',', lineterminator='\n', igLabels=False, igEnum=False, maxSize=200):
   try:
     if type == 'csv': data = extractCSV(file, delimiter, lineterminator)
     if type == 'xls': data = extractExcel(file)
   except: return
   if igLabels: data = numpy.delete(data, (0), axis=0)
+  if len(data) > maxSize: return
   if igEnum: data = numpy.delete(data, (0), axis=1)
   maxd = len(data[0])
   if maxdim < maxd: maxd = maxdim

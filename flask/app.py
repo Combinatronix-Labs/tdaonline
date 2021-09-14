@@ -21,6 +21,8 @@ class MainForm(FlaskForm):
 
 app = Flask(__name__)
 app.config.from_object(Config)
+try: maxSize = int(os.environ['MAXSIZE'])
+except: maxSize = 200
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
@@ -37,7 +39,7 @@ def index():
       t = 'xls'
       f = io.BufferedReader(io.BytesIO(upload))
     try:
-      result = ctda.analyze(f, t, int(form.maxdim.data), int(form.coeff.data), form.delimiter.data, form.lineterminator.data, form.igLabels.data, form.igEnum.data)
+      result = ctda.analyze(f, t, int(form.maxdim.data), int(form.coeff.data), form.delimiter.data, form.lineterminator.data, form.igLabels.data, form.igEnum.data, maxSize)
       image = base64.b64encode(result[0].getvalue()).decode('utf-8')
       bar = base64.b64encode(result[1].getvalue()).decode('utf-8')
       return render_template('results.html', diagram=image, barcode=bar, betti=result[2], stats=result[3], raw=result[4], dim=result[5])
