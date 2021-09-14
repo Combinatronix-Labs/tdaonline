@@ -42,7 +42,10 @@ def index():
   form = MainForm()
   if form.submit.data:
     if captcha.validate():
-      upload = form.file.data.read()
+      try: upload = form.file.data.read()
+      except:
+        flash('Please select a file.')
+        return render_template('index.html', form=form)
       co = copy(upload)
       type = from_buffer(co).upper()
       if 'ASCII' in type or 'CSV' in type or 'TEXT' in type:
