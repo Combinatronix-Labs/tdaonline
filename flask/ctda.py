@@ -29,9 +29,9 @@ def analyze(file, type, maxdim=3, coeff=7, delimiter=',', lineterminator='\n', i
   try:
     if type == 'csv': data = extractCSV(file, delimiter, lineterminator)
     if type == 'xls': data = extractExcel(file)
-  except: return
+  except: return ['File format error.']
   if igLabels: data = numpy.delete(data, (0), axis=0)
-  if len(data) > maxSize: return
+  if len(data) > maxSize: return ['Data too large! Please submit a data set with ' + str(maxSize) + ' points or fewer (your file contains ' + str(len(data)) + ' points).']
   if igEnum: data = numpy.delete(data, (0), axis=1)
   maxd = len(data[0])
   if maxdim < maxd: maxd = maxdim
