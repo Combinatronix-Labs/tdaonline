@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+  {% block content %}
+    <style>
+      img {
+        border: 2px solid rgba(0, 128, 255, 0.6);
+        border-radius: 4px;
+      }
+    </style>
+    <p>
+      This page will walk you through each step of the data submission process. The data used in the example images is the <a href="static/1s3o_CA.csv">coordinate data of the alpha carbons</a> extracted from the <a href="https://www.rcsb.org/">Protein Data Bank</a>'s file on the <a href="https://www.rcsb.org/structure/1S3O">human mitochondrial single strand DNA binding protein (hmSSB)</a><sup><a href="#1">[1]</a></sup>.<br>
+    </p>
+      <h3>File Select</h3>
+    <p>
+      The first step is choosing the file that contains your data. Right now, TDA Online supports analysis only of data stored in CSV and Excel files, so make sure your data is stored in one of those. Click the "Choose File" button and select the file in the file selector that appears.
+    </p>
+    <h3>Maximum Dimension</h3>
+    <p>
+      The dimension referred to here is the dimension of the topological features to be computed. In general, it suffices to take the dimensions of your data and subtract one from that; if you're analyzing 3-dimensional data, you'd select a maximum dimension of 2 in order to get the full analysis of what you have. TDA Online performs automatic detection of the maximum possible dimension of features that can be computed and will fall back on that if you select something out of bounds, so if you're not sure what to pick, 2 is safe.
+    </p>
+    <h3>Field Coefficient</h3>
+    <p>
+      The field coefficient has to do with computation of the persistence diagram. Selecting a coefficient of 7 will help avoid the misclassification of non-orientable surfaces, so if you're not sure which dimension to select, 7 is a safe choice.
+    </p>
+    <h3>Whether to ignore the first row</h3>
+    <p>
+      Sometimes the first row in a data set is used to store labels rather than a point of data. For example, the built-in functions of the R interpreter include labels by default when writing CSV files. Selecting the option to ignore the first row will instruct TDA Online to drop the first row prior to analysis. If your data looks like<br>
+      <img src="static/img/0a.png"> or <img src="static/img/0b.png"><br>
+      you should check this box. However, choosing this option will drop the first row in your file regardless of what it actually is, so make sure it doesn't contain data you want included in the analysis.
+    </p>
+    <h3>Whether to ignore the first column</h3>
+    <p>
+      Sometimes data points in a set are enumerated, and the first column is used to store the enumeration index rather than a dimension of data.  For example, the built-in functions of the R interpreter include an enumeration index by default when writing CSV files. Selecting the option to ignore the first column will instruct TDA Online to drop the first column prior to analysis. If your data looks like<br>
+      <img src="static/img/1a.png"> or <img src="static/img/1b.png"><br>
+      you should check this box. However, choosing this option will drop the first column in your file regardless of what it actually is, so make sure it doesn't contain data you want included in the analysis.
+    </p>
+    <p>
+      Sometimes a data set will contain both labels and enumeration<br>
+      <img src="static/img/2a.png"> or <img src="static/img/2b.png"><br>
+      in which case you should check both.
+    </p>
+    <h3>Delimiters and Line Terminators (CSV Files Only)</h3>
+    <p>
+      Delimiters and line terminators are used to organize the data in a CSV file, so if you're uploading data in an Excel file, you can ignore the next two options. If you're uploading data in a CSV file and you're not sure what were used as the delimiter and line terminator, take a peek inside the file with any text editor; dimensions (columns) are separated within a data point by the delimiter and data points (rows) are separated from each other by the line terminator. The most common format for CSV files is to use a comma as the delimiter and a new line as the line terminator, like in the above images. By default, CSV files written by the built-in function of the Python interpreter use a comma as the delimiter and by convention either a new line or double new line will probably be used as the line terminator; by default, CSV files written by the R interpreter use a comma (write.csv()), a semicolon (write.csv2()), or a space (write.table()) as the delimiter and a new line as the line terminator. However, the write.csv2() function of the R interpreter uses commas in place of decimal points, but if you submit any data that actively follows this convention, TDA Online will throw an error.<br>
+      If you're still not sure, you can open your file with Microsoft Excel, LibreOffice Calc, or a similar application and export it as an Excel file instead.
+    </p>
+    <h3>The Captcha</h3>
+    <p>
+      <img src="static/img/3a.png"><br>
+      The last part to complete is the captcha. A typical captcha consists of an obscured image or set of images of letters, numbers, or objects and is used to help prevent automated use of a web service by bots. The captcha on TDA Online is a box of 7 numbers, and the last step before analysis is to enter the numbers you see into the input field right above the "Submit" button.<br>
+      <img src="static/img/3b.png"><br>
+    </p>
+    <p>
+      Once the form has been filled out, press "Submit" and the analysis will run. Depending on the size and complexity of the data you've submitted, analysis can take anywhere from a few second to several minutes. However, if there was an error with the form submission or the structure of your data, the page will promptly reload with an error message at the top.
+    </p>
+    <p>
+      Once analysis is complete, you'll be brought to the results page. Currently, no data is saved to the TDA Online servers, so make sure to save anything you may need.<br>
+      At the top of the page are the persistence diagram and barcode in SVG format.<br>
+      <img src="static/img/4.png"><br>
+      After that is the list of Betti numbers and Euler characteristics with an entry at every length at which a Betti number changes.<br>
+      <img src="static/img/5.png"><br>
+      In this example (and by approximation), the value of Betti 0 is 211 from length 0 until (but not including) length 3.6236. From 3.6236 to 3.6465, Betti 0 is 210; from 3.6465 to 3.6519 Betti 0 is 209, and so on.<br>
+      Following that is a list of various statistics about the features of your data by dimension, including the number of features, minimum and maximum (finite) lengths, and the mean and median lengths.<br>
+      <img src="static/img/6.png"><br>
+      Next are comparisons between the dimensions of your data's features, presented as ratios of their stats.<br>
+      <img src="static/img/7.png"><br>
+      Last is a list of NumPy arrays of the original results generated using the <a href="https://ripser.scikit-tda.org/">Ripser persistent homology package for Python</a>.<sup><a href="#2">[2]</a></sup> Each array represents a dimension of features, sorted by increasing order of dimension. The arrays here contain only their objects: each a single list containing the features of its dimension. If a dimension has no features, the list is empty. Otherwise, each feature is described by a list containing its times of birth and death.<br>
+      <img src="static/img/8.png"><br>
+      In this example, the list [0. , 3.62362599] represents a feature with a birth time of 0 and a death time of 3.62362599, and it appears in the first array, so it's a feature of dimension 0.
+    </p>
+    <h3>References</h3>
+    <ol>
+    <li id="1">Venclovas, C., Ginalski, K., Kang, C. (2004) Human mitochondrial single strand DNA binding protein (hmSSB) doi:<a href="http://doi.org/10.2210/pdb1S3O/pdb">10.2210/pdb1S3O/pdb</a></li>
+    <li id="2">Tralie, C., Saul, N., Bar-On, R. (2018) Ripser.py: A Lean Persistent Homology Library for Python doi:<a href="https://doi.org/10.21105/joss.00925">10.21105/joss.00925</a></li>
+    </ol>
+  {% endblock %}
