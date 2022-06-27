@@ -1,11 +1,105 @@
 <!DOCTYPE html>
-  <head><title>TDA Online - {{ title }}</title></head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ 'TDA Online' }} - {{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  </head>
   <body>
-  <p> <a href="index">Home</a> | 
-  <a href="analyzer">Try it</a> 
-  <a href="instructions">(how it works)</a> | 
-    {% block content %}
-    {% endblock %}
+    <header class="header">
+      <div id="hamburger-icon" onclick="toggleMobileMenu(this)">
+        <div class="barN bar1"></div>
+        <div class="barN bar2"></div>
+        <div class="barN bar3"></div>
+        <ul class="mobile-menu">
+          <li><a href="analyzer">Try it</a> </li>
+          <li><a href="instructions">(how it works)</a> </li>
+        </ul>
+      </div>
+      <div id="Brand">
+        <div id="BrandLogo" title="">
+          <a href="/" target="_self">
+            <img src="/static/img/tda_online_logo.png"
+              alt="logo" style="width: 106px; height: 80px; object-fit: contain; object-position: center center;"/>
+          </a>
+        </div>
+        <div id="BrandText">
+          <p><a href="/" target="_self">TDA Online</a></p>
+        </div>
+      </div>
+      <nav class="main-nav">
+        <ul class="nav-items">
+          <li class="nav-item"><a href="analyzer">Try it</a> </li>
+          <li class="nav-item"><a href="instructions">(how it works)</a> </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="MainContent">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for i in messages %}
+            {{ i }}
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        {% block content %}
+        {% endblock %}
+
+      </div>
+    </main>
+    <footer class="FooterContainer" id="footer" role="contentinfo">
+      <div class="FooterInner">
+        <div class="FooterNavWrapper">
+          <nav>
+            <div class="FooterBackToTopContainer">
+              <a class="FooterBackToTopLink" href="#">{{ 'Back To Top' }}</a>
+            </div>
+          </nav>
+        </div>
+        <div class="SqsLayout" id="footerBlocks">
+          <div class="SqsRow">
+            <div class="SqsCol">
+              <div class="SqsBlock">
+                <div class="SqsBlockContent">
+                  <div class="SqsBlockLegalLinks">
+                    <a class="FooterRouterLink" href="/">
+                      © 2022 {{ 'TDA Online. All Rights Reserved' }}
+                    </a>
+                    |<a class="FooterRouterLink" href="privacy_policy">{{ 'Privacy Policy' }}</a>|
+                    <a class="FooterRouterLink" href="terms_of_service">{{ 'Terms of Service' }}</a>
+                  </div>
+                  <br />
+                  <br />
+                  <div class="SqsBlockLegalLinks">
+                    Source code available at the <a class="FooterRouterLink" href="https://github.com/Combinatronix-Labs/tdaonline">Combinatronix Labs GitHub</a>.
+                  </div>
+                  <br />
+                  <br />
+                  <div class="SqsBlockSocial" stlye="padding: 0.5rem 0px;">
+                    <a class="FooterExternalLink"
+                      href="https://www.combinatronixlabs.org/"
+                      target="_blank"
+                      rel="noreferrer"
+                      style="display: flex; justify-content: center; flex-direction: row; color: #1f3c88; font-weight: 700"
+                    >
+                      <span>{{ 'Powered By' }}</span>
+                      <img
+                        src="/static/img/Combinatronix-Labs-Logo.png"
+                        height="28/"
+                        alt={''}
+                      />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="{{url_for('static', filename='js/main.js')}}"></script>
   </body>
-  <footer>Source code available at the <a href="https://github.com/Combinatronix-Labs/tdaonline">Combinatronix Labs GitHub</a>.</footer>
 </html>
