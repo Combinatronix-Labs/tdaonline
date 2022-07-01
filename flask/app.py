@@ -6,7 +6,7 @@ from flask_sessionstore import Session
 from flask_session_captcha import FlaskSessionCaptcha
 from flask_sqlalchemy import SQLAlchemy
 from copy import copy
-# from magic import from_buffer
+from magic import from_buffer
 import os
 import io
 import base64
@@ -17,7 +17,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
     SECRET_KEY = os.urandom(12).hex()
-    CAPTCHA_ENABLE = True
+    CAPTCHA_ENABLE = False
     CAPTCHA_LENGTH = 7
     CAPTCHA_WIDTH = 200
     CAPTCHA_HEIGHT = 60
@@ -29,7 +29,7 @@ class Config(object):
 try:
     maxSize = int(os.environ['MAXSIZE'])
 except Exception:
-    maxSize = 200
+    maxSize = 300
 
 
 class MainForm(FlaskForm):
