@@ -1,62 +1,144 @@
 {% extends "base.html" %}
   {% block content %}
-    <p>
-      <img src="data:image/svg+xml;base64,{{ diagram }}"></img>
-      <img src="data:image/svg+xml;base64,{{ barcode }}"></img>
-    </p>
-    <p>
-      Betti numbers and Euler characteristic:
-      <table>
-      <th>Length</th>
-      {% for i in range(betti|length - 2) %}
-      <th>Betti {{ i }}</th>
-      {% endfor %}
-      <th>Euler characteristic</th>
-      {% for i in range(betti[0]|length) %}
-      <tr>
-      <td>{{ betti[0][i] }}</td>
-      {% for j in range(betti|length - 1) %}
-      <td>{{ betti[j+1][i] }}</td>
-      {% endfor %}
-      {% endfor %}
-      </tr>
-      </table>
-      </p>
-      <p>
-      Statistics:
-      <table>
-        <th>Dimension</th><th>Number of features</th><th>Minimum length</th><th>Maximum nontrivial length</th><th>Mean length</th><th>Median length</th>
-        {% for i in range(dim|length) %}
-        <tr>
-        <td>{{ dim[i] }}</td>
-        {% for j in stats[i] %}
-        <td>{{ j }}</td>
-        {% endfor %}
-        </tr>
-        {% endfor %}
-      </table>
+    <div class="MainResultsPage">
+      <section class="ResultsGraphs">
+        <div class="PersistanceGraph">
+          <img src="data:image/svg+xml;base64,{{ diagram }}"></img>
+        </div>
+        <div class="BarcodeGraph">
+          <img src="data:image/svg+xml;base64,{{ barcode }}"></img>
+        </div>
+      </section>
+
+      <section class="BettiAndEuler">
+        <div class="BettiAndEulerTableContainer">
+          <table id="BettiAndEulerTable">
+            <thead>
+              <tr>
+                <th colspan="{{ betti|length }}">
+                  <span style="float: right; font-weight: normal; text-align: right; width: 6em;">
+                    [<input id="CollapseBettiAndEulerTable" type="button" onclick="collapseBettiAndEulerTable(this)" value="Hide">]
+                  </span>
+                  <h4>Betti numbers and Euler characteristic:</h4>
+                </th>
+              </tr>
+              <tr class="BettiAndEulerHeadRow">
+                <th>Length</th>
+                  {% for i in range(betti|length - 2) %}
+                    <th>Betti {{ i }}</th>
+                  {% endfor %}
+                <th>Euler characteristic</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in range(betti[0]|length) %}
+                <tr class="BettiAndEulerBodyRow">
+                  <td>{{ betti[0][i] }}</td>
+                  {% for j in range(betti|length - 1) %}
+                    <td>{{ betti[j+1][i] }}</td>
+                  {% endfor %}
+                </tr>
+              {% endfor %}  
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="Statistics">
+        <div class="StatisticsTableContainer">
+          <table id="StatisticsTable">
+            <thead>
+              <tr>
+                <th colspan="6">
+                  <span style="float: right; font-weight: normal; text-align: right; width: 6em;">
+                    [<input id="CollapseStatisticsTable" type="button" onclick="collapseStatisticsTable(this)" value="Hide">]
+                  </span>
+                  <h4>Statistics:</h4>
+                </th>
+              </tr>
+              <tr class="StatisticsHeadRow">
+                <th>Dimension</th>
+                <th>Number of features</th>
+                <th>Minimum length</th>
+                <th>Maximum nontrivial length</th>
+                <th>Mean length</th>
+                <th>Median length</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in range(dim|length) %}
+              <tr class="StatisticsBodyRow">
+                <td>{{ dim[i] }}</td>
+                {% for j in stats[i] %}
+                  <td>{{ j }}</td>
+                {% endfor %}
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       {% if stats[1] %}
-      </p>
-      <p>
-      Ratios:
-      <table>
-        <th>Dimensions</th><th>Ratio of number of features</th><th>Ratio of mean feature length</th>
-        {% set k = namespace(value=0) %}
-        {% for i in range(dim|length) %}
-        {% for j in range(dim|length) %}
-        {% if j > i %}
-        <tr>
-        <td>{{ dim[i] }}:{{ dim[j] }}</td><td>{{ stats[-1][k.value] }}</td><td>{{ stats[-1][k.value+1] }}</td>
-        </tr>
-        {% set k.value = k.value + 2 %}
-        {% endif %}
-        {% endfor %}
-        {% endfor %}
-      <table>
+        <section class="Ratios">
+            <table id="RatiosTable">
+              <thead>
+                <tr>
+                  <th colspan="6">
+                    <span style="float: right; font-weight: normal; text-align: right; width: 6em;">
+                      [<input id="CollapseRatiosTable" type="button" onclick="collapseRatiosTable(this)" value="Hide">]
+                    </span>
+                    <h4>Ratios:</h4>
+                  </th>
+                </tr>
+                <tr class="RatiosHeadRow">
+                  <th>Dimensions</th>
+                  <th>Ratio of number of features</th>
+                  <th>Ratio of mean feature length</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% set k = namespace(value=0) %}
+                  {% for i in range(dim|length) %}
+                  {% for j in range(dim|length) %}
+                    {% if j > i %}
+                    <tr class="RatiosBodyRow">
+                      <td>{{ dim[i] }}:{{ dim[j] }}</td>
+                      <td>{{ stats[-1][k.value] }}</td>
+                      <td>{{ stats[-1][k.value+1] }}</td>
+                    </tr>
+                    {% set k.value = k.value + 2 %}
+                    {% endif %}
+                  {% endfor %}
+                {% endfor %}
+              </tbody>
+            </table>
+        </section>
       {% endif %}
-    </p>
-    <p>
-      NumPy arrays of lifetime data:<br>
-      {{ raw }}
-    </p>
+
+      <section class="RawData">
+        <table id="RawDataTable">
+          <thead>
+            <tr>
+              <th colspan="2">
+                <span style="float: right; font-weight: normal; text-align: right; width: 6em;">
+                  [<input id="CollapseRawDataTable" type="button" onclick="collapseRawDataTable(this)" value="Hide">]
+                </span>
+                <h4>NumPy arrays of lifetime data:</h4>
+              </th>
+            </tr>
+            <tr class="RawDataHeadRow">
+              <th>Raw Data</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="RawDataBodyRow">
+              <td>
+                {{ raw }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
   {% endblock %}
