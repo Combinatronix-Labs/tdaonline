@@ -1,20 +1,62 @@
+:root {
+  --header-background-color: darkolivegreen;
+  --scrollbar-handle-color: var(--header-background-color);
+  --scrollbar-handle-hover-color: var(--header-background-color);
+  --main-background-color: gainsboro;
+  --img-border-color: var(var(--header-background-color));
+  --table-header-bg-color: var(--header-background-color);
+  --footer-background-color: #0f0f0f;
+  --link_text_color_light: white;
+}
+
 * {
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
 }
 
 body {
   position: absolute;
   width: 100%;
   height: 100%;
-  color: white;
   font-family: "Poppins", sans-serif;
-  --header-background-color: darkolivegreen;
-  --main-background-color: gainsboro;
-  --footer-background-color: #0f0f0f;
-  --link_text_color_light: white;
-  --link_text_color_dark: ;
+  color: white;
+  background: var(--main-background-color);
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+.active {
+  display: none;
+}
+
+/* width */
+::-webkit-scrollbar {
+  /* margin-top: 100px; */
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-handle-color);
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-handle-hover-color);
 }
 
 /* Header */
@@ -28,6 +70,7 @@ body {
   z-index: 1000;
   background-color: var(--header-background-color);
   text-decoration: none;
+  overflow: hidden;
 }
 
 /* Header: Hamburger */
@@ -230,11 +273,13 @@ nav a:hover,
 
 /* Main Content */
 main {
+  /* height: 100%; */
   padding: 0px 1rem;
 }
 .MainContent {
   width: 100%;
   padding: 100px 0px 0px 0px;
+  /* height: 100%; */
 }
 .MainContent img {
   border: 2px solid rgba(0, 128, 255, 0.6);
@@ -252,6 +297,7 @@ main {
   color: black;
 }
 .MainInstructionsPage section {
+  width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -264,14 +310,14 @@ main {
   font-weight: 600;
   margin: 0.5rem 0px;
 }
-.MainContent .ImageRow {
+.MainInstructionsPage .ImageRow {
   display: flex;
   flex-direction: row;
   justify-content: center;
   padding: 16px 0px;
   margin: 0.5rem 0px;
 }
-.MainContent .ImageRow p {
+.MainInstructionsPage .ImageRow p {
   margin: auto 3rem;
 }
 
