@@ -1,6 +1,66 @@
-{% extends "base.html" %}
-  {% block content %}
-    <p>
-      Welcome to TDA Online!
-    </p>
-  {% endblock %}
+{% extends "base.html" %} {% block content %}
+<div class="MainWelcomePage">
+  <section id="Showcase">
+    <div class="Container">
+      <div id="ShowcaseCTA">
+        <h1>Welcome to TDA Online</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo
+          repudiandae rerum libero ipsum asperiores omnis mollitia, nostrum
+          commodi placeat ea itaque modi corrupti corporis nam voluptas aut
+          reprehenderit eaque culpa.
+        </p>
+        <a href="#" class="btn">Read More</a>
+      </div>
+      <div id="ShowcaseAnimation">
+        <!-- <figure>
+          <img
+            alt=""
+            src="https://miro.medium.com/max/500/0*je-SFw4oqc5sUrl4"
+            width="650"
+            height="650"
+            loading="lazy"
+            role="presentation"
+          />
+        </figure> -->
+      </div>
+    </div>
+  </section>
+
+  <section class="Counters">
+    <div class="row">
+      <div class="column">
+        <div class="card">
+          <p><i class="fa fa-user"></i></p>
+          <h3>11+</h3>
+          <p>Partners</p>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="card">
+          <p><i class="fa fa-check"></i></p>
+          <h3>55+</h3>
+          <p>Projects</p>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="card">
+          <p><i class="fa fa-smile-o"></i></p>
+          <h3>100+</h3>
+          <p>Happy Clients</p>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="card">
+          <p><i class="fa fa-coffee"></i></p>
+          <h3>100+</h3>
+          <p>Meetings</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
