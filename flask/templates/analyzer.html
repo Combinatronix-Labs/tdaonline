@@ -1,48 +1,44 @@
-{% extends "base.html" %}
-  {% block content %}
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    {% for i in messages %}
-    {{ i }}
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
+{% extends "base.html" %} {% block content %}
+<div class="MainAnalyzerPage">
+  <section class="Messages">
+    {% with messages = get_flashed_messages() %} {% if messages %} {% for i in
+    messages %} {{ i }} {% endfor %} {% endif %} {% endwith %}
+  </section>
+  <section class="AnalyzerForm">
     <p><a href="instructions">Tell me how it works!</a></p>
     <form action="" method="POST" enctype="multipart/form-data" novalidate>
       {{ form.hidden_tag() }}
       <p>
-        {{ form.file.label }}<br>
-        {{ form.file }}<br>
+        {{ form.file.label }}<br />
+        {{ form.file }}<br />
       </p>
       <p>
-        {{ form.maxdim.label }}<br>
-        {{ form.maxdim }}<br>
+        {{ form.maxdim.label }}<br />
+        {{ form.maxdim }}<br />
       </p>
       <p>
-        {{ form.coeff.label }}<br>
-        {{ form.coeff }}<br>
+        {{ form.coeff.label }}<br />
+        {{ form.coeff }}<br />
+      </p>
+      <p>{{ form.igLabels }} {{ form.igLabels.label }}<br /></p>
+      <p>{{ form.igEnum }} {{ form.igEnum.label }}<br /></p>
+      <p>
+        {{ form.delimiter.label }}<br />
+        {{ form.delimiter }}<br />
       </p>
       <p>
-        {{ form.igLabels }} {{ form.igLabels.label }}<br>
+        {{ form.lineterminator.label }}<br />
+        {{ form.lineterminator }}<br />
       </p>
       <p>
-        {{ form.igEnum }} {{ form.igEnum.label }}<br>
+        {{ captcha() }}<br />
+        Please type the numbers above in the box below.<br />
+        <input type="text" name="captcha" />
       </p>
-      <p>
-        {{ form.delimiter.label }}<br>
-        {{ form.delimiter }}<br>
-      </p>
-      <p>
-        {{ form.lineterminator.label }}<br>
-        {{ form.lineterminator }}<br>
-      </p>
-      <p>
-         {{ captcha() }}<br>
-         Please type the numbers above in the box below.<br>
-         <input type="text" name="captcha">
-      <p>
-      <p>
-        {{ form.submit }}
-      </p>
+
+      <p></p>
+      <p>{{ form.submit }}</p>
     </form>
-  {% endblock %}
+  </section>
+</div>
+{% endblock %}
