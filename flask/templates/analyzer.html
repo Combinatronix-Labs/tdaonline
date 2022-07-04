@@ -4,40 +4,40 @@
     {% with messages = get_flashed_messages() %} {% if messages %} {% for i in
     messages %} {{ i }} {% endfor %} {% endif %} {% endwith %}
   </section>
-  <section class="AnalyzerForm">
+  <section class="Analyzer" >
     <p><a href="instructions">Tell me how it works!</a></p>
     <form action="" method="POST" enctype="multipart/form-data" novalidate>
       {{ form.hidden_tag() }}
-      <p>
+      <div class="AnalyzerFieldContainer">
         {{ form.file.label }}<br />
         {{ form.file }}<br />
-      </p>
-      <p>
-        {{ form.maxdim.label }}<br />
-        {{ form.maxdim }}<br />
-      </p>
-      <p>
-        {{ form.coeff.label }}<br />
-        {{ form.coeff }}<br />
-      </p>
-      <p>{{ form.igLabels }} {{ form.igLabels.label }}<br /></p>
-      <p>{{ form.igEnum }} {{ form.igEnum.label }}<br /></p>
-      <p>
-        {{ form.delimiter.label }}<br />
-        {{ form.delimiter }}<br />
-      </p>
-      <p>
-        {{ form.lineterminator.label }}<br />
-        {{ form.lineterminator }}<br />
-      </p>
-      <p>
+      </div>
+      <div class="AnalyzerFieldContainer">
+        {{ form.maxdim }}
+        {{ form.maxdim.label }} <br />
+        {{ form.coeff }}
+        {{ form.coeff.label }}
+      </div>
+      <div class="AnalyzerFieldContainer">
+        {{ form.igLabels }} 
+        {{ form.igLabels.label }} <br />
+
+        {{ form.igEnum }} 
+        {{ form.igEnum.label }}
+      </div>
+      <div class="AnalyzerFieldContainer">
+        {{ form.delimiter }}
+        {{ form.delimiter.label }} <br />
+
+        {{ form.lineterminator }}
+        {{ form.lineterminator.label }}
+      </div>
+      <div class="AnalyzerFieldContainer">
         {{ captcha() }}<br />
         Please type the numbers above in the box below.<br />
         <input type="text" name="captcha" />
-      </p>
-
-      <p></p>
-      <p>{{ form.submit }}</p>
+      </div>
+      <div class="FormSumit">{{ form.submit }}</div>
     </form>
   </section>
 </div>

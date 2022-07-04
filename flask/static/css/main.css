@@ -31,7 +31,9 @@ a {
 ul {
   list-style: none;
 }
-
+img {
+  border: 2px solid var(--img-border-color);
+}
 .active {
   display: none;
 }
@@ -45,13 +47,20 @@ ul {
 /* Track */
 ::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px grey;
+  -webkit-box-shadow: inset 0 0 6px rgb(4, 4, 4);
+  -webkit-border-radius: 10px;
   border-radius: 5px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: var(--scrollbar-handle-color);
+  background: rgba(13, 9, 9, 0.8);
   border-radius: 5px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
 /* Handle on hover */
@@ -272,13 +281,10 @@ nav a:hover,
 }
 
 /* Main Content */
-main {
-  /* height: 100%; */
-  padding: 0px 1rem;
-}
 .MainContent {
   width: 100%;
-  padding: 100px 0px 0px 0px;
+  padding: 96px 0px 0px 0px;
+  margin: 0px;
   /* height: 100%; */
 }
 .MainContent img {
@@ -288,22 +294,30 @@ main {
 
 /* Main Content: Welcome Page */
 .MainWelcomePage {
+  position: relative;
   width: 100%;
   /* height: 100%; */
   /* display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center; */
-  padding: 0px 1.5rem;
-  margin: 1rem 0px;
+  /* padding: 0px 1.5rem; */
+  /* margin: 1rem 0px; */
   color: black;
+  overflow-x: hidden;
+}
+.MainWelcomePage .Background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
 }
 .MainWelcomePage section {
   /* display: flex;
   justify-content: space-between;
   flex-direction: column; */
   margin: 1rem 0px;
-  padding: 0px 0.5rem;
+  padding: 0px 5rem;
 }
 
 .MainWelcomePage #Showcase {
@@ -413,11 +427,26 @@ main {
   width: 100%;
   display: flex;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: column;<div class="FormSumit" > {
+        {
+        form.submit
+      }
+    }
+  
+    </div >
   margin: 1rem 0px;
   padding: 0px 0.5rem;
 }
+.Analyzer form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 
+}
+.AnalyzerFieldContainer {
+  margin: 1rem 0;
+}
 /* Main Content: Results Page */
 .MainResultsPage {
   width: 100%;
