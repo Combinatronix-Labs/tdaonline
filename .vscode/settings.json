@@ -2,5 +2,6 @@
   "python.formatting.provider": "autopep8",
   "python.linting.enabled": true,
   "python.linting.pycodestyleEnabled": true,
-  "python.linting.pycodestyleArgs": ["--ignore=E501"]
+  "python.linting.pycodestyleArgs": ["--ignore=E501"],
+  "terminal.integrated.cwd": "${workspaceFolder}/flask"
 }
