@@ -120,4 +120,5 @@ def analyzerResults():
         stats=result.stats,
         raw=result.dgms,
         dim=result.totald,
+        latest_result=result.toJSON()
     )

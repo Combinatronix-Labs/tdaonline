@@ -140,5 +140,20 @@
           </tbody>
         </table>
       </section>
+      {% if latest_result %}
+      <span data-latest-result="{{ latest_result }}" id="latest-result" hidden></span>
+      {% endif %}
+      <script>
+        // Load result data to session storage if not already set
+        if(window.sessionStorage.getItem("current-result") == null){
+          window.sessionStorage.setItem(
+            "current-result", 
+            document
+            .getElementById("latest-result")
+            .getAttribute("data-latest-result")
+            );
+          }
+          var result = window.sessionStorage.getItem("current-result");
+      </script>
     </div>
   {% endblock %}
