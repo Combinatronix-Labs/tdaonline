@@ -147,10 +147,10 @@
         // Load result data to session storage if not already set
         if(window.sessionStorage.getItem("current-result") == null){
           window.sessionStorage.setItem(
-            "current-result", 
-            document
-            .getElementById("latest-result")
-            .getAttribute("data-latest-result")
+              "current-result", 
+              document
+                .getElementById("latest-result")
+                .getAttribute("data-latest-result")
             );
           }
           var result = window.sessionStorage.getItem("current-result");
