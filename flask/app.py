@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, flash
+from typing import List
+from flask import Flask, render_template, request, redirect, flash, session
 from flask_wtf import FlaskForm
 from flask_babel import Babel, _
 from wtforms import SubmitField, SelectField, FileField, BooleanField
@@ -9,8 +10,9 @@ from copy import copy
 from magic import from_buffer
 import os
 import io
-import base64
 import ctda
+from models.result.error import ErrorResult
+from models.result.successful import SuccessfulResult
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -91,12 +93,11 @@ def analyzer():
             try:
                 result = ctda.analyze(f, t, int(form.maxdim.data), int(
                     form.coeff.data), form.delimiter.data, form.lineterminator.data, form.igLabels.data, form.igEnum.data, maxSize)
-                if len(result) == 1:
-                    flash(result[0])
+                if result is ErrorResult:
+                    flash(result)
                     return render_template('analyzer.html', title="Analyzer", form=form)
-                image = base64.b64encode(result[0].getvalue()).decode('utf-8')
-                bar = base64.b64encode(result[1].getvalue()).decode('utf-8')
-                return render_template('results.html', title="Results", diagram=image, barcode=bar, betti=result[2], stats=result[3], raw=result[4], dim=result[5])
+                session['last_result'] = result.toJSON()
+                return redirect('/analyzer/results')
             except Exception:
                 flash('There seems to a miscalculation.')
                 return render_template('analyzer.html', title="Analyzer", form=form)
@@ -104,3 +105,19 @@ def analyzer():
             flash('Captcha incorrect.')
             return render_template('analyzer.html', title="Analyzer", form=form)
     return render_template('analyzer.html', title="Analyzer", form=form)
+
+
+@app.route('/analyzer/results', methods=['GET'])
+def analyzerResults():
+    encoded = session['last_result']
+    result = SuccessfulResult.fromJson(encoded=encoded)
+    return render_template(
+        'results.html',
+        title="Results",
+        diagram=result.diagram,
+        barcode=result.barcode,
+        betti=result.betti,
+        stats=result.stats,
+        raw=result.dgms,
+        dim=result.totald,
+    )

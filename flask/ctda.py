@@ -1,9 +1,11 @@
-# This is the support library for TDA Online. It contains various functions for processing file analysis requests as passed to it by the Flask app, unified under the 'analyze' function.
-# The accompanying Flask app sends a file in either a TextIO or ByteIO wrapper with information on file type as determined by magic. Dimensions of the data are automatically determined and data is extracted and organized into a NumPy array.
-# Analysis is through ripser, taking the maximum feature dimension as the minimum of the dimension of the data and the maxdim value passed by the Flask app. Betti numbers and the Euler characteristics are calculated at every change, and statistical analysis is performed.
-# Stats are provided for each dimension of nonempty results in the following presentation: [number of features, min length, max length, mean length, median length]; max, mean, and median calculations ignore the 0-dimensional feature of infinite length. The lists are collected in the superlist 'stats' in increasing dimension order.
-# Ratios are calculated if the resultant features span at least 2 dimensions. Ratios are ordered in 'lexicographical order' (0:1, 0:2, 1:2) with ratios involving any empty set of features omitted. The resulting list is appended as the last item to 'stats.'
-# Support is currently for CSV files with the capability to accept any delimiter and any line terminator and for Excel files. There are plans to add support for other files including PDB (Protein Data Bank) files.
+'''
+    This is the support library for TDA Online. It contains various functions for processing file analysis requests as passed to it by the Flask app, unified under the 'analyze' function.
+    The accompanying Flask app sends a file in either a TextIO or ByteIO wrapper with information on file type as determined by magic. Dimensions of the data are automatically determined and data is extracted and organized into a NumPy array.
+    Analysis is through ripser, taking the maximum feature dimension as the minimum of the dimension of the data and the maxdim value passed by the Flask app. Betti numbers and the Euler characteristics are calculated at every change, and statistical analysis is performed.
+    Stats are provided for each dimension of nonempty results in the following presentation: [number of features, min length, max length, mean length, median length]; max, mean, and median calculations ignore the 0-dimensional feature of infinite length. The lists are collected in the superlist 'stats' in increasing dimension order.
+    Ratios are calculated if the resultant features span at least 2 dimensions. Ratios are ordered in 'lexicographical order' (0:1, 0:2, 1:2) with ratios involving any empty set of features omitted. The resulting list is appended as the last item to 'stats.'
+    Support is currently for CSV files with the capability to accept any delimiter and any line terminator and for Excel files. There are plans to add support for other files including PDB (Protein Data Bank) files.
+'''
 
 # import packages and set Matplotlib to output to buffer
 from io import BytesIO
@@ -15,18 +17,12 @@ import matplotlib
 import matplotlib.pyplot
 from csv import reader
 from openpyxl import load_workbook
+from models.result.error import *
+from models.result.successful import *
 
 matplotlib.use("Agg")
 
 
-# This is he function that accepts all input from the Flask app. Provided the file data and the file type, it first directs files for data extraction appropriately. In the case an unsupported file is submitted, automatically returns.
-# Next, the function determines the dimension of the data and picks the minimum between it and the max dimension specified. This is done to avoid attempting analysis for nonexistent dimensions, while still respecting that only the requested analysis is performed.
-# The simplicial complex is computed, and dimensions with features are determined.
-# Next, it calls functions to get the betti numbers, Euler characteristics, and statistics.
-# The next sequence of steps involving plot creation are performed once for the persistence diagram and once for the persistence barcode:
-# A variable is prepared as a BytesIO object to accept a byte stream. This is where the plot will be written so that it can be served to the client without being first written to any non-volatile server storage.
-# The data is plotted and the final plot written to the BytesIO variable, then the plot is cleared.
-# The data is returned to the Flask app as a list in the following way: [persistence diagram, persistence barcode, betti numbers and Euler characteristics, statistics, simplicial complex, list of dimensions with features]
 def analyze(
     file,
     type,
@@ -37,24 +33,28 @@ def analyze(
     igLabels=False,
     igEnum=False,
     maxSize=200,
-):
+) -> Result:
+    '''
+        This is he function that accepts all input from the Flask app. Provided the file data and the file type, it first directs files for data extraction appropriately. In the case an unsupported file is submitted, automatically returns.
+        Next, the function determines the dimension of the data and picks the minimum between it and the max dimension specified. This is done to avoid attempting analysis for nonexistent dimensions, while still respecting that only the requested analysis is performed.
+        The simplicial complex is computed, and dimensions with features are determined.
+        Next, it calls functions to get the betti numbers, Euler characteristics, and statistics.
+        The next sequence of steps involving plot creation are performed once for the persistence diagram and once for the persistence barcode:
+        A variable is prepared as a BytesIO object to accept a byte stream. This is where the plot will be written so that it can be served to the client without being first written to any non-volatile server storage.
+        The data is plotted and the final plot written to the BytesIO variable, then the plot is cleared.
+        The data is returned to the Flask app as a list in the following way: [persistence diagram, persistence barcode, betti numbers and Euler characteristics, statistics, simplicial complex, list of dimensions with features]
+    '''
     try:
         if type == "csv":
             data = extractCSV(file, delimiter, lineterminator)
         if type == "xls":
             data = extractExcel(file)
     except Exception:
-        return ["File format error."]
+        return FormattingErrorResult()
     if igLabels:
         data = numpy.delete(data, (0), axis=0)
     if len(data) > maxSize:
-        return [
-            "Data too large! Please submit a data set with "
-            + str(maxSize)
-            + " points or fewer (your file contains "
-            + str(len(data))
-            + " points)."
-        ]
+        return InputSizeErrorResult(maxSize=maxSize, inputLength=len(data))
     if igEnum:
         data = numpy.delete(data, (0), axis=1)
     maxd = len(data[0])
@@ -100,11 +100,18 @@ def analyze(
     matplotlib.pyplot.legend(handles=legend)
     matplotlib.pyplot.savefig(bar, bbox_inches="tight", format="svg")
     matplotlib.pyplot.clf()
-    return [buf, bar, betti, stats, dgms, totald]
+    return SuccessfulResult(
+        base64.b64encode(buf.getvalue()).decode('utf-8'), 
+        base64.b64encode(bar.getvalue()).decode('utf-8'), 
+        betti, 
+        stats, 
+        dgms, 
+        totald
+    )
 
 
-# The getStats funtion accepts the simplicial complex and produces and returns the stats and ratios described in the overview at the top.
 def getStats(dgms, nontrivd, totald):
+    """The getStats funtion accepts the simplicial complex and produces and returns the stats and ratios described in the overview at the top."""
     stats = [[len(dgms[0])]]
     lifetimes = []
     for i in range(len(dgms[0]) - 1):
@@ -129,8 +136,8 @@ def getStats(dgms, nontrivd, totald):
     return stats
 
 
-# The getBetti function accepts the simplicial complex and calculates the betti numbers and Euler characteristic every time they change.
 def getBetti(dgms, nontrivd, totald):
+    """The getBetti function accepts the simplicial complex and calculates the betti numbers and Euler characteristic every time they change."""
     tchanges = []
     for i in range(len(dgms[0]) - 1):
         tchanges.append(dgms[0][i][0])
@@ -165,18 +172,22 @@ def getBetti(dgms, nontrivd, totald):
     return betti
 
 
-# The extractExcel function extracts and prepares data from Excel files.
-# Accepts data held in a BufferedReader(BytesIO) wrapper stack.
 def extractExcel(file):
+    '''
+        The extractExcel function extracts and prepares data from Excel files.
+        Accepts data held in a BufferedReader(BytesIO) wrapper stack.
+    '''
     wb = load_workbook(file)
     sheet = wb[wb.sheetnames[0]]
     data = numpy.array(list(sheet.values))
     return data
 
 
-# The extractCVS function extracts and prepares data from CSV files.
-# Accepts data held in a TextIO(BufferedReader(BytesIO)) wrapper stack, the delimiter, and the line terminator.
 def extractCSV(file, delimiter, lineterminator):
+    '''
+        The extractCVS function extracts and prepares data from CSV files.
+        Accepts data held in a TextIO(BufferedReader(BytesIO)) wrapper stack, the delimiter, and the line terminator.
+    '''
     table = list(reader(file, delimiter=delimiter,
                  lineterminator=lineterminator))
     tableLength = len(table)

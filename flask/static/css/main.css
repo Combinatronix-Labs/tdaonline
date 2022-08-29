@@ -427,13 +427,7 @@ nav a:hover,
   width: 100%;
   display: flex;
   justify-content: center;
-  flex-direction: column;<div class="FormSumit" > {
-        {
-        form.submit
-      }
-    }
-  
-    </div >
+  flex-direction: column;
   margin: 1rem 0px;
   padding: 0px 0.5rem;
 }
