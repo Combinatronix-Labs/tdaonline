@@ -109,7 +109,10 @@ def analyzer():
 
 @app.route('/analyzer/results', methods=['GET'])
 def analyzerResults():
-    encoded = session['last_result']
+    if 'last_result' in session:
+        encoded = session['last_result']
+    else:
+        encoded = None
     result = SuccessfulResult.fromJson(encoded=encoded)
     return render_template(
         'results.html',
@@ -120,4 +123,5 @@ def analyzerResults():
         stats=result.stats,
         raw=result.dgms,
         dim=result.totald,
+        latest_result=result.toJSON()
     )

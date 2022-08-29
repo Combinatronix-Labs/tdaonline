@@ -1,5 +1,5 @@
 from io import BytesIO
-from numpy import ndarray
+from numpy import ndarray, savetxt, load, genfromtxt
 import pickle
 import base64
 from typing import Any, List
@@ -20,7 +20,7 @@ class SuccessfulResult(Result):
         betti: List[List[int]],
         stats: List[List[int]],
         dgms: List[ndarray],
-        totald: List
+        totald: List[int]
     ) -> None:
         super().__init__()
         self.diagram = diagram
@@ -31,23 +31,36 @@ class SuccessfulResult(Result):
         self.totald = totald
 
     def toJSON(self) -> str:
+        raw = []
+        for a in self.dgms:
+            memfile = BytesIO()
+            savetxt(memfile, a)
+            raw.append(memfile.getvalue().decode('latin-1'))
+
         return json.dumps({
             'diagram': self.diagram,
             'barcode': self.barcode,
             'betti': self.betti,
             'stats': self.stats,
-            'raw': pickle.dumps(self.dgms).decode('latin-1'),
-            'dim': pickle.dumps(self.totald).decode('latin-1'),
+            'raw': raw,
+            'dim': self.totald,
         })
 
     @staticmethod
     def fromJson(encoded: str):
         decoded = json.loads(encoded)
+        dgms = []
+        for a in decoded['raw']:
+            memfile = BytesIO()
+            memfile.write(a.encode('latin-1'))
+            memfile.seek(0)
+            # dgms.append(load(file=memfile, encoding='latin1', mmap_mode='r'))
+            dgms.append(genfromtxt(memfile))
         return SuccessfulResult(
-            decoded['diagram'],
-            decoded['barcode'],
-            decoded['betti'],
-            decoded['stats'],
-            pickle.loads(decoded['raw'].encode('latin-1')),
-            pickle.loads(decoded['dim'].encode('latin-1')),
+            diagram=decoded['diagram'],
+            barcode=decoded['barcode'],
+            betti=decoded['betti'],
+            stats=decoded['stats'],
+            dgms=dgms,
+            totald=decoded['dim'],
         )

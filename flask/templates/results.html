@@ -22,23 +22,12 @@
                   <h4>Betti numbers and Euler characteristic:</h4>
                 </th>
               </tr>
-              <tr class="BettiAndEulerHeadRow">
+              <tr class="BettiAndEulerHeadRow" id="betti-euler-table-header">
                 <th>Length</th>
-                  {% for i in range(betti|length - 2) %}
-                    <th>Betti {{ i }}</th>
-                  {% endfor %}
-                <th>Euler characteristic</th>
+                <th id="betti-euler-table-last-header">Euler characteristic</th>
               </tr>
             </thead>
-            <tbody>
-              {% for i in range(betti[0]|length) %}
-                <tr class="BettiAndEulerBodyRow">
-                  <td>{{ betti[0][i] }}</td>
-                  {% for j in range(betti|length - 1) %}
-                    <td>{{ betti[j+1][i] }}</td>
-                  {% endfor %}
-                </tr>
-              {% endfor %}  
+            <tbody id="betti-euler-table-body"> 
             </tbody>
           </table>
         </div>
@@ -65,58 +54,13 @@
                 <th>Median length</th>
               </tr>
             </thead>
-            <tbody>
-              {% for i in range(dim|length) %}
-              <tr class="StatisticsBodyRow">
-                <td>{{ dim[i] }}</td>
-                {% for j in stats[i] %}
-                  <td>{{ j }}</td>
-                {% endfor %}
-              </tr>
-              {% endfor %}
+            <tbody id="statistics-body">
             </tbody>
           </table>
         </div>
       </section>
 
-      {% if stats[1] %}
-        <section class="Ratios">
-            <table id="RatiosTable">
-              <thead>
-                <tr>
-                  <th colspan="6">
-                    <span style="float: right; font-weight: normal; text-align: right; width: 6em;">
-                      [<input id="CollapseRatiosTable" type="button" onclick="collapseRatiosTable(this)" value="Hide">]
-                    </span>
-                    <h4>Ratios:</h4>
-                  </th>
-                </tr>
-                <tr class="RatiosHeadRow">
-                  <th>Dimensions</th>
-                  <th>Ratio of number of features</th>
-                  <th>Ratio of mean feature length</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% set k = namespace(value=0) %}
-                  {% for i in range(dim|length) %}
-                  {% for j in range(dim|length) %}
-                    {% if j > i %}
-                    <tr class="RatiosBodyRow">
-                      <td>{{ dim[i] }}:{{ dim[j] }}</td>
-                      <td>{{ stats[-1][k.value] }}</td>
-                      <td>{{ stats[-1][k.value+1] }}</td>
-                    </tr>
-                    {% set k.value = k.value + 2 %}
-                    {% endif %}
-                  {% endfor %}
-                {% endfor %}
-              </tbody>
-            </table>
-        </section>
-      {% endif %}
-
-      <section class="RawData">
+      <section class="RawData" id="raw-data-section">
         <table id="RawDataTable">
           <thead>
             <tr>
@@ -131,14 +75,158 @@
               <th>Raw Data</th>
             </tr>
           </thead>
-          <tbody>
-            <tr class="RawDataBodyRow">
-              <td>
-                {{ raw }}
-              </td>
-            </tr>
+          <tbody id="raw-data-table-body">
+            
           </tbody>
         </table>
       </section>
+      {% if latest_result %}
+      <span data-latest-result="{{ latest_result }}" id="latest-result" hidden></span>
+      {% endif %}
+      <script>
+        function loadBettiEulerTable(result){
+          // load header
+          const headerElem = document.getElementById("betti-euler-table-header");
+          const lastHeaderColElem = document.getElementById("betti-euler-table-last-header");
+          for (var i = 0; i < result.betti.length-2; i++) {
+            const colHeaderElem = document.createElement("th");
+            const newContent = document.createTextNode("Betti " + i);
+            colHeaderElem.appendChild(newContent);
+            headerElem.insertBefore(colHeaderElem,lastHeaderColElem);
+          }
+
+          // load body
+          const bodyElem = document.getElementById("betti-euler-table-body");
+          for (var i = 0; i < result.betti[0].length; i++) {
+            const rowElem = document.createElement("tr");
+            rowElem.setAttribute("class", "BettiAndEulerBodyRow");
+            const firstColElem = document.createElement("td");
+            const firstColContent = document.createTextNode(result.betti[0][i]);
+            firstColElem.appendChild(firstColContent);
+            rowElem.appendChild(firstColElem);
+            for (let j = 0; j < result.betti.length-1; j++) {
+              const curCol = document.createElement("td");
+              const curColContent = document.createTextNode(result.betti[j+1][i]);
+              curCol.appendChild(curColContent);
+              rowElem.appendChild(curCol);
+            }
+            bodyElem.appendChild(rowElem);
+          }
+        }
+
+        function loadStatisticsBody(result) {
+          const bodyElem = document.getElementById("statistics-body");
+          for (var i = 0; i < result.dim.length; i++) {
+            const rowElem = document.createElement("tr");
+            rowElem.setAttribute("class", "StatisticsBodyRow");
+            const firstColElem = document.createElement("td");
+            const firstColContent = document.createTextNode(result.dim[i]);
+            firstColElem.appendChild(firstColContent);
+            rowElem.appendChild(firstColElem);
+            for (var j = 0; j < result.stats[i].length; j++) {
+              const colElem = document.createElement("td");
+              const colElemContent = document.createTextNode(result.stats[i][j]);
+              colElem.appendChild(colElemContent);
+              rowElem.appendChild(colElem);
+            }
+            bodyElem.appendChild(rowElem);
+          }
+        }
+
+        function createFragment(htmlStr) {
+            var frag = document.createDocumentFragment(),
+                temp = document.createElement('div');
+            temp.innerHTML = htmlStr;
+            while (temp.firstChild) {
+                frag.appendChild(temp.firstChild);
+            }
+            return frag;
+        }
+
+        function loadRatiosTable(result) {
+          if(result.stats[1]){
+            const sectionElem = document.createElement("section");
+            sectionElem.setAttribute("class","Ratios");
+            const tableElem = document.createElement("table");
+            tableElem.setAttribute("id", "RatiosTable");
+            tableElem.innerHTML = `
+              <thead>
+                <tr>
+                  <th colspan="6">
+                    <span style="float: right; font-weight: normal; text-align: right; width: 6em;">
+                      <input id="CollapseRatiosTable" type="button" onclick="collapseRatiosTable(this)" value="Hide">
+                    </span>
+                    <h4>Ratios:</h4>
+                  </th>
+                </tr>
+                <tr class="RatiosHeadRow">
+                  <th>Dimensions</th>
+                  <th>Ratio of number of features</th>
+                  <th>Ratio of mean feature length</th>
+                </tr>
+              </thead>
+            `;
+            const tableBodyElem = document.createElement("tbody");
+            var k = 0;
+            const stats = result.stats;
+            for (var i = 0; i < result.dim.length; i++) {
+              for (var j = 0; j < result.dim.length; j++) {
+                if(j>i){
+                  const rowElem = document.createElement("tr");
+                  rowElem.setAttribute("class", "RatiosBodyRow");
+                  const col1Elem = document.createElement("td");
+                  const col2Elem = document.createElement("td");
+                  const col3Elem = document.createElement("td");
+                  const col1Content = document.createTextNode(result.dim[i]+":"+result.dim[j]);
+                  const col2Content = document.createTextNode(stats[stats.length-1][k]);
+                  const col3Content = document.createTextNode(stats[stats.length-1][k+1]);
+                  col1Elem.appendChild(col1Content);
+                  col2Elem.appendChild(col2Content);
+                  col3Elem.appendChild(col3Content);
+                  rowElem.appendChild(col1Elem);
+                  rowElem.appendChild(col2Elem);
+                  rowElem.appendChild(col3Elem);
+                  tableBodyElem.appendChild(rowElem);
+                  k+=2;
+                }
+              }
+            }
+            tableElem.appendChild(tableBodyElem);
+            sectionElem.appendChild(tableElem);
+            document
+              .getElementById("raw-data-section")
+              .insertAdjacentElement("beforebegin", sectionElem);
+          }
+        }
+
+        function loadRawData(result) {
+          const elem = document.getElementById("raw-data-table-body");
+          for (let i = 0; i < result.raw.length; i++) {
+            const element = result.raw[i];
+            const rowElem = document.createElement("tr");
+            rowElem.setAttribute("class", "RawDataBodyRow");
+            const colElem = document.createElement("td");
+            const content = document.createTextNode(result.raw[i]);
+            colElem.appendChild(content);
+            rowElem.appendChild(colElem);
+            elem.appendChild(rowElem);
+          }
+        }
+
+        // Load result data to session storage if not already set
+        if(window.sessionStorage.getItem("current-result") == null){
+          window.sessionStorage.setItem(
+              "current-result", 
+              document
+                .getElementById("latest-result")
+                .getAttribute("data-latest-result")
+            );
+          }
+          const result = JSON.parse(window.sessionStorage.getItem("current-result"));
+          loadBettiEulerTable(result);
+          loadStatisticsBody(result);
+          loadRatiosTable(result);
+          loadRawData(result);
+      </script>
     </div>
   {% endblock %}
