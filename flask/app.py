@@ -93,7 +93,7 @@ def analyzer():
             try:
                 result = ctda.analyze(f, t, int(form.maxdim.data), int(
                     form.coeff.data), form.delimiter.data, form.lineterminator.data, form.igLabels.data, form.igEnum.data, maxSize)
-                if result is not SuccessfulResult:
+                if isinstance(result, ErrorResult):
                     flash(result)
                     return render_template('analyzer.html', title="Analyzer", form=form)
                 session['last_result'] = result.toJSON()
