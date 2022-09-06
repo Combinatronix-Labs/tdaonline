@@ -75,7 +75,7 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 0.5rem;
+  padding: 0.7rem 1rem;
   z-index: 1000;
   background-color: var(--header-background-color);
   text-decoration: none;
@@ -89,33 +89,33 @@ img {
   cursor: pointer;
 }
 #hamburger-icon .barN {
-  width: 35px;
-  height: 3px;
+  width: 60px;
+  height: 5px;
   background-color: white;
-  margin: 6px 0;
+  margin: 12px 0;
   transition: 0.4s;
 }
 .open .bar1 {
-  -webkit-transform: rotate(-45deg) translate(-6px, 6px);
-  transform: rotate(-45deg) translate(-6px, 6px);
+  -webkit-transform: rotate(-45deg) translate(-12px, 12px);
+  transform: rotate(-45deg) translate(-12px, 12px);
 }
 .open .bar2 {
   opacity: 0;
 }
 .open .bar3 {
-  -webkit-transform: rotate(45deg) translate(-6px, -8px);
-  transform: rotate(45deg) translate(-6px, -8px);
+  -webkit-transform: rotate(45deg) translate(-12px, -12px);
+  transform: rotate(45deg) translate(-12px, -12px);
 }
 
 /* Header: Mobile Menu */
 .mobile-menu {
-  position: absolute;
+  /* position: absolute; */
   top: 96px;
   left: 0;
   display: none;
   width: 100%;
-  height: calc(100vh - 96px);
-  background-color: rgb(0, 0, 0, 1);
+  height: calc(30vh - 96px);
+  background-color: var(--header-background-color);
   list-style-type: none;
   text-decoration: none;
 }
@@ -126,7 +126,7 @@ img {
   justify-content: center;
 }
 .mobile-menu li {
-  /* float: left; */
+  float: left;
   padding: 5px;
   margin-bottom: 10px;
 }
@@ -190,7 +190,7 @@ img {
   justify-content: center;
 }
 #Brand a {
-  padding: 8px;
+  padding: 0;
   text-decoration: none;
   color: white;
   display: flex;
@@ -198,8 +198,10 @@ img {
   flex-direction: row;
   justify-content: center;
 }
-#Brand #BrandLogo {
-  padding-top: 0px;
+#Brand #BrandLogo a img {
+  height: 70px; 
+  object-fit: contain; 
+  object-position: center center;
 }
 #BrandText {
   text-decoration: none;
@@ -283,8 +285,8 @@ nav a:hover,
 /* Main Content */
 .MainContent {
   width: 100%;
-  padding: 96px 0px 0px 0px;
-  margin: 0px;
+  padding: 2vh 0 0 0;
+  margin: 96px 0 0 0;
   /* height: 100%; */
 }
 .MainContent img {
@@ -296,13 +298,8 @@ nav a:hover,
 .MainWelcomePage {
   position: relative;
   width: 100%;
-  /* height: 100%; */
-  /* display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center; */
-  /* padding: 0px 1.5rem; */
-  /* margin: 1rem 0px; */
+  margin: 0;
+  padding: 0px 1rem;
   color: black;
   overflow-x: hidden;
 }
@@ -310,38 +307,38 @@ nav a:hover,
   position: absolute;
   width: 100%;
   height: 100%;
-
-}
-.MainWelcomePage section {
-  /* display: flex;
-  justify-content: space-between;
-  flex-direction: column; */
-  margin: 1rem 0px;
-  padding: 0px 5rem;
 }
 
 .MainWelcomePage #Showcase {
-  margin: 2rem 0;
+  /* margin: 2rem 0; */
   font-family: "Catamaran", sans-serif;
   line-height: 1.6;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 .MainWelcomePage #Showcase .Container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 3rem;
+  grid-template-rows: min-content min-content min-content;
+  grid-row-gap: 1rem;
   align-items: center;
   justify-content: center;
 }
+.MainWelcomePage #Showcase .Container #ShowcaseAnimation {
+  grid-row: 1 / 2;
+}
+.MainWelcomePage #Showcase .Container #ShowcaseCTA {
+  grid-row: 2 / 3;
+}
 .MainWelcomePage #Showcase h1 {
-  font-size: 4rem;
+  font-size: 3rem;
   color: var(--primary-color);
+  text-align: center;
 }
 .MainWelcomePage #Showcase p {
   margin: 1rem 0;
 }
 .MainWelcomePage #Showcase img {
   width: 100%;
+  height: 30vh;
 }
 .MainWelcomePage .Counters .column {
   float: left;
@@ -392,7 +389,11 @@ nav a:hover,
   justify-content: center;
   flex-direction: column;
   margin: 1rem 0px;
-  padding: 0px 0.5rem;
+}
+.MainInstructionsPage h2 {
+  color: black;
+  font-weight: 600;
+  margin: 2rem 0px;
 }
 .MainInstructionsPage section h3 {
   color: black;
@@ -402,10 +403,13 @@ nav a:hover,
 }
 .MainInstructionsPage .ImageRow {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content: center;
   padding: 16px 0px;
   margin: 0.5rem 0px;
+}
+.MainInstructionsPage .ImageRow img {
+  width: 256px;
 }
 .MainInstructionsPage .ImageRow p {
   margin: auto 3rem;
@@ -458,8 +462,6 @@ nav a:hover,
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin: 1rem 0px;
-  padding: 0px 0.5rem;
 }
 .MainResultsPage .ResultsGraphs {
   width: 100%;
@@ -549,7 +551,7 @@ nav a:hover,
   display: none;
   position: relative;
 
-  font-family: Source Code Pro;
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-style: normal;
   font-size: 12px;
@@ -586,8 +588,6 @@ nav a:hover,
 .SqsBlock {
   position: relative;
   height: auto;
-  padding-top: 17px;
-  padding-bottom: 17px;
 }
 .SqsBlockContent {
   display: flex;
@@ -595,7 +595,6 @@ nav a:hover,
   flex-direction: column;
   text-align: center;
   width: 100%;
-  padding: 17px 0px 0px;
   flex-wrap: wrap;
 }
 .SqsBlockSocial {
@@ -619,7 +618,6 @@ nav a:hover,
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0 1rem;
   height: 50%;
   text-decoration: none;
   cursor: pointer;
@@ -639,7 +637,6 @@ nav a:hover,
   margin-top: 15px;
   margin-bottom: 15px;
   flex-wrap: wrap;
-  padding: 1rem 0px;
 }
 .FooterRouterLink {
   flex: 0 0 auto;
