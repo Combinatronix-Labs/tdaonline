@@ -7,6 +7,7 @@
   --table-header-bg-color: var(--header-background-color);
   --footer-background-color: #0f0f0f;
   --link_text_color_light: white;
+  --image-max-width: 256px;
 }
 
 * {
@@ -36,6 +37,11 @@ img {
 }
 .active {
   display: none;
+}
+
+figure {
+  justify-content: center;
+  display: flex;
 }
 
 /* width */
@@ -339,6 +345,7 @@ nav a:hover,
 .MainWelcomePage #Showcase img {
   width: 100%;
   height: 30vh;
+  max-width: var(--image-max-width);
 }
 .MainWelcomePage .Counters .column {
   float: left;
@@ -409,7 +416,7 @@ nav a:hover,
   margin: 0.5rem 0px;
 }
 .MainInstructionsPage .ImageRow img {
-  width: 256px;
+  max-width: var(--image-max-width);
 }
 .MainInstructionsPage .ImageRow p {
   margin: auto 3rem;
@@ -467,11 +474,21 @@ nav a:hover,
   width: 100%;
   display: flex;
   justify-content: space-around;
-  flex-direction: row;
+  flex-flow: row wrap;
 }
 .ResultsGraphs .PersistanceGraph,
 .ResultsGraphs .BarcodeGraph {
   flex: 0 0 auto;
+}
+.BettiAndEulerTableContainer, 
+.StatisticsTableContainer,
+.Ratios,
+.RawData {
+  overflow-x: auto;
+}
+.ResultsGraphs .PersistanceGraph img,
+.ResultsGraphs .BarcodeGraph img{
+  max-width: var(--image-max-width);
 }
 #RawDataTable,
 #RatiosTable,
