@@ -13,24 +13,37 @@
         {{ form.file }}<br />
       </div>
       <div class="AnalyzerFieldContainer">
-        {{ form.maxdim }}
-        {{ form.maxdim.label }} <br />
-        {{ form.coeff }}
-        {{ form.coeff.label }}
+        <div class="AnalyzerFieldRow">
+          {{ form.maxdim }}
+          {{ form.maxdim.label }}
+        </div> 
+        <br />
+        <div class="AnalyzerFieldRow">
+          {{ form.coeff }}
+          {{ form.coeff.label }}
+        </div>
       </div>
       <div class="AnalyzerFieldContainer">
-        {{ form.igLabels }} 
-        {{ form.igLabels.label }} <br />
-
-        {{ form.igEnum }} 
-        {{ form.igEnum.label }}
+        <div class="AnalyzerFieldRow">
+          {{ form.igLabels }} 
+          {{ form.igLabels.label }} 
+        </div>
+        <br />
+        <div class="AnalyzerFieldRow">
+          {{ form.igEnum }} 
+          {{ form.igEnum.label }}
+        </div>
       </div>
       <div class="AnalyzerFieldContainer">
-        {{ form.delimiter }}
-        {{ form.delimiter.label }} <br />
-
-        {{ form.lineterminator }}
-        {{ form.lineterminator.label }}
+        <div class="AnalyzerFieldRow">
+          {{ form.delimiter }}
+          {{ form.delimiter.label }} 
+        </div>
+        <br/>
+        <div class="AnalyzerFieldRow">
+          {{ form.lineterminator }}
+          {{ form.lineterminator.label }}
+        </div>
       </div>
       <div class="AnalyzerFieldContainer">
         {{ captcha() }}<br />

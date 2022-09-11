@@ -2,8 +2,9 @@
   --header-background-color: darkolivegreen;
   --scrollbar-handle-color: var(--header-background-color);
   --scrollbar-handle-hover-color: var(--header-background-color);
+  --button-background-color: var(--header-background-color);
   --main-background-color: gainsboro;
-  --img-border-color: var(var(--header-background-color));
+  --img-border-color: var(--header-background-color);
   --table-header-bg-color: var(--header-background-color);
   --footer-background-color: #0f0f0f;
   --link_text_color_light: white;
@@ -56,9 +57,6 @@ a {
 
 ul {
   list-style: none;
-}
-img {
-  border: 2px solid var(--img-border-color);
 }
 .active {
   display: none;
@@ -326,7 +324,6 @@ nav a:hover,
   /* height: 100%; */
 }
 .MainContent img {
-  border: 2px solid var(--img-border-color);
   border-radius: 4px;
 }
 
@@ -476,10 +473,41 @@ nav a:hover,
   display: flex;
   justify-content: center;
   flex-direction: column;
-
 }
 .AnalyzerFieldContainer {
   margin: 1rem 0;
+}
+.AnalyzerFieldContainer input[type=checkbox] {
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+.AnalyzerFieldContainer input[type=checkbox]:checked {
+  accent-color: var(--button-background-color);
+}
+.AnalyzerFieldContainer select,
+.AnalyzerFieldContainer input[type=file]::file-selector-button {
+  background-color: var(--button-background-color);
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.AnalyzerFieldRow{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.FormSumit input {
+  background-color: var(--button-background-color);
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
 }
 /* Main Content: Results Page */
 .MainResultsPage {
