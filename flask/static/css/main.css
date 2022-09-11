@@ -42,6 +42,14 @@ footer {
   grid-row: 3/4;
 }
 
+h2 {
+  font-size: calc(var(--showcase-font-size)*2);
+}
+
+h3 {
+  font-size: var(--showcase-font-size);
+}
+
 a {
   text-decoration: none;
 }
@@ -407,12 +415,16 @@ nav a:hover,
   margin: 1rem 0px;
   color: black;
 }
+.MainInstructionsPage p {
+  font-size: var(--showcase-font-size);
+}
 .MainInstructionsPage section {
   width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
   margin: 1rem 0px;
+  font-size: var(--showcase-font-size);
 }
 .MainInstructionsPage h2 {
   color: black;
@@ -421,7 +433,6 @@ nav a:hover,
 }
 .MainInstructionsPage section h3 {
   color: black;
-  font-size: medium;
   font-weight: 600;
   margin: 0.5rem 0px;
 }
@@ -434,6 +445,7 @@ nav a:hover,
 }
 .MainInstructionsPage .ImageRow img {
   max-width: var(--image-max-width);
+  margin-top: 16px;
 }
 .MainInstructionsPage .ImageRow p {
   margin: auto 3rem;
@@ -798,6 +810,10 @@ nav a:hover,
   #ShowcaseAnimation{
     grid-column: 2/3;
     grid-row: 1/2;
+  }
+  .MainInstructionsPage{
+    padding-left: 10vw;
+    padding-right: 10vw;
   }
   .NewLogEntry {
     height: initial !important;
