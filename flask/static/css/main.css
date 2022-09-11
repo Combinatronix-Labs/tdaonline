@@ -44,6 +44,10 @@ figure {
   display: flex;
 }
 
+header nav {
+  display: none;
+}
+
 /* width */
 ::-webkit-scrollbar {
   /* margin-top: 100px; */
@@ -90,7 +94,7 @@ figure {
 
 /* Header: Hamburger */
 #hamburger-icon {
-  display: none;
+  display: block;
   margin: auto 0;
   cursor: pointer;
 }
@@ -210,6 +214,7 @@ figure {
   object-position: center center;
 }
 #BrandText {
+  display: none;
   text-decoration: none;
   color: white;
 }
@@ -348,9 +353,11 @@ nav a:hover,
   max-width: var(--image-max-width);
 }
 .MainWelcomePage .Counters .column {
+  display: block;
   float: left;
-  width: 25%;
+  width: 100%;
   padding: 0 5px;
+  margin-bottom: 10px;
 }
 .MainWelcomePage .Counters .row {
   margin: 0 -5px;
@@ -359,13 +366,6 @@ nav a:hover,
   content: "";
   display: table;
   clear: both;
-}
-@media screen and (max-width: 600px) {
-  .MainWelcomePage .Counters .column {
-    width: 100%;
-    display: block;
-    margin-bottom: 10px;
-  }
 }
 .MainWelcomePage .Counters .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -549,6 +549,27 @@ nav a:hover,
   color: white;
 }
 
+.DailyLog {
+  overflow-x: scroll;
+}
+.CompletLog {
+  overflow-x: scroll;
+}
+
+.SqsLayout {
+  text-align: center;
+}
+
+.NewLogEntry {
+  height: auto !important;
+}
+
+.NewLogEntryForm .FormRow {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
 /* Footer */
 .FooterContainer {
   display: flex;
@@ -559,13 +580,14 @@ nav a:hover,
   margin: auto;
   width: auto;
   max-width: 1080px;
-  padding: 68px 34px 10px;
+  text-align: center;
+  padding: 20px;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
 }
 .FooterNavWrapper {
-  display: none;
+  display: block;
   position: relative;
 
   font-family: "Poppins", sans-serif;
@@ -579,7 +601,8 @@ nav a:hover,
 .FooterBackToTopContainer {
   display: inline-block;
   vertical-align: middle;
-  margin: 0;
+  text-align: center;
+  margin: 0 0 1em 0;
 }
 .FooterBackToTopLink {
   display: block;
@@ -597,8 +620,8 @@ nav a:hover,
   width: auto !important;
 }
 .SqsCol {
-  float: left;
-  width: 100%;
+  float: none;
+  width: auto;
   padding-left: 17px;
   padding-right: 17px;
 }
@@ -669,28 +692,33 @@ nav a:hover,
 }
 
 /* Media Queries */
-@media only screen and (max-width: 640px) {
+@media only screen and (min-width: 640px) {
   #BrandText {
-    display: none;
+    display: initial;
+  }
+  .MainWelcomePage .Counters .column {
+    width: 25%;
+    display: initial;
+    margin-bottom: initial;
   }
   .DailyLog {
-    overflow-x: scroll;
+    overflow-x: initial;
   }
   .CompletLog {
-    overflow-x: scroll;
+    overflow-x: initial;
   }
   .FooterInner {
-    padding: 20px;
+    padding: 68px 34px 10px;
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 768px) {
   header nav {
-    display: none;
+    display: initial;
   }
 
   #hamburger-icon {
-    display: block;
+    display: none;
   }
 
   .NewLogEntryForm .FormRow {
@@ -698,35 +726,35 @@ nav a:hover,
   }
 
   .FooterInner {
-    text-align: center;
+    text-align: initial;
   }
 
   .FooterNavWrapper {
-    display: block;
+    display: none;
   }
 
   .FooterBackToTopContainer {
     text-align: center;
-    margin-bottom: 1em;
+    margin: 0;
   }
 
   .SqsLayout {
-    text-align: center;
+    text-align: initial;
   }
 
   .SqsCol {
-    float: none !important;
-    width: auto !important;
+    float: left !important;
+    width: 100% !important;
   }
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (min-width: 1200px) {
   .NewLogEntry {
-    height: auto !important;
+    height: initial !important;
   }
   .NewLogEntryForm .FormRow {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    display: initial;
+    flex-direction: row;
+    justify-content: flex-start;
   }
 }
