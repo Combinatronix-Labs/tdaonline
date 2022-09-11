@@ -8,6 +8,9 @@
   --footer-background-color: #0f0f0f;
   --link_text_color_light: white;
   --image-max-width: 256px;
+  --brand-font-size: 24px;
+  --showcase-font-size: 1rem;
+  --footer-font-size: 12px;
 }
 
 * {
@@ -23,6 +26,20 @@ body {
   font-family: "Poppins", sans-serif;
   color: white;
   background: var(--main-background-color);
+  display: grid;
+  grid-template-rows: min-content auto min-content;
+}
+
+header{
+  grid-row: 1/2;
+}
+
+main {
+  grid-row: 2/3;
+}
+
+footer {
+  grid-row: 3/4;
 }
 
 a {
@@ -151,7 +168,7 @@ header nav {
   z-index: 1001;
 }
 .mobile-menu li .dropdown .dropbtn {
-  font-size: 16px;
+  font-size: calc(var(--brand-font-size)*0.6);
   border: none;
   outline: none;
   color: white;
@@ -193,7 +210,7 @@ header nav {
 /* Header: Brand */
 #Brand {
   font-weight: bold;
-  font-size: 24px;
+  font-size: var(--brand-font-size);
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -221,7 +238,7 @@ header nav {
 #BrandText p {
   text-decoration: none;
   line-height: 1.41em;
-  font-size: 22px;
+  font-size: calc(var(--brand-font-size) * 0.8);
 }
 
 /* Header: Navbar */
@@ -243,7 +260,7 @@ header nav {
 } */
 .nav-item a {
   float: left;
-  font-size: 16px;
+  font-size: calc(var(--brand-font-size) * 0.6);
   color: white;
   text-align: center;
   padding: 14px 16px;
@@ -257,7 +274,7 @@ header nav {
   z-index: 1001;
 }
 .dropdown .dropbtn {
-  font-size: 16px;
+  font-size: calc(var(--brand-font-size) * 0.6);
   border: none;
   outline: none;
   color: white;
@@ -324,7 +341,7 @@ nav a:hover,
   /* margin: 2rem 0; */
   font-family: "Catamaran", sans-serif;
   line-height: 1.6;
-  font-size: 1rem;
+  font-size: var(--showcase-font-size);
 }
 .MainWelcomePage #Showcase .Container {
   display: grid;
@@ -340,7 +357,7 @@ nav a:hover,
   grid-row: 2 / 3;
 }
 .MainWelcomePage #Showcase h1 {
-  font-size: 3rem;
+  font-size: calc(var(--showcase-font-size)*3);
   color: var(--primary-color);
   text-align: center;
 }
@@ -375,7 +392,7 @@ nav a:hover,
   color: white;
 }
 .MainWelcomePage .Counters .fa {
-  font-size: 50px;
+  font-size: calc(var(--showcase-font-size)*2);
 }
 
 /* Main Content: Instructions Page */
@@ -593,7 +610,7 @@ nav a:hover,
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 12px;
+  font-size: var(--footer-font-size);
   letter-spacing: 3px;
   text-transform: uppercase;
   text-decoration: none;
@@ -666,7 +683,7 @@ nav a:hover,
 }
 .FooterExternalLink span {
   margin-bottom: 0.05rem;
-  font-size: 14px;
+  font-size: calc(var(--footer-font-size)*1.3);
   margin-right: 0.5rem;
   color: rgb(145, 143, 143);
 }
@@ -677,6 +694,7 @@ nav a:hover,
   margin-top: 15px;
   margin-bottom: 15px;
   flex-wrap: wrap;
+  font-size: var(--footer-font-size);
 }
 .FooterRouterLink {
   flex: 0 0 auto;
@@ -687,12 +705,24 @@ nav a:hover,
   transition: all 0.2s ease-in-out;
   color: var(--text-color);
   text-decoration: none;
-  font-size: 13px;
+  font-size: calc(var(--footer-font-size)*1.2);
   font-weight: 700;
 }
 
 /* Media Queries */
-@media only screen and (min-width: 640px) {
+@media only screen and (min-width: 600px) {
+  :root{
+    --image-max-width: 384px;
+  }
+  .MainWelcomePage #Showcase img {
+    height: auto;
+  }
+  main {
+    margin-bottom: 8px;
+  }
+  #BrandLogo{
+    margin-right: 8px;
+  }
   #BrandText {
     display: initial;
   }
@@ -706,9 +736,6 @@ nav a:hover,
   }
   .CompletLog {
     overflow-x: initial;
-  }
-  .FooterInner {
-    padding: 68px 34px 10px;
   }
 }
 
@@ -748,7 +775,30 @@ nav a:hover,
   }
 }
 
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1024px) {
+  :root {
+    --image-max-width: 512px;
+  }
+  figure{
+    display: initial;
+  }
+  .MainWelcomePage{
+    max-width: 1200px;
+    margin: auto;
+  }
+  #Showcase .Container{
+    grid-template-columns: 1fr 1fr;
+    padding: 0 8px 0 8px;
+  }
+  #ShowcaseCTA{
+    grid-column: 1/2;
+    grid-row: 1/2 !important;
+    margin: 32px;
+  }
+  #ShowcaseAnimation{
+    grid-column: 2/3;
+    grid-row: 1/2;
+  }
   .NewLogEntry {
     height: initial !important;
   }
@@ -756,5 +806,29 @@ nav a:hover,
     display: initial;
     flex-direction: row;
     justify-content: flex-start;
+  }
+}
+
+@media only screen and (min-width: 1500px) {
+  :root {
+    --image-max-width: 1000px;
+    --brand-font-size: 64px;
+    --showcase-font-size: 2rem;
+    --footer-font-size: 24px;
+  }
+  .MainWelcomePage{
+    max-width: 2000px;
+  }
+  .FooterInner{
+    max-width: 1500px;
+  }
+}
+
+@media only screen and (min-width: 1500px) {
+  #Brand #BrandLogo a img {
+    height: 128px; 
+  }
+  #BrandLogo{
+    margin-right: 32px;
   }
 }
