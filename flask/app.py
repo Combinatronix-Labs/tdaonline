@@ -19,7 +19,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
     SECRET_KEY = os.urandom(12).hex()
-    CAPTCHA_ENABLE = False
+    CAPTCHA_ENABLE = True
     CAPTCHA_LENGTH = 7
     CAPTCHA_WIDTH = 200
     CAPTCHA_HEIGHT = 60
@@ -125,3 +125,12 @@ def analyzerResults():
         dim=result.totald,
         latest_result=result.toJSON()
     )
+
+
+@app.route('/privacy', methods=['GET'])
+def privacy():
+    return render_template('privacy.html')
+
+@app.route('/terms', methods=['GET'])
+def terms():
+    return render_template('terms.html')
