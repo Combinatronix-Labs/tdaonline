@@ -10,7 +10,7 @@
       {{ form.hidden_tag() }}
       <div class="AnalyzerFieldContainer">
         {{ form.file.label }}<br />
-        {{ form.file }}<br />
+        {{ form.file }}
       </div>
       <div class="AnalyzerFieldContainer">
         <div class="AnalyzerFieldRow">
@@ -35,12 +35,12 @@
         </div>
       </div>
       <div class="AnalyzerFieldContainer">
-        <div class="AnalyzerFieldRow">
+        <div class="AnalyzerDropdownFieldRow">
           {{ form.delimiter }}
           {{ form.delimiter.label }} 
         </div>
         <br/>
-        <div class="AnalyzerFieldRow">
+        <div class="AnalyzerDropdownFieldRow">
           {{ form.lineterminator }}
           {{ form.lineterminator.label }}
         </div>

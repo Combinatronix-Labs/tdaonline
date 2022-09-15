@@ -12,6 +12,7 @@
   --brand-font-size: 24px;
   --showcase-font-size: 1rem;
   --footer-font-size: 12px;
+  --analyzer-font-size: calc(var(--footer-font-size)*1.3);
 }
 
 * {
@@ -468,6 +469,9 @@ nav a:hover,
   margin: 1rem 0px;
   padding: 0px 0.5rem;
 }
+.Analyzer{
+  font-size: var(--analyzer-font-size);
+}
 .Analyzer form {
   width: 100%;
   display: flex;
@@ -478,12 +482,23 @@ nav a:hover,
   margin: 1rem 0;
 }
 .AnalyzerFieldContainer input[type=checkbox] {
+  min-width: 25px;
+  min-height: 25px;
   height: 25px;
   width: 25px;
   background-color: #eee;
 }
 .AnalyzerFieldContainer input[type=checkbox]:checked {
   accent-color: var(--button-background-color);
+}
+.AnalyzerFieldContainer input[type=text]{
+  margin-top: 10px;
+  width: 100%;
+  max-width: 300px;
+  padding: 16px;
+}
+.AnalyzerFieldContainer input[type=file]{
+  margin-top: 10px;
 }
 .AnalyzerFieldContainer select,
 .AnalyzerFieldContainer input[type=file]::file-selector-button {
@@ -494,11 +509,21 @@ nav a:hover,
   text-decoration: none;
   margin: 4px 2px;
   cursor: pointer;
+  font-size: var(--analyzer-font-size);
 }
 .AnalyzerFieldRow{
   display: flex;
   align-items: center;
   gap: 8px;
+}
+.AnalyzerDropdownFieldRow{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border-style: solid;
+  padding: 5px;
+  border-color: var(--header-background-color);
 }
 .FormSumit input {
   background-color: var(--button-background-color);
@@ -511,7 +536,7 @@ nav a:hover,
 }
 /* Main Content: Results Page */
 .MainResultsPage {
-  width: 100%;
+  width: 100vw;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -771,6 +796,10 @@ nav a:hover,
     display: initial;
     margin-bottom: initial;
   }
+  .AnalyzerDropdownFieldRow{
+    flex-direction: row;
+    border-style: none;
+  }
   .DailyLog {
     overflow-x: initial;
   }
@@ -874,5 +903,15 @@ nav a:hover,
   }
   #BrandLogo{
     margin-right: 32px;
+  }
+  .FormSumit input{
+    padding: 24px 40px;
+  }
+  .AnalyzerFieldContainer select, .AnalyzerFieldContainer input[type=file]::file-selector-button{
+    padding: 16px 24px;
+  }
+  .AnalyzerFieldContainer input[type=checkbox]{
+    min-width: 32px;
+    min-height: 32px;
   }
 }
