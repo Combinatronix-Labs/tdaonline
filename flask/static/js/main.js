@@ -60,3 +60,13 @@ const collapseRawDataTable = (toggler) => {
 
   collapseBody(element, 'RawDataBodyRow');
 }
+
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    document.getElementById("GoToTopButton").style.bottom = "0";
+  } else {
+    document.getElementById("GoToTopButton").style.bottom = "-100px";
+  }
+}
