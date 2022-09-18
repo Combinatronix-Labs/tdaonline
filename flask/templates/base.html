@@ -4,6 +4,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ 'TDA Online' }} - {{ title }}</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
   </head>
@@ -36,6 +38,7 @@
         </ul>
       </nav>
     </header>
+    <div class="TopGap"></div>
     <main>
       <div class="MainContent">
         {% with messages = get_flashed_messages() %}
@@ -68,8 +71,8 @@
                     <a class="FooterRouterLink" href="/">
                       © 2022 {{ 'TDA Online. All Rights Reserved' }}
                     </a>
-                    |<a class="FooterRouterLink" href="privacy_policy">{{ 'Privacy Policy' }}</a>|
-                    <a class="FooterRouterLink" href="terms_of_service">{{ 'Terms of Service' }}</a>
+                    |<a class="FooterRouterLink" href="privacy">{{ 'Privacy Policy' }}</a>|
+                    <a class="FooterRouterLink" href="terms">{{ 'Terms of Service' }}</a>
                   </div>
                   <div class="SqsBlockLegalLinks">
                     Source code available at the <a class="FooterRouterLink" href="https://github.com/Combinatronix-Labs/tdaonline">Combinatronix Labs GitHub</a>.
