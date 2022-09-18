@@ -151,3 +151,13 @@ def faviconICO():
 @app.route('/favicon.svg')
 def faviconSVG():
     return send_from_directory('./static', 'favicon.svg')
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html', title="404 - Not Found"), 404
+
+
+@app.errorhandler(Exception)
+def internal_error(e):
+    return render_template('500.html', title="500 - Internal Error"), 500

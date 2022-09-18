@@ -352,6 +352,7 @@ nav a:hover,
   text-decoration: inherit;
   color: inherit;
   transition: bottom 0.3s;
+  z-index: 99999;
 }
 
 /* Main Content: Welcome Page */
@@ -828,6 +829,22 @@ nav a:hover,
   text-decoration: none;
   font-size: calc(var(--footer-font-size)*1.2);
   font-weight: 700;
+}
+
+/* Error Page Styling */
+.ErrorMainContent{
+  text-align: center;
+}
+
+.ErrorMainContent h1{
+  font-size: calc(var(--showcase-font-size)*3);
+  color: black;
+}
+
+.ErrorMainContent h2{
+  margin-top: 1vh;
+  font-size: calc(var(--showcase-font-size)*2);
+  color: black;
 }
 
 /* Media Queries */
