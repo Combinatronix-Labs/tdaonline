@@ -1,5 +1,6 @@
+from turtle import title
 from typing import List
-from flask import Flask, render_template, request, redirect, flash, session
+from flask import Flask, render_template, request, redirect, flash, session, send_from_directory
 from flask_wtf import FlaskForm
 from flask_babel import Babel, _
 from wtforms import SubmitField, SelectField, FileField, BooleanField
@@ -129,9 +130,24 @@ def analyzerResults():
 
 @app.route('/privacy', methods=['GET'])
 def privacy():
-    return render_template('privacy.html')
+    return render_template('privacy.html', title="Privacy Notice")
 
 
 @app.route('/terms', methods=['GET'])
 def terms():
-    return render_template('terms.html')
+    return render_template('terms.html', title="Terms & Conditions")
+
+
+@app.route("/manifest.json")
+def manifest():
+    return send_from_directory('./static', 'manifest.json')
+
+
+@app.route('/favicon.ico')
+def faviconICO():
+    return send_from_directory('./static', 'favicon.ico')
+
+
+@app.route('/favicon.svg')
+def faviconSVG():
+    return send_from_directory('./static', 'favicon.svg')

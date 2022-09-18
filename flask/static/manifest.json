@@ -1,0 +1,16 @@
+{
+  "short_name": "TDA Online",
+  "name": "TDA Online",
+  "description": "An app for your topological data analysis needs.",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#556b2f",
+  "background_color": "#dcdcdc"
+}
