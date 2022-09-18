@@ -1,12 +1,14 @@
 <!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="An app for your topological data analysis needs.">
     <title>{{ 'TDA Online' }} - {{ title }}</title>
     <link rel="manifest" href="manifest.json" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
   </head>
   <body>
@@ -16,29 +18,29 @@
         <div class="barN bar2"></div>
         <div class="barN bar3"></div>
         <ul class="mobile-menu">
-          <li><a href="analyzer">Try it</a> </li>
-          <li><a href="instructions">(how it works)</a> </li>
+          <li><a href="analyzer" aria-label="Try out the TDA Analyzer">Try it</a> </li>
+          <li><a href="instructions" aria-label="Check out instructions on how to use the TDA Analyzer">(how it works)</a> </li>
         </ul>
       </div>
       <div id="Brand">
         <div id="BrandLogo" title="TDA Online">
-          <a href="/" target="_self">
+          <a href="/" target="_self" aria-label="TDA Online home page">
             <img src="/static/img/logo2-white.svg"
               alt="logo"/>
           </a>
         </div>
         <div id="BrandText">
-          <p><a href="/" target="_self">TDA Online</a></p>
+          <p><a href="/" target="_self" aria-label="TDA Online home page">TDA Online</a></p>
         </div>
       </div>
       <nav class="main-nav">
         <ul class="nav-items">
-          <li class="nav-item"><a href="analyzer">Try it</a> </li>
-          <li class="nav-item"><a href="instructions">(how it works)</a> </li>
+          <li class="nav-item"><a href="analyzer" aria-label="TDA Online Analyzer">Try it</a> </li>
+          <li class="nav-item"><a href="instructions" aria-label="TDA Online instructions for running the analyzer">(how it works)</a> </li>
         </ul>
       </nav>
     </header>
-    <a href="#" class="GoToTopButton" id="GoToTopButton">
+    <a href="#" class="GoToTopButton" id="GoToTopButton" aria-label="Go to the top of this page">
       <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M240.971 130.524l194.343 194.343c9.373 9.373 9.373 24.569 0 33.941l-22.667 22.667c-9.357 9.357-24.522 9.375-33.901.04L224 227.495 69.255 381.516c-9.379 9.335-24.544 9.317-33.901-.04l-22.667-22.667c-9.373-9.373-9.373-24.569 0-33.941L207.03 130.525c9.372-9.373 24.568-9.373 33.941-.001z"></path></svg>
     </a>
     <main>
@@ -60,7 +62,7 @@
         <div class="FooterNavWrapper">
           <nav>
             <div class="FooterBackToTopContainer">
-              <a class="FooterBackToTopLink" href="#">{{ 'Back To Top' }}</a>
+              <a class="FooterBackToTopLink" href="#" aria-label="Go to the top of this page">{{ 'Back To Top' }}</a>
             </div>
           </nav>
         </div>
@@ -70,14 +72,14 @@
               <div class="SqsBlock">
                 <div class="SqsBlockContent">
                   <div class="SqsBlockLegalLinks">
-                    <a class="FooterRouterLink" href="/">
+                    <a class="FooterRouterLink" href="/" aria-label="TDA Online home page">
                       © 2022 {{ 'TDA Online. All Rights Reserved' }}
                     </a>
-                    |<a class="FooterRouterLink" href="privacy">{{ 'Privacy Policy' }}</a>|
-                    <a class="FooterRouterLink" href="terms">{{ 'Terms of Service' }}</a>
+                    |<a class="FooterRouterLink" href="privacy" aria-label="TDA Online privacy notice">{{ 'Privacy Policy' }}</a>|
+                    <a class="FooterRouterLink" href="terms" aria-label="TDA Online terms of service">{{ 'Terms of Service' }}</a>
                   </div>
                   <div class="SqsBlockLegalLinks">
-                    Source code available at the <a class="FooterRouterLink" href="https://github.com/Combinatronix-Labs/tdaonline">Combinatronix Labs GitHub</a>.
+                    Source code available at the <a class="FooterRouterLink" href="https://github.com/Combinatronix-Labs/tdaonline" aria-label="TDA Online github repository">Combinatronix Labs GitHub</a>.
                   </div>
                   <div class="SqsBlockSocial" stlye="padding: 0.5rem 0px;">
                     <a class="FooterExternalLink"
@@ -85,6 +87,7 @@
                       target="_blank"
                       rel="noreferrer"
                       style="display: flex; justify-content: center; flex-direction: row; color: #1f3c88; font-weight: 700"
+                      aria-label="Combinatronix Labs website"
                     >
                       <span>{{ 'Powered By' }}</span>
                       <img
@@ -101,6 +104,7 @@
         </div>
       </div>
     </footer>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
     <script src="{{url_for('static', filename='js/main.js')}}"></script>
   </body>
 </html>
