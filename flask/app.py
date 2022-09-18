@@ -1,5 +1,6 @@
+from turtle import title
 from typing import List
-from flask import Flask, render_template, request, redirect, flash, session
+from flask import Flask, render_template, request, redirect, flash, session, send_from_directory
 from flask_wtf import FlaskForm
 from flask_babel import Babel, _
 from wtforms import SubmitField, SelectField, FileField, BooleanField
@@ -93,7 +94,7 @@ def analyzer():
             try:
                 result = ctda.analyze(f, t, int(form.maxdim.data), int(
                     form.coeff.data), form.delimiter.data, form.lineterminator.data, form.igLabels.data, form.igEnum.data, maxSize)
-                if result is ErrorResult:
+                if isinstance(result, ErrorResult):
                     flash(result)
                     return render_template('analyzer.html', title="Analyzer", form=form)
                 session['last_result'] = result.toJSON()
@@ -125,3 +126,38 @@ def analyzerResults():
         dim=result.totald,
         latest_result=result.toJSON()
     )
+
+
+@app.route('/privacy', methods=['GET'])
+def privacy():
+    return render_template('privacy.html', title="Privacy Notice")
+
+
+@app.route('/terms', methods=['GET'])
+def terms():
+    return render_template('terms.html', title="Terms & Conditions")
+
+
+@app.route("/manifest.json")
+def manifest():
+    return send_from_directory('./static', 'manifest.json')
+
+
+@app.route('/favicon.ico')
+def faviconICO():
+    return send_from_directory('./static', 'favicon.ico')
+
+
+@app.route('/favicon.svg')
+def faviconSVG():
+    return send_from_directory('./static', 'favicon.svg')
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html', title="404 - Not Found"), 404
+
+
+@app.errorhandler(Exception)
+def internal_error(e):
+    return render_template('500.html', title="500 - Internal Error"), 500

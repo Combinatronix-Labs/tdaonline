@@ -1,5 +1,6 @@
 {% extends "base.html" %} {% block content %}
 <div class="MainInstructionsPage">
+  <h2>How It Works!</h2>
   <p>
     This page will walk you through each step of the data submission process.
     The data used in the example images is the
@@ -54,7 +55,7 @@
       to analysis. If your data looks like
     </p>
     <div class="ImageRow">
-      <img src="static/img/0a.png" /> <p>or</p> <img src="static/img/0b.png" />
+      <img src="static/img/0a.png" alt="First row spreadsheet example" /> <p>or</p> <img src="static/img/0b.png" alt="First row text file example" />
     </div>
     <p>
       you should check this box. However, choosing this option will drop the
@@ -74,7 +75,7 @@
       column prior to analysis. If your data looks like
     </p>
     <div class="ImageRow">
-      <img src="static/img/1a.png" /> <p>or</p> <img src="static/img/1b.png" />
+      <img src="static/img/1a.png" alt="First column spreadsheet example"/> <p>or</p> <img src="static/img/1b.png" alt="First column text file example"/>
     </div>
     <p>
       you should check this box. However, choosing this option will drop the
@@ -86,7 +87,7 @@
       Sometimes a data set will contain both labels and enumeration
     </p>
     <div class="ImageRow">
-      <img src="static/img/2a.png" /> <p>or</p> <img src="static/img/2b.png" />
+      <img src="static/img/2a.png" alt="First column spreadsheet example with labels/enumeration"/> <p>or</p> <img src="static/img/2b.png" alt="First column text file example with labels/enumeration"/>
     </div>
     <p>
       in which case you should check both.
@@ -122,7 +123,7 @@
   <section>
     <h3>The Captcha</h3>
     <div class="ImageRow">
-      <img src="static/img/3a.png" />
+      <img src="static/img/3a.png" alt="Captcha example"/>
     </div>
     <p>
       The last part to complete is the captcha. A typical captcha consists of an
@@ -133,7 +134,7 @@
       button.
     </p>
     <div class="ImageRow">
-      <img src="static/img/3b.png" />
+      <img src="static/img/3b.png" alt="Captcha example filled out"/>
     </div>
     <p>
       Once the form has been filled out, press "Submit" and the analysis will
@@ -151,14 +152,15 @@
       format.
     </p>
     <div class="ImageRow">
-      <img src="static/img/4.png" />
+      <img src="static/img/4-1.png" alt="Sample persistence diagram result"/>
+      <img src="static/img/4-2.png" alt="Sample barcode diagram result"/>
     </div>
     <p>
       After that is the list of Betti numbers and Euler characteristics with an
       entry at every length at which a Betti number changes.<br />
     </p>
     <div class="ImageRow">
-      <img src="static/img/5.png" /><br />
+      <img src="static/img/5.png" alt="Sample Betti numbers and Euler characteristics results"/><br />
     </div>
     <p>
       In this example (and by approximation), the value of Betti 0 is 211 from
@@ -169,14 +171,14 @@
       (finite) lengths, and the mean and median lengths.<br />
     </p>
     <div class="ImageRow">
-      <img src="static/img/6.png" /><br />
+      <img src="static/img/6.png" alt="Sample statistics results"/><br />
     </div>
     <p>
       Next are comparisons between the dimensions of your data's features,
       presented as ratios of their stats.<br />
     </p>
     <div class="ImageRow">
-      <img src="static/img/7.png" /><br />
+      <img src="static/img/7.png" alt="Sample ratios results"/><br />
     </div>
     <p>
       Last is a list of NumPy arrays of the original results generated using the
@@ -190,7 +192,7 @@
       death.<br />
     </p>
     <div class="ImageRow">
-      <img src="static/img/8.png" /><br />
+      <img src="static/img/8.png" alt="Sample raw data results"/><br />
     </div>
     <p>
       In this example, the list [0. , 3.62362599] represents a feature with a

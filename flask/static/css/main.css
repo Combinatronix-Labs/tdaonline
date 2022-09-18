@@ -2,17 +2,28 @@
   --header-background-color: darkolivegreen;
   --scrollbar-handle-color: var(--header-background-color);
   --scrollbar-handle-hover-color: var(--header-background-color);
+  --button-background-color: var(--header-background-color);
   --main-background-color: gainsboro;
-  --img-border-color: var(var(--header-background-color));
+  --img-border-color: var(--header-background-color);
   --table-header-bg-color: var(--header-background-color);
   --footer-background-color: #0f0f0f;
   --link_text_color_light: white;
+  --image-max-width: 256px;
+  --brand-font-size: 24px;
+  --showcase-font-size: 1rem;
+  --footer-font-size: 12px;
+  --analyzer-font-size: calc(var(--footer-font-size)*1.3);
+  --go-to-top-button-radius: 50px
 }
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -22,6 +33,28 @@ body {
   font-family: "Poppins", sans-serif;
   color: white;
   background: var(--main-background-color);
+  display: grid;
+  grid-template-rows: min-content auto min-content;
+}
+
+header{
+  grid-row: 1/2;
+}
+
+main {
+  grid-row: 2/3;
+}
+
+footer {
+  grid-row: 3/4;
+}
+
+h2 {
+  font-size: calc(var(--showcase-font-size)*2);
+}
+
+h3 {
+  font-size: var(--showcase-font-size);
 }
 
 a {
@@ -31,17 +64,23 @@ a {
 ul {
   list-style: none;
 }
-img {
-  border: 2px solid var(--img-border-color);
-}
 .active {
+  display: none;
+}
+
+figure {
+  justify-content: center;
+  display: flex;
+}
+
+header nav {
   display: none;
 }
 
 /* width */
 ::-webkit-scrollbar {
   /* margin-top: 100px; */
-  width: 10px;
+  /* width: 10px; */
 }
 
 /* Track */
@@ -70,52 +109,51 @@ img {
 
 /* Header */
 .header {
-  position: fixed;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 0.5rem;
-  z-index: 1000;
+  padding: 0.7rem 1rem;
   background-color: var(--header-background-color);
   text-decoration: none;
   overflow: hidden;
+  z-index: 1000;
 }
 
 /* Header: Hamburger */
 #hamburger-icon {
-  display: none;
+  display: block;
   margin: auto 0;
   cursor: pointer;
 }
 #hamburger-icon .barN {
-  width: 35px;
-  height: 3px;
+  width: 60px;
+  height: 5px;
   background-color: white;
-  margin: 6px 0;
+  margin: 12px 0;
   transition: 0.4s;
 }
 .open .bar1 {
-  -webkit-transform: rotate(-45deg) translate(-6px, 6px);
-  transform: rotate(-45deg) translate(-6px, 6px);
+  -webkit-transform: rotate(-45deg) translate(-12px, 12px);
+  transform: rotate(-45deg) translate(-12px, 12px);
 }
 .open .bar2 {
   opacity: 0;
 }
 .open .bar3 {
-  -webkit-transform: rotate(45deg) translate(-6px, -8px);
-  transform: rotate(45deg) translate(-6px, -8px);
+  -webkit-transform: rotate(45deg) translate(-12px, -12px);
+  transform: rotate(45deg) translate(-12px, -12px);
 }
 
 /* Header: Mobile Menu */
 .mobile-menu {
-  position: absolute;
+  /* position: absolute; */
   top: 96px;
   left: 0;
   display: none;
   width: 100%;
-  height: calc(100vh - 96px);
-  background-color: rgb(0, 0, 0, 1);
+  height: calc(30vh - 96px);
+  background-color: var(--header-background-color);
   list-style-type: none;
   text-decoration: none;
 }
@@ -126,7 +164,7 @@ img {
   justify-content: center;
 }
 .mobile-menu li {
-  /* float: left; */
+  float: left;
   padding: 5px;
   margin-bottom: 10px;
 }
@@ -141,7 +179,7 @@ img {
   z-index: 1001;
 }
 .mobile-menu li .dropdown .dropbtn {
-  font-size: 16px;
+  font-size: calc(var(--brand-font-size)*0.6);
   border: none;
   outline: none;
   color: white;
@@ -183,14 +221,14 @@ img {
 /* Header: Brand */
 #Brand {
   font-weight: bold;
-  font-size: 24px;
+  font-size: var(--brand-font-size);
   display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: center;
 }
 #Brand a {
-  padding: 8px;
+  padding: 0;
   text-decoration: none;
   color: white;
   display: flex;
@@ -198,17 +236,20 @@ img {
   flex-direction: row;
   justify-content: center;
 }
-#Brand #BrandLogo {
-  padding-top: 0px;
+#Brand #BrandLogo a img {
+  height: 70px; 
+  object-fit: contain; 
+  object-position: center center;
 }
 #BrandText {
+  display: none;
   text-decoration: none;
   color: white;
 }
 #BrandText p {
   text-decoration: none;
   line-height: 1.41em;
-  font-size: 22px;
+  font-size: calc(var(--brand-font-size) * 0.8);
 }
 
 /* Header: Navbar */
@@ -230,7 +271,7 @@ img {
 } */
 .nav-item a {
   float: left;
-  font-size: 16px;
+  font-size: calc(var(--brand-font-size) * 0.6);
   color: white;
   text-align: center;
   padding: 14px 16px;
@@ -244,7 +285,7 @@ img {
   z-index: 1001;
 }
 .dropdown .dropbtn {
-  font-size: 16px;
+  font-size: calc(var(--brand-font-size) * 0.6);
   border: none;
   outline: none;
   color: white;
@@ -283,26 +324,43 @@ nav a:hover,
 /* Main Content */
 .MainContent {
   width: 100%;
-  padding: 96px 0px 0px 0px;
-  margin: 0px;
+  padding: 2vh 0 0 0;
   /* height: 100%; */
 }
 .MainContent img {
-  border: 2px solid var(--img-border-color);
   border-radius: 4px;
+}
+
+/* Top Gap */
+.TopGap{
+  height: 12vh;
+}
+
+/* "Go to top" Button */
+.GoToTopButton{
+  position: fixed;
+  bottom: calc(-1*var(--go-to-top-button-radius));
+  right: 5vw;
+  border-radius: 100%;
+  border-style: solid;
+  height: var(--go-to-top-button-radius);
+  width: var(--go-to-top-button-radius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--footer-background-color);
+  text-decoration: inherit;
+  color: inherit;
+  transition: bottom 0.3s;
+  z-index: 99999;
 }
 
 /* Main Content: Welcome Page */
 .MainWelcomePage {
   position: relative;
   width: 100%;
-  /* height: 100%; */
-  /* display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center; */
-  /* padding: 0px 1.5rem; */
-  /* margin: 1rem 0px; */
+  margin: 0;
+  padding: 0px 1rem;
   color: black;
   overflow-x: hidden;
 }
@@ -310,43 +368,46 @@ nav a:hover,
   position: absolute;
   width: 100%;
   height: 100%;
-
-}
-.MainWelcomePage section {
-  /* display: flex;
-  justify-content: space-between;
-  flex-direction: column; */
-  margin: 1rem 0px;
-  padding: 0px 5rem;
 }
 
 .MainWelcomePage #Showcase {
-  margin: 2rem 0;
+  /* margin: 2rem 0; */
   font-family: "Catamaran", sans-serif;
   line-height: 1.6;
-  font-size: 1.1rem;
+  font-size: var(--showcase-font-size);
 }
 .MainWelcomePage #Showcase .Container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 3rem;
+  grid-template-rows: min-content min-content min-content;
+  grid-row-gap: 1rem;
   align-items: center;
   justify-content: center;
 }
+.MainWelcomePage #Showcase .Container #ShowcaseAnimation {
+  grid-row: 1 / 2;
+}
+.MainWelcomePage #Showcase .Container #ShowcaseCTA {
+  grid-row: 2 / 3;
+}
 .MainWelcomePage #Showcase h1 {
-  font-size: 4rem;
+  font-size: calc(var(--showcase-font-size)*3);
   color: var(--primary-color);
+  text-align: center;
 }
 .MainWelcomePage #Showcase p {
   margin: 1rem 0;
 }
 .MainWelcomePage #Showcase img {
   width: 100%;
+  height: 30vh;
+  max-width: var(--image-max-width);
 }
 .MainWelcomePage .Counters .column {
+  display: block;
   float: left;
-  width: 25%;
+  width: 100%;
   padding: 0 5px;
+  margin-bottom: 10px;
 }
 .MainWelcomePage .Counters .row {
   margin: 0 -5px;
@@ -356,13 +417,6 @@ nav a:hover,
   display: table;
   clear: both;
 }
-@media screen and (max-width: 600px) {
-  .MainWelcomePage .Counters .column {
-    width: 100%;
-    display: block;
-    margin-bottom: 10px;
-  }
-}
 .MainWelcomePage .Counters .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 16px;
@@ -371,7 +425,7 @@ nav a:hover,
   color: white;
 }
 .MainWelcomePage .Counters .fa {
-  font-size: 50px;
+  font-size: calc(var(--showcase-font-size)*2);
 }
 
 /* Main Content: Instructions Page */
@@ -386,26 +440,37 @@ nav a:hover,
   margin: 1rem 0px;
   color: black;
 }
+.MainInstructionsPage p {
+  font-size: var(--showcase-font-size);
+}
 .MainInstructionsPage section {
   width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
   margin: 1rem 0px;
-  padding: 0px 0.5rem;
+  font-size: var(--showcase-font-size);
+}
+.MainInstructionsPage h2 {
+  color: black;
+  font-weight: 600;
+  margin: 2rem 0px;
 }
 .MainInstructionsPage section h3 {
   color: black;
-  font-size: medium;
   font-weight: 600;
   margin: 0.5rem 0px;
 }
 .MainInstructionsPage .ImageRow {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content: center;
   padding: 16px 0px;
   margin: 0.5rem 0px;
+}
+.MainInstructionsPage .ImageRow img {
+  max-width: var(--image-max-width);
+  margin-top: 16px;
 }
 .MainInstructionsPage .ImageRow p {
   margin: auto 3rem;
@@ -431,19 +496,74 @@ nav a:hover,
   margin: 1rem 0px;
   padding: 0px 0.5rem;
 }
+.Analyzer{
+  font-size: var(--analyzer-font-size);
+}
 .Analyzer form {
   width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
-
 }
 .AnalyzerFieldContainer {
   margin: 1rem 0;
 }
+.AnalyzerFieldContainer input[type=checkbox] {
+  min-width: 25px;
+  min-height: 25px;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+.AnalyzerFieldContainer input[type=checkbox]:checked {
+  accent-color: var(--button-background-color);
+}
+.AnalyzerFieldContainer input[type=text]{
+  margin-top: 10px;
+  width: 100%;
+  max-width: 300px;
+  padding: 16px;
+}
+.AnalyzerFieldContainer input[type=file]{
+  margin-top: 10px;
+}
+.AnalyzerFieldContainer select,
+.AnalyzerFieldContainer input[type=file]::file-selector-button {
+  background-color: var(--button-background-color);
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-size: var(--analyzer-font-size);
+}
+.AnalyzerFieldRow{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.AnalyzerDropdownFieldRow{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border-style: solid;
+  padding: 5px;
+  border-color: var(--header-background-color);
+}
+.FormSumit input {
+  background-color: var(--button-background-color);
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
 /* Main Content: Results Page */
 .MainResultsPage {
-  width: 100%;
+  width: 100vw;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -458,18 +578,26 @@ nav a:hover,
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin: 1rem 0px;
-  padding: 0px 0.5rem;
 }
 .MainResultsPage .ResultsGraphs {
   width: 100%;
   display: flex;
   justify-content: space-around;
-  flex-direction: row;
+  flex-flow: row wrap;
 }
 .ResultsGraphs .PersistanceGraph,
 .ResultsGraphs .BarcodeGraph {
   flex: 0 0 auto;
+}
+.BettiAndEulerTableContainer, 
+.StatisticsTableContainer,
+.Ratios,
+.RawData {
+  overflow-x: auto;
+}
+.ResultsGraphs .PersistanceGraph img,
+.ResultsGraphs .BarcodeGraph img{
+  max-width: var(--image-max-width);
 }
 #RawDataTable,
 #RatiosTable,
@@ -530,6 +658,57 @@ nav a:hover,
   color: white;
 }
 
+.DailyLog {
+  overflow-x: scroll;
+}
+.CompletLog {
+  overflow-x: scroll;
+}
+
+.SqsLayout {
+  text-align: center;
+}
+
+.NewLogEntry {
+  height: auto !important;
+}
+
+.NewLogEntryForm .FormRow {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* Main Content: Privacy */
+.PrivacyRoot{
+  display: grid;
+  grid-template-columns: 10vw auto 10vw;
+}
+.PrivacyColumnPaddingLeft{
+  grid-column: 1/2;
+}
+.PrivacyMainCotent{
+  grid-column: 2/3;
+}
+.PrivacyColumnPaddingRight{
+  grid-column: 3/4;
+}
+
+/* Main Content: Terms */
+.TermsRoot{
+  display: grid;
+  grid-template-columns: 10vw auto 10vw;
+}
+.TermsColumnPaddingLeft{
+  grid-column: 1/2;
+}
+.TermsMainCotent{
+  grid-column: 2/3;
+}
+.TermsColumnPaddingRight{
+  grid-column: 3/4;
+}
+
 /* Footer */
 .FooterContainer {
   display: flex;
@@ -540,19 +719,20 @@ nav a:hover,
   margin: auto;
   width: auto;
   max-width: 1080px;
-  padding: 68px 34px 10px;
+  text-align: center;
+  padding: 20px;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
 }
 .FooterNavWrapper {
-  display: none;
+  display: block;
   position: relative;
 
-  font-family: Source Code Pro;
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 12px;
+  font-size: var(--footer-font-size);
   letter-spacing: 3px;
   text-transform: uppercase;
   text-decoration: none;
@@ -560,7 +740,8 @@ nav a:hover,
 .FooterBackToTopContainer {
   display: inline-block;
   vertical-align: middle;
-  margin: 0;
+  text-align: center;
+  margin: 0 0 1em 0;
 }
 .FooterBackToTopLink {
   display: block;
@@ -578,16 +759,14 @@ nav a:hover,
   width: auto !important;
 }
 .SqsCol {
-  float: left;
-  width: 100%;
+  float: none;
+  width: auto;
   padding-left: 17px;
   padding-right: 17px;
 }
 .SqsBlock {
   position: relative;
   height: auto;
-  padding-top: 17px;
-  padding-bottom: 17px;
 }
 .SqsBlockContent {
   display: flex;
@@ -595,7 +774,6 @@ nav a:hover,
   flex-direction: column;
   text-align: center;
   width: 100%;
-  padding: 17px 0px 0px;
   flex-wrap: wrap;
 }
 .SqsBlockSocial {
@@ -619,7 +797,6 @@ nav a:hover,
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0 1rem;
   height: 50%;
   text-decoration: none;
   cursor: pointer;
@@ -628,7 +805,7 @@ nav a:hover,
 }
 .FooterExternalLink span {
   margin-bottom: 0.05rem;
-  font-size: 14px;
+  font-size: calc(var(--footer-font-size)*1.3);
   margin-right: 0.5rem;
   color: rgb(145, 143, 143);
 }
@@ -639,7 +816,7 @@ nav a:hover,
   margin-top: 15px;
   margin-bottom: 15px;
   flex-wrap: wrap;
-  padding: 1rem 0px;
+  font-size: var(--footer-font-size);
 }
 .FooterRouterLink {
   flex: 0 0 auto;
@@ -650,33 +827,67 @@ nav a:hover,
   transition: all 0.2s ease-in-out;
   color: var(--text-color);
   text-decoration: none;
-  font-size: 13px;
+  font-size: calc(var(--footer-font-size)*1.2);
   font-weight: 700;
 }
 
+/* Error Page Styling */
+.ErrorMainContent{
+  text-align: center;
+}
+
+.ErrorMainContent h1{
+  font-size: calc(var(--showcase-font-size)*3);
+  color: black;
+}
+
+.ErrorMainContent h2{
+  margin-top: 1vh;
+  font-size: calc(var(--showcase-font-size)*2);
+  color: black;
+}
+
 /* Media Queries */
-@media only screen and (max-width: 640px) {
+@media only screen and (min-width: 600px) {
+  :root{
+    --image-max-width: 384px;
+  }
+  .MainWelcomePage #Showcase img {
+    height: auto;
+  }
+  main {
+    margin-bottom: 8px;
+  }
+  #BrandLogo{
+    margin-right: 8px;
+  }
   #BrandText {
-    display: none;
+    display: initial;
+  }
+  .MainWelcomePage .Counters .column {
+    width: 25%;
+    display: initial;
+    margin-bottom: initial;
+  }
+  .AnalyzerDropdownFieldRow{
+    flex-direction: row;
+    border-style: none;
   }
   .DailyLog {
-    overflow-x: scroll;
+    overflow-x: initial;
   }
   .CompletLog {
-    overflow-x: scroll;
-  }
-  .FooterInner {
-    padding: 20px;
+    overflow-x: initial;
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 768px) {
   header nav {
-    display: none;
+    display: initial;
   }
 
   #hamburger-icon {
-    display: block;
+    display: none;
   }
 
   .NewLogEntryForm .FormRow {
@@ -684,35 +895,102 @@ nav a:hover,
   }
 
   .FooterInner {
-    text-align: center;
+    text-align: initial;
   }
 
   .FooterNavWrapper {
-    display: block;
+    display: none;
   }
 
   .FooterBackToTopContainer {
     text-align: center;
-    margin-bottom: 1em;
+    margin: 0;
   }
 
   .SqsLayout {
-    text-align: center;
+    text-align: initial;
   }
 
   .SqsCol {
-    float: none !important;
-    width: auto !important;
+    float: left !important;
+    width: 100% !important;
   }
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (min-width: 1024px) {
+  :root {
+    --image-max-width: 512px;
+  }
+  figure{
+    display: initial;
+  }
+  .TopGap{
+    height: 8vh;
+  }
+  .MainWelcomePage{
+    max-width: 1200px;
+    margin: auto;
+  }
+  #Showcase .Container{
+    grid-template-columns: 1fr 1fr;
+    padding: 0 8px 0 8px;
+  }
+  #ShowcaseCTA{
+    grid-column: 1/2;
+    grid-row: 1/2 !important;
+    margin: 32px;
+  }
+  #ShowcaseAnimation{
+    grid-column: 2/3;
+    grid-row: 1/2;
+  }
+  .MainInstructionsPage{
+    padding-left: 10vw;
+    padding-right: 10vw;
+  }
   .NewLogEntry {
-    height: auto !important;
+    height: initial !important;
   }
   .NewLogEntryForm .FormRow {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    display: initial;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+}
+
+@media only screen and (min-width: 1500px) {
+  :root {
+    --image-max-width: 1000px;
+    --brand-font-size: 64px;
+    --showcase-font-size: 2rem;
+    --footer-font-size: 24px;
+  }
+  .TopGap{
+    height: 5vh;
+  }
+  .MainWelcomePage{
+    max-width: 2000px;
+  }
+  .FooterInner{
+    max-width: 1500px;
+  }
+}
+
+@media only screen and (min-width: 1500px) {
+  #Brand #BrandLogo a img {
+    height: 128px; 
+  }
+  #BrandLogo{
+    margin-right: 32px;
+  }
+  .FormSumit input{
+    padding: 24px 40px;
+  }
+  .AnalyzerFieldContainer select, .AnalyzerFieldContainer input[type=file]::file-selector-button{
+    padding: 16px 24px;
+  }
+  .AnalyzerFieldContainer input[type=checkbox]{
+    min-width: 32px;
+    min-height: 32px;
   }
 }
