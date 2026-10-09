@@ -5,7 +5,7 @@
     messages %} {{ i }} {% endfor %} {% endif %} {% endwith %}
   </section>
   <section class="Analyzer" >
-    <p><a href="instructions">Tell me how it works!</a></p>
+    <p><a href="{{ url_for('instructions') }}">Tell me how it works!</a></p>
     <form action="" target="_blank" method="POST" enctype="multipart/form-data" novalidate>
       {{ form.hidden_tag() }}
       <div class="AnalyzerFieldContainer">

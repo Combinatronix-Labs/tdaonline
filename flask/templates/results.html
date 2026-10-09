@@ -16,10 +16,10 @@
             <thead>
               <tr>
                 <th colspan="{{ betti|length }}">
-                  <span style="float: right; font-weight: normal; text-align: right; width: 6em;">
+                  <div class="ResultTableHeading"><span style="float: right; font-weight: normal; text-align: right; width: 6em;">
                     [<input id="CollapseBettiAndEulerTable" type="button" onclick="collapseBettiAndEulerTable(this)" value="Hide">]
                   </span>
-                  <h4>Betti numbers and Euler characteristic:</h4>
+                  <h4>Betti numbers and Euler characteristic:</h4></div>
                 </th>
               </tr>
               <tr class="BettiAndEulerHeadRow" id="betti-euler-table-header">
@@ -39,10 +39,10 @@
             <thead>
               <tr>
                 <th colspan="6">
-                  <span style="float: right; font-weight: normal; text-align: right; width: 6em;">
+                  <div class="ResultTableHeading"><span style="float: right; font-weight: normal; text-align: right; width: 6em;">
                     [<input id="CollapseStatisticsTable" type="button" onclick="collapseStatisticsTable(this)" value="Hide">]
                   </span>
-                  <h4>Statistics:</h4>
+                  <h4>Statistics:</h4></div>
                 </th>
               </tr>
               <tr class="StatisticsHeadRow">
@@ -65,10 +65,10 @@
           <thead>
             <tr>
               <th colspan="2">
-                <span style="float: right; font-weight: normal; text-align: right; width: 6em;">
+                <div class="ResultTableHeading"><span style="float: right; font-weight: normal; text-align: right; width: 6em;">
                   [<input id="CollapseRawDataTable" type="button" onclick="collapseRawDataTable(this)" value="Hide">]
                 </span>
-                <h4>NumPy arrays of lifetime data:</h4>
+                <h4>NumPy arrays of lifetime data:</h4></div>
               </th>
             </tr>
             <tr class="RawDataHeadRow">
@@ -153,10 +153,10 @@
               <thead>
                 <tr>
                   <th colspan="6">
-                    <span style="float: right; font-weight: normal; text-align: right; width: 6em;">
+                    <div class="ResultTableHeading"><span style="float: right; font-weight: normal; text-align: right; width: 6em;">
                       [<input id="CollapseRatiosTable" type="button" onclick="collapseRatiosTable(this)" value="Hide">]
                     </span>
-                    <h4>Ratios:</h4>
+                    <h4>Ratios:</h4></div>
                   </th>
                 </tr>
                 <tr class="RatiosHeadRow">
@@ -216,7 +216,7 @@
         // Load result data to session storage if not already set
         if(window.sessionStorage.getItem("current-result") == null){
           window.sessionStorage.setItem(
-              "current-result", 
+              "current-result",
               document
                 .getElementById("latest-result")
                 .getAttribute("data-latest-result")

@@ -1,6 +1,15 @@
 const toggleMobileMenu = (menu) => {
   menu.classList.toggle('open');
+  menu.querySelector('.menu-toggle').setAttribute('aria-expanded', menu.classList.contains('open'));
 };
+
+document.addEventListener('keydown', (event) => {
+  const menu = document.getElementById('hamburger-icon');
+  if (event.key === 'Escape' && menu.classList.contains('open')) {
+    toggleMobileMenu(menu);
+    menu.querySelector('.menu-toggle').focus();
+  }
+});
 
 if (window.history.replaceState) {
   window.history.replaceState(null, null, window.location.href);

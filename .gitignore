@@ -2,5 +2,5 @@ venv
 __pycache__
 flask/.venv/*
 .DS_Store
-flask/templates/privacy.html
-flask/templates/terms.html
+# Deployment-owned legal documents; only their page wrappers are tracked.
+/flask/legal_content/

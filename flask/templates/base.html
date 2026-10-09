@@ -8,18 +8,19 @@
     <title>{{ 'TDA Online' }} - {{ title }}</title>
     <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}" />
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
   </head>
   <body>
     <header class="header">
-      <div id="hamburger-icon" onclick="toggleMobileMenu(this)">
-        <div class="barN bar1"></div>
-        <div class="barN bar2"></div>
-        <div class="barN bar3"></div>
-        <ul class="mobile-menu">
-          <li><a href="analyzer" aria-label="Try out the TDA Analyzer">Try it</a> </li>
-          <li><a href="instructions" aria-label="Check out instructions on how to use the TDA Analyzer">(how it works)</a> </li>
+      <div id="hamburger-icon">
+        <button class="menu-toggle" type="button" onclick="toggleMobileMenu(this.parentElement)" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-navigation">
+          <span class="barN bar1"></span>
+          <span class="barN bar2"></span>
+          <span class="barN bar3"></span>
+        </button>
+        <ul class="mobile-menu" id="mobile-navigation">
+          <li><a href="{{ url_for('analyzer') }}" aria-label="Try out the TDA Analyzer">Try it</a> </li>
+          <li><a href="{{ url_for('instructions') }}" aria-label="Check out instructions on how to use the TDA Analyzer">(how it works)</a> </li>
         </ul>
       </div>
       <div id="Brand">
@@ -35,8 +36,8 @@
       </div>
       <nav class="main-nav">
         <ul class="nav-items">
-          <li class="nav-item"><a href="analyzer" aria-label="TDA Online Analyzer">Try it</a> </li>
-          <li class="nav-item"><a href="instructions" aria-label="TDA Online instructions for running the analyzer">(how it works)</a> </li>
+          <li class="nav-item"><a href="{{ url_for('analyzer') }}" aria-label="TDA Online Analyzer" {% if request.endpoint == 'analyzer' %}aria-current="page"{% endif %}>Try it</a> </li>
+          <li class="nav-item"><a href="{{ url_for('instructions') }}" aria-label="TDA Online instructions for running the analyzer" {% if request.endpoint == 'instructions' %}aria-current="page"{% endif %}>(how it works)</a> </li>
         </ul>
       </nav>
     </header>
@@ -48,7 +49,7 @@
         {% with messages = get_flashed_messages() %}
           {% if messages %}
             {% for i in messages %}
-            {{ i }}
+            <div class="FlashMessage" role="status">{{ i }}</div>
             {% endfor %}
           {% endif %}
         {% endwith %}
@@ -75,24 +76,23 @@
                     <a class="FooterRouterLink" href="/" aria-label="TDA Online home page">
                       © 2022 {{ 'TDA Online. All Rights Reserved' }}
                     </a>
-                    |<a class="FooterRouterLink" href="privacy" aria-label="TDA Online privacy notice">{{ 'Privacy Policy' }}</a>|
-                    <a class="FooterRouterLink" href="terms" aria-label="TDA Online terms of service">{{ 'Terms of Service' }}</a>
+                    |<a class="FooterRouterLink" href="{{ url_for('privacy') }}" aria-label="TDA Online privacy notice">{{ 'Privacy Policy' }}</a>|
+                    <a class="FooterRouterLink" href="{{ url_for('terms') }}" aria-label="TDA Online terms of service">{{ 'Terms of Service' }}</a>
                   </div>
                   <div class="SqsBlockLegalLinks">
                     Source code available at the <a class="FooterRouterLink" href="https://github.com/Combinatronix-Labs/tdaonline" aria-label="TDA Online github repository">Combinatronix Labs GitHub</a>.
                   </div>
-                  <div class="SqsBlockSocial" stlye="padding: 0.5rem 0px;">
+                  <div class="SqsBlockSocial">
                     <a class="FooterExternalLink"
                       href="https://www.combinatronixlabs.org/"
                       target="_blank"
                       rel="noreferrer"
-                      style="display: flex; justify-content: center; flex-direction: row; color: #1f3c88; font-weight: 700"
                       aria-label="Combinatronix Labs website"
                     >
                       <span>{{ 'Powered By' }}</span>
                       <img
                         src="/static/img/Combinatronix-Labs-Logo.png"
-                        height="28/"
+                        height="28"
                         alt="Combinatronix Labs Logo"
                       />
                     </a>
@@ -104,7 +104,6 @@
         </div>
       </div>
     </footer>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
     <script src="{{url_for('static', filename='js/main.js')}}"></script>
   </body>
 </html>

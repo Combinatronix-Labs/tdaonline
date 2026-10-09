@@ -9,6 +9,7 @@ from flask_session_captcha import FlaskSessionCaptcha
 from flask_sqlalchemy import SQLAlchemy
 from copy import copy
 from magic import from_buffer
+from markupsafe import Markup
 import os
 import io
 import ctda
@@ -27,6 +28,7 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = 'sqlite://'
     SESSION_TYPE = 'sqlalchemy'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    LEGAL_CONTENT_DIR = os.environ.get('LEGAL_CONTENT_DIR', os.path.join(basedir, 'legal_content'))
 
 
 try:
@@ -130,12 +132,21 @@ def analyzerResults():
 
 @app.route('/privacy', methods=['GET'])
 def privacy():
-    return render_template('privacy.html', title="Privacy Notice")
+    return render_template('privacy.html', title="Privacy Notice", legal_content=load_legal_content('privacy.html'))
 
 
 @app.route('/terms', methods=['GET'])
 def terms():
-    return render_template('terms.html', title="Terms & Conditions")
+    return render_template('terms.html', title="Terms & Conditions", legal_content=load_legal_content('terms.html'))
+
+
+def load_legal_content(filename):
+    """Read deployment-owned HTML without evaluating it as a Jinja template."""
+    try:
+        with open(os.path.join(app.config['LEGAL_CONTENT_DIR'], filename), encoding='utf-8') as document:
+            return Markup(document.read())
+    except FileNotFoundError:
+        return None
 
 
 @app.route("/manifest.json")

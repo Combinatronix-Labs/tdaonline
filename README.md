@@ -44,6 +44,30 @@ Make sure your virtual environment is activated when you do so.
 
 ## Run The Flask App
 
+### Add Terms & Privacy Content
+
+Legal document content is managed separately from Git. Before deployment, create
+`flask/legal_content/` and add `privacy.html` and `terms.html`. This directory is
+ignored by Git; the tracked page templates contain only the shared page layout.
+
+Save each document as a UTF-8 HTML fragment containing its headings, text, and
+links, without an outer `<html>` or `<body>` tag. These files are trusted content
+managed by the site operator and are rendered as HTML, without interpreting
+Jinja expressions. Editing a file updates the page on its next request.
+
+To keep the documents outside the checkout (for example, in a deployment-mounted
+directory), set `LEGAL_CONTENT_DIR` to that directory's absolute path before
+starting Flask:
+
+```sh
+export LEGAL_CONTENT_DIR=/srv/tdaonline/legal_content
+```
+
+The directory must contain the same two filenames. A fresh checkout does not
+include the documents; copy them from your deployment's legal content source.
+If a document is missing, its page displays an unavailable notice instead of a
+server error. Back up these files separately from the repository.
+
 ### Run in Development & Debug Mode
 
 In your machine's commandline terminal, run `FLASK_DEBUG=1 FLASK_ENV=development flask run` while inside the `flask` directory of this repository.

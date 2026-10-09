@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="PrivacyRoot LegalPage">
+  <div class="PrivacyColumnPaddingLeft"></div>
+  <div class="PrivacyColumnPaddingRight"></div>
+  <div class="PrivacyMainCotent">
+    {% if legal_content %}
+      {{ legal_content }}
+    {% else %}
+      <h1>{{ title }}</h1>
+      <p>This document is currently unavailable. Please check back later.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
