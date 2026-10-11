@@ -89,12 +89,10 @@ class ResultsNavigationTests(unittest.TestCase):
     def test_results_navigation_resolves_to_existing_top_level_routes(self):
         page = self.render_result(make_result("B"))
         expected = {
-            "Try out the TDA Analyzer": "/analyzer",
-            "Check out instructions on how to use the TDA Analyzer": "/instructions",
-            "TDA Online Analyzer": "/analyzer",
-            "TDA Online instructions for running the analyzer": "/instructions",
-            "TDA Online privacy notice": "/privacy",
-            "TDA Online terms of service": "/terms",
+            "Try it: TDA Online Analyzer": "/analyzer",
+            "(how it works): TDA Online instructions": "/instructions",
+            "Privacy Policy: TDA Online": "/privacy",
+            "Terms of Service: TDA Online": "/terms",
         }
         links = {link.get("aria-label"): link.get("href") for link in page.links}
         for label, destination in expected.items():

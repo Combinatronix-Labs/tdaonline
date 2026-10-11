@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block content %}
 <div class="MainInstructionsPage">
-  <h2>How It Works!</h2>
+  <h1 class="InstructionsTitle">How It Works!</h1>
   <p>
     This page will walk you through each step of the data submission process.
     The data used in the example images is the
@@ -12,7 +12,7 @@
     ><sup><a href="#1">[1]</a></sup><br />
   </p>
   <section>
-    <h3>File Select</h3>
+    <h2 class="GuideStepTitle">File Select</h2>
     <p>
       The first step is choosing the file that contains your data. Right now,
       TDA Online supports analysis only of data stored in CSV and Excel files,
@@ -22,7 +22,7 @@
   </section>
 
   <section>
-    <h3>Maximum Dimension</h3>
+    <h2 class="GuideStepTitle">Maximum Dimension</h2>
     <p>
       The dimension referred to here is the dimension of the topological
       features to be computed. In general, it suffices to take the dimensions of
@@ -36,7 +36,7 @@
   </section>
 
   <section>
-    <h3>Field Coefficient</h3>
+    <h2 class="GuideStepTitle">Field Coefficient</h2>
     <p>
       The field coefficient has to do with computation of the persistence
       diagram. Selecting a coefficient of 7 will help avoid the
@@ -46,7 +46,7 @@
   </section>
 
   <section>
-    <h3>Whether to ignore the first row</h3>
+    <h2 class="GuideStepTitle">Whether to ignore the first row</h2>
     <p>
       Sometimes the first row in a data set is used to store labels rather than
       a point of data. For example, the built-in functions of the R interpreter
@@ -65,7 +65,7 @@
   </section>
 
   <section>
-    <h3>Whether to ignore the first column</h3>
+    <h2 class="GuideStepTitle">Whether to ignore the first column</h2>
     <p>
       Sometimes data points in a set are enumerated, and the first column is
       used to store the enumeration index rather than a dimension of data. For
@@ -95,7 +95,7 @@
   </section>
 
   <section>
-    <h3>Delimiters and Line Terminators (CSV Files Only)</h3>
+    <h2 class="GuideStepTitle">Delimiters and Line Terminators (CSV Files Only)</h2>
     <p>
       Delimiters and line terminators are used to organize the data in a CSV
       file, so if you're uploading data in an Excel file, you can ignore the
@@ -121,7 +121,7 @@
   </section>
 
   <section>
-    <h3>The Captcha</h3>
+    <h2 class="GuideStepTitle">The Captcha</h2>
     <div class="ImageRow">
       <img src="static/img/3a.png" alt="Captcha example"/>
     </div>
@@ -202,7 +202,7 @@
   </section>
 
   <section>
-    <h3>References</h3>
+    <h2 class="GuideStepTitle">References</h2>
     <ol>
       <li id="1">
         Venclovas, C., Ginalski, K., Kang, C. (2004) Human mitochondrial single

@@ -64,6 +64,16 @@ Attempt #1 uses a green poster style; attempt #2 uses a simplex field notebook
 style. These settings change presentation without changing page text or analysis
 behavior.
 
+The selected design uses system sans-serif fonts, larger reading text, visible
+keyboard focus, a skip link, named controls and tables, and finite decorative
+animation. Charts distinguish dimensions with marker shapes and line patterns
+as well as contrasting colors. Accessibility checks target
+[WCAG 2.2 Level AA](https://www.w3.org/TR/WCAG22/), including narrow layouts,
+doubled text size, and custom text spacing. These checks are not a formal
+conformance certification; test production content with assistive technology
+before making a compliance claim. If image CAPTCHA is enabled, it still needs
+an accessible alternative that does not depend on vision.
+
 ### Add Terms & Privacy Content
 
 Legal document content is managed separately from Git. Before deployment, create
@@ -74,6 +84,8 @@ Save each document as a UTF-8 HTML fragment containing its headings, text, and
 links, without an outer `<html>` or `<body>` tag. These files are trusted content
 managed by the site operator and are rendered as HTML, without interpreting
 Jinja expressions. Editing a file updates the page on its next request.
+Keep the supplied documents' heading structure, table headers, and named links
+when editing them so screen-reader navigation remains available.
 
 To keep the documents outside the checkout (for example, in a deployment-mounted
 directory), set `LEGAL_CONTENT_DIR` to that directory's absolute path before

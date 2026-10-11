@@ -48,8 +48,8 @@ body.design-attempt-2 {
 
 /* Form controls arranged as a ruled page in the notebook. */
 .design-attempt-2 .MainAnalyzerPage { width: min(100% - 80px, 960px); margin: 48px auto 72px; }
-.design-attempt-2 .Analyzer > p { margin-bottom: 30px; }
-.design-attempt-2 .Analyzer > p a { color: #0f0f0f; font: italic 42px/1.25 Georgia, "Times New Roman", serif; letter-spacing: -.04em; text-decoration-thickness: 1px; text-underline-offset: 8px; }
+.design-attempt-2 .Analyzer > :is(p, h1) { margin-bottom: 30px; }
+.design-attempt-2 .Analyzer > :is(p, h1) a { color: #0f0f0f; font: italic 42px/1.25 Georgia, "Times New Roman", serif; letter-spacing: -.04em; text-decoration-thickness: 1px; text-underline-offset: 8px; }
 .design-attempt-2 .Analyzer form { position: relative; gap: 0 36px; padding: 22px 42px 32px 54px; border: 1px solid #0f0f0f; border-radius: 0; background: #f5f5f1; box-shadow: 5px 5px 0 rgb(15 15 15 / 12%); }
 .design-attempt-2 .Analyzer form::before { content: ""; position: absolute; inset: 0 auto 0 23px; width: 1px; background: #556b2f; }
 .design-attempt-2 .AnalyzerFieldContainer { padding: 26px 0; border-bottom: 1px solid #bfc1b8; }
@@ -64,11 +64,11 @@ body.design-attempt-2 {
 
 /* Long pages use editorial headings, a margin rule and numbered annotations. */
 .design-attempt-2 .MainInstructionsPage { width: min(100% - 80px, 960px); margin: 48px auto 72px; }
-.design-attempt-2 .MainInstructionsPage h2 { font-size: clamp(43px, 5.5vw, 68px); font-style: italic; margin-bottom: 26px; }
+.design-attempt-2 .MainInstructionsPage > :is(h1, h2) { font-size: clamp(43px, 5.5vw, 68px); font-style: italic; margin-bottom: 26px; }
 .design-attempt-2 .MainInstructionsPage > p { max-width: 850px; color: #343832; font-size: 16px; }
 .design-attempt-2 .MainInstructionsPage section { padding: 36px 20px 36px 80px; border-top: 1px solid #0f0f0f; background: rgb(245 245 241 / 78%); }
 .design-attempt-2 .MainInstructionsPage section::before { top: 36px; left: 17px; font: italic 30px/1 Georgia, "Times New Roman", serif; transform: none; }
-.design-attempt-2 .MainInstructionsPage section h3 { font-size: 29px; font-weight: 400; letter-spacing: -.04em; }
+.design-attempt-2 .MainInstructionsPage section :is(h2, h3) { font-size: 29px; font-weight: 400; letter-spacing: -.04em; }
 .design-attempt-2 .MainInstructionsPage section p { color: #343832; }
 .design-attempt-2 .MainInstructionsPage .ImageRow { border: 1px solid #bfc1b8; border-radius: 0; box-shadow: none; background: white; }
 .design-attempt-2 .MainInstructionsPage ol { color: #343832; }
@@ -77,7 +77,7 @@ body.design-attempt-2 {
 .design-attempt-2 .PersistanceGraph, .design-attempt-2 .BarcodeGraph { padding: 18px; border: 1px solid #0f0f0f; border-top: 1px solid #0f0f0f; border-radius: 0; box-shadow: 4px 4px 0 rgb(15 15 15 / 12%); }
 .design-attempt-2 .BettiAndEulerTableContainer, .design-attempt-2 .StatisticsTableContainer, .design-attempt-2 .Ratios, .design-attempt-2 .RawData { border: 1px solid #0f0f0f; border-radius: 0; background: #f5f5f1; }
 .design-attempt-2 .MainResultsPage table { font-size: 13px; }
-.design-attempt-2 .MainResultsPage h4 { font-family: Georgia, "Times New Roman", serif; font-size: 21px; font-weight: 400; letter-spacing: -.035em; }
+.design-attempt-2 .MainResultsPage :is(h2, h4) { font-family: Georgia, "Times New Roman", serif; font-size: 21px; font-weight: 400; letter-spacing: -.035em; }
 .design-attempt-2 .MainResultsPage thead tr:first-child th { border-left: 5px solid #556b2f; background: #0f0f0f; }
 .design-attempt-2 .MainResultsPage thead tr:nth-child(2) th { background: #e4e6df; border-bottom: 1px solid #0f0f0f; font-family: "Courier New", monospace; font-size: 12px; }
 .design-attempt-2 .MainResultsPage tbody tr:nth-child(even) { background: #eaece5; }
@@ -141,21 +141,21 @@ body.design-attempt-2 {
   .NotebookPlot { right: 0; bottom: -3%; width: 40%; padding: 7px 5px; }
   .NotebookPlot::before { width: 28px; height: 11px; top: -6px; }
   .design-attempt-2 .MainAnalyzerPage { margin-top: 32px; margin-bottom: 45px; }
-  .design-attempt-2 .Analyzer > p a { font-size: 34px; }
+  .design-attempt-2 .Analyzer > :is(p, h1) a { font-size: 34px; }
   .design-attempt-2 .Analyzer form { padding: 16px 20px 24px 31px; box-shadow: 3px 3px 0 rgb(15 15 15 / 12%); }
   .design-attempt-2 .Analyzer form::before { left: 13px; }
   .design-attempt-2 .AnalyzerFieldContainer { padding: 23px 0; }
   .design-attempt-2 .AnalyzerFieldContainer:first-of-type { padding: 16px 0 23px; }
   .design-attempt-2 .AnalyzerFieldContainer:nth-of-type(4) { gap: 20px; }
   .design-attempt-2 .MainInstructionsPage { margin-top: 32px; }
-  .design-attempt-2 .MainInstructionsPage h2 { font-size: 43px; }
+  .design-attempt-2 .MainInstructionsPage > :is(h1, h2) { font-size: 43px; }
   .design-attempt-2 .MainInstructionsPage section { padding: 26px 17px 28px 44px; }
   .design-attempt-2 .MainInstructionsPage section::before { top: 28px; left: 9px; font-size: 22px; }
-  .design-attempt-2 .MainInstructionsPage section h3 { font-size: 26px; }
+  .design-attempt-2 .MainInstructionsPage section :is(h2, h3) { font-size: 26px; }
   .design-attempt-2 .MainInstructionsPage section p { font-size: 14px; }
   .design-attempt-2 .MainResultsPage { margin-top: 24px; }
   .design-attempt-2 .PersistanceGraph, .design-attempt-2 .BarcodeGraph { padding: 10px; }
-  .design-attempt-2 .MainResultsPage h4 { font-size: 17px; }
+  .design-attempt-2 .MainResultsPage :is(h2, h4) { font-size: 17px; }
   .design-attempt-2 .MainResultsPage th, .design-attempt-2 .MainResultsPage td { padding: 12px; }
   .design-attempt-2 .LegalPage { width: calc(100% - 40px); margin: 30px auto 44px; padding: 26px 21px 28px 30px; }
   .design-attempt-2 .LegalPage::before { left: 12px; }

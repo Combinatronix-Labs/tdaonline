@@ -3,11 +3,32 @@ const toggleMobileMenu = (menu) => {
   menu.querySelector('.menu-toggle').setAttribute('aria-expanded', menu.classList.contains('open'));
 };
 
+const closeMobileMenu = (menu) => {
+  menu.classList.remove('open');
+  menu.querySelector('.menu-toggle').setAttribute('aria-expanded', 'false');
+};
+
+const mobileMenu = document.getElementById('hamburger-icon');
+const mobileLayout = window.matchMedia('(max-width: 800px)');
+
 document.addEventListener('keydown', (event) => {
-  const menu = document.getElementById('hamburger-icon');
-  if (event.key === 'Escape' && menu.classList.contains('open')) {
-    toggleMobileMenu(menu);
-    menu.querySelector('.menu-toggle').focus();
+  if (event.key === 'Escape' && mobileMenu.classList.contains('open')) {
+    closeMobileMenu(mobileMenu);
+    if (mobileLayout.matches) {
+      mobileMenu.querySelector('.menu-toggle').focus();
+    }
+  }
+});
+
+mobileMenu.addEventListener('focusout', (event) => {
+  if (!mobileMenu.contains(event.relatedTarget)) {
+    closeMobileMenu(mobileMenu);
+  }
+});
+
+mobileLayout.addEventListener('change', (event) => {
+  if (!event.matches) {
+    closeMobileMenu(mobileMenu);
   }
 });
 
@@ -24,6 +45,8 @@ const collapseHeader = (toggler, table, className) => {
     headRow.classList.add('active');
     toggler.setAttribute('value', 'Show');
   }
+  toggler.setAttribute('aria-expanded', !headRow.classList.contains('active'));
+  toggler.setAttribute('aria-label', toggler.value + ' ' + toggler.dataset.tableLabel);
 }
 
 const collapseBody = (table, className) => {
@@ -39,7 +62,7 @@ const collapseBody = (table, className) => {
   }
 }
 const collapseBettiAndEulerTable = (toggler) => {
-  element = document.getElementById('BettiAndEulerTable');
+  const element = document.getElementById('BettiAndEulerTable');
 
   collapseHeader(toggler, element, 'BettiAndEulerHeadRow');
 
@@ -47,7 +70,7 @@ const collapseBettiAndEulerTable = (toggler) => {
 }
 
 const collapseStatisticsTable = (toggler) => {
-  element = document.getElementById('StatisticsTable');
+  const element = document.getElementById('StatisticsTable');
 
   collapseHeader(toggler, element, 'StatisticsHeadRow');
 
@@ -55,7 +78,7 @@ const collapseStatisticsTable = (toggler) => {
 }
 
 const collapseRatiosTable = (toggler) => {
-  element = document.getElementById('RatiosTable');
+  const element = document.getElementById('RatiosTable');
 
   collapseHeader(toggler, element, 'RatiosHeadRow');
 
@@ -63,19 +86,22 @@ const collapseRatiosTable = (toggler) => {
 }
 
 const collapseRawDataTable = (toggler) => {
-  element = document.getElementById('RawDataTable');
+  const element = document.getElementById('RawDataTable');
 
   collapseHeader(toggler, element, 'RawDataHeadRow');
 
   collapseBody(element, 'RawDataBodyRow');
 }
 
-window.onscroll = function() {scrollFunction()};
+window.addEventListener('scroll', scrollFunction, { passive: true });
 
 function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    document.getElementById("GoToTopButton").style.bottom = "0";
-  } else {
-    document.getElementById("GoToTopButton").style.bottom = "-100px";
-  }
+  const button = document.getElementById('GoToTopButton');
+  const scrolled = document.body.scrollTop > 20 || document.documentElement.scrollTop > 20;
+  const visible = scrolled || document.activeElement === button;
+  button.hidden = !visible;
+  button.style.bottom = visible ? '0' : '-100px';
 }
+
+document.getElementById('GoToTopButton').addEventListener('blur', scrollFunction);
+scrollFunction();

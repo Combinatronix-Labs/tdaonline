@@ -70,9 +70,15 @@ def analyze(
     totald.sort()
     betti = getBetti(dgms, nontrivd, totald)
     stats = getStats(dgms, nontrivd, totald)
+    # High-contrast colors and distinct shapes/patterns identify each dimension.
+    colours = ["#0f0f0f", "#556b2f", "#444444", "#3c4e20", "#263a1f"]
+    markers = ["o", "^", "s", "D", "v"]
+    line_styles = ["solid", "dashed", "dotted", "dashdot", (0, (5, 2, 1, 2, 1, 2))]
     buf = BytesIO()
-    for i in dgms:
-        matplotlib.pyplot.scatter(i[:, 0], i[:, 1])
+    for dimension, i in enumerate(dgms):
+        matplotlib.pyplot.scatter(
+            i[:, 0], i[:, 1], color=colours[dimension], marker=markers[dimension]
+        )
     m = max(dgms[0][0:-2][:, 1])
     for i in nontrivd:
         m = max(m, max(dgms[i][:, 1]))
@@ -80,7 +86,6 @@ def analyze(
     matplotlib.pyplot.plot((0, m), (0, m), color="black", linestyle="dashed")
     matplotlib.pyplot.savefig(buf, bbox_inches="tight", format="svg")
     matplotlib.pyplot.clf()
-    colours = ["black", "blue", "red", "purple", "green"]
     bar = BytesIO()
     step = 0
     for i in totald:
@@ -89,13 +94,16 @@ def analyze(
                 (dgms[i][-j - 1][0], dgms[i][-j - 1][1]),
                 (step, step),
                 color=colours[i],
-                linestyle="solid",
+                linestyle=line_styles[i],
             )
             step += 1
     legend = []
     for i in range(len(totald)):
         legend.append(
-            matplotlib.patches.Patch(color=colours[totald[i]], label=totald[i])
+            matplotlib.lines.Line2D(
+                [0], [0], color=colours[totald[i]],
+                linestyle=line_styles[totald[i]], label=totald[i]
+            )
         )
     matplotlib.pyplot.legend(handles=legend)
     matplotlib.pyplot.savefig(bar, bbox_inches="tight", format="svg")
