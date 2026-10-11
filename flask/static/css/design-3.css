@@ -194,6 +194,7 @@ body.design-attempt-3 {
 
 /* Operator-owned legal documents remain a legible gainsboro reading surface. */
 .design-attempt-3 .LegalPage {
+  --accent: #3c4e20;
   --muted: #444;
   --surface: #dcdcdc;
   margin-top: 58px;
@@ -205,7 +206,7 @@ body.design-attempt-3 {
   box-shadow: 8px 8px 0 #556b2f;
   color-scheme: light;
 }
-.design-attempt-3 .LegalPage a { color: #556b2f; }
+.design-attempt-3 .LegalPage a { color: var(--accent); }
 .design-attempt-3 .LegalPage a:hover { color: #3c4e20; }
 .design-attempt-3 .LegalPage :focus-visible { outline-color: #556b2f; }
 .design-attempt-3 .ErrorMainContent { border: 1px solid #556b2f; border-top-width: 8px; border-radius: 0; color: #dcdcdc; background: #1b1b1b; box-shadow: none; }

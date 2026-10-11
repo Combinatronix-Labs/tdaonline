@@ -44,14 +44,15 @@ Make sure your virtual environment is activated when you do so.
 
 ## Run The Flask App
 
-### Compare the UI Design Attempts
+### UI Design
 
-The current design is attempt #1 and remains the default. To preview one of the
-two alternatives, set `UI_DESIGN_ATTEMPT` before starting Flask. The setting
-applies to all pages; navigation and analysis behavior are the same in each design.
+Design attempt #3, the dark simplex blackboard design, is the default for all
+pages. No design setting is needed for production. If a deployment already sets
+`UI_DESIGN_ATTEMPT`, remove that override or set it to `3` to use the selected
+design. Unrecognized values also use attempt #3.
 
-From the `flask` directory, run each command in a separate terminal with your
-virtual environment activated:
+Attempts #1 and #2 remain available for comparison. From the `flask` directory,
+run each command in a separate terminal with your virtual environment activated:
 
 ```sh
 UI_DESIGN_ATTEMPT=1 flask run --port 5001
@@ -59,8 +60,9 @@ UI_DESIGN_ATTEMPT=2 flask run --port 5002
 UI_DESIGN_ATTEMPT=3 flask run --port 5004
 ```
 
-Attempt #2 uses a simplex field notebook style. Attempt #3 uses a dark, faceted
-blackboard style. Unset or unrecognized values use attempt #1.
+Attempt #1 uses a green poster style; attempt #2 uses a simplex field notebook
+style. These settings change presentation without changing page text or analysis
+behavior.
 
 ### Add Terms & Privacy Content
 
@@ -75,7 +77,8 @@ Jinja expressions. Editing a file updates the page on its next request.
 
 To keep the documents outside the checkout (for example, in a deployment-mounted
 directory), set `LEGAL_CONTENT_DIR` to that directory's absolute path before
-starting Flask:
+starting Flask. In production, put this setting in the service or container's
+environment so the app receives it on startup:
 
 ```sh
 export LEGAL_CONTENT_DIR=/srv/tdaonline/legal_content

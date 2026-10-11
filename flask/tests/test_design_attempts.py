@@ -63,15 +63,15 @@ class DesignAttemptTests(unittest.TestCase):
                         with self.client.get(f'/static/css/design-{attempt}.css') as stylesheet:
                             self.assertEqual(stylesheet.status_code, 200)
 
-    def test_unknown_design_uses_attempt_one(self):
-        app.config['UI_DESIGN_ATTEMPT'] = '1'
-        original = self.client.get('/').get_data(as_text=True)
+    def test_unknown_design_uses_selected_attempt_three(self):
+        app.config['UI_DESIGN_ATTEMPT'] = '3'
+        selected = self.client.get('/').get_data(as_text=True)
         for value in ('', '4', '../../privacy'):
             with self.subTest(value=value):
                 app.config['UI_DESIGN_ATTEMPT'] = value
                 response = self.client.get('/')
                 self.assertEqual(response.status_code, 200)
-                self.assertEqual(response.get_data(as_text=True), original)
+                self.assertEqual(response.get_data(as_text=True), selected)
 
 
 if __name__ == '__main__':
