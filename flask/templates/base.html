@@ -9,8 +9,11 @@
     <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}" />
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+    {% if design_attempt in ('2', '3') %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/design-' ~ design_attempt ~ '.css') }}"/>
+    {% endif %}
   </head>
-  <body>
+  <body class="design-attempt-{{ design_attempt }}">
     <header class="header">
       <div id="hamburger-icon">
         <button class="menu-toggle" type="button" onclick="toggleMobileMenu(this.parentElement)" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-navigation">

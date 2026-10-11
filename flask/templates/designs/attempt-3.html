@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="MainWelcomePage FacetedWelcome">
+  <section id="Showcase">
+    <div class="Container">
+      <div id="ShowcaseCTA">
+        <h1>
+          <span class="WelcomeLine">Welcome to</span>
+          <span class="TDALine">TDA</span>
+          <span class="OnlineLine">Online</span>
+        </h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo
+          repudiandae rerum libero ipsum asperiores omnis mollitia, nostrum
+          commodi placeat ea itaque modi corrupti corporis nam voluptas aut
+          reprehenderit eaque culpa.
+        </p>
+        <a href="#" class="btn">Read More</a>
+      </div>
+      <div id="ShowcaseAnimation" class="SimplexStage">
+        <svg class="FacetedSimplex" viewBox="0 0 600 660" fill="none" aria-hidden="true">
+          <g class="SimplexGuides" stroke="#dcdcdc" stroke-width="1">
+            <path d="M0 493 600 493M300 0V660M0 80 600 660M0 660 600 80"/>
+            <path d="M32 20V36M24 28H40M554 593V609M546 601H562M536 61V77M528 69H544" stroke-width="2"/>
+            <circle cx="300" cy="337" r="277" stroke-dasharray="3 11"/>
+          </g>
+          <g class="SimplexVolume">
+            <path d="M300 49 49 457 289 613Z" fill="#556b2f" fill-opacity=".34"/>
+            <path d="M300 49 558 429 289 613Z" fill="#556b2f" fill-opacity=".9"/>
+            <path d="M49 457 558 429 289 613Z" fill="#dcdcdc" fill-opacity=".08"/>
+            <path d="M300 49 49 457 289 613 558 429 300 49ZM300 49 289 613" stroke="#dcdcdc" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M49 457 558 429" stroke="#dcdcdc" stroke-width="2" stroke-dasharray="7 9"/>
+            <path d="m300 49 97 143M49 457l79-129M289 613l88-60" stroke="#dcdcdc" stroke-width="7"/>
+            <g fill="#0f0f0f" stroke="#dcdcdc" stroke-width="3">
+              <circle cx="300" cy="49" r="12"/>
+              <circle cx="49" cy="457" r="12"/>
+              <circle cx="558" cy="429" r="12"/>
+              <circle cx="289" cy="613" r="12"/>
+            </g>
+            <g fill="#dcdcdc">
+              <circle cx="300" cy="49" r="4"/>
+              <circle cx="49" cy="457" r="4"/>
+              <circle cx="558" cy="429" r="4"/>
+              <circle cx="289" cy="613" r="4"/>
+            </g>
+          </g>
+          <g class="SimplexSatellite" stroke="#dcdcdc" stroke-width="2">
+            <path d="m73 99 50-54 65 47-58 64Z"/>
+            <path d="m73 99 115-7M123 45l7 111"/>
+            <path d="m123 45 65 47-58 64Z" fill="#556b2f"/>
+            <g fill="#dcdcdc" stroke="none">
+              <circle cx="73" cy="99" r="5"/>
+              <circle cx="123" cy="45" r="5"/>
+              <circle cx="188" cy="92" r="5"/>
+              <circle cx="130" cy="156" r="5"/>
+            </g>
+          </g>
+        </svg>
+        <figure>
+          <img alt="Persistence graph" src="/static/img/graph.svg" width="650" role="presentation" />
+        </figure>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}

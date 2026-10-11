@@ -44,6 +44,24 @@ Make sure your virtual environment is activated when you do so.
 
 ## Run The Flask App
 
+### Compare the UI Design Attempts
+
+The current design is attempt #1 and remains the default. To preview one of the
+two alternatives, set `UI_DESIGN_ATTEMPT` before starting Flask. The setting
+applies to all pages; navigation and analysis behavior are the same in each design.
+
+From the `flask` directory, run each command in a separate terminal with your
+virtual environment activated:
+
+```sh
+UI_DESIGN_ATTEMPT=1 flask run --port 5001
+UI_DESIGN_ATTEMPT=2 flask run --port 5002
+UI_DESIGN_ATTEMPT=3 flask run --port 5004
+```
+
+Attempt #2 uses a simplex field notebook style. Attempt #3 uses a dark, faceted
+blackboard style. Unset or unrecognized values use attempt #1.
+
 ### Add Terms & Privacy Content
 
 Legal document content is managed separately from Git. Before deployment, create

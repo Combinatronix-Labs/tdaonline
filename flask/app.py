@@ -29,6 +29,7 @@ class Config(object):
     SESSION_TYPE = 'sqlalchemy'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     LEGAL_CONTENT_DIR = os.environ.get('LEGAL_CONTENT_DIR', os.path.join(basedir, 'legal_content'))
+    UI_DESIGN_ATTEMPT = os.environ.get('UI_DESIGN_ATTEMPT', '1')
 
 
 try:
@@ -61,10 +62,23 @@ Session(app)
 captcha = FlaskSessionCaptcha(app)
 
 
+def get_design_attempt():
+    """Select a preview design, keeping the current design as the default."""
+    attempt = str(app.config['UI_DESIGN_ATTEMPT'])
+    return attempt if attempt in ('1', '2', '3') else '1'
+
+
+@app.context_processor
+def design_context():
+    return {'design_attempt': get_design_attempt()}
+
+
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html', title="Home")
+    attempt = get_design_attempt()
+    template = 'index.html' if attempt == '1' else f'designs/attempt-{attempt}.html'
+    return render_template(template, title="Home")
 
 
 @app.route('/instructions', methods=['GET', 'POST'])
