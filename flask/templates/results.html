@@ -1,30 +1,32 @@
 {% extends "base.html" %}
   {% block content %}
     <div class="MainResultsPage">
+      <h1 class="VisuallyHidden">{{ title }}</h1>
       <section class="ResultsGraphs">
         <div class="PersistanceGraph">
-          <img src="data:image/svg+xml;base64,{{ diagram }}"></img>
+          <img src="data:image/svg+xml;base64,{{ diagram }}" alt="Persistence diagram" aria-describedby="raw-data-heading">
         </div>
         <div class="BarcodeGraph">
-          <img src="data:image/svg+xml;base64,{{ barcode }}"></img>
+          <img src="data:image/svg+xml;base64,{{ barcode }}" alt="Persistence barcode" aria-describedby="raw-data-heading">
         </div>
       </section>
 
       <section class="BettiAndEuler">
-        <div class="BettiAndEulerTableContainer">
-          <table id="BettiAndEulerTable">
+        <div class="BettiAndEulerTableContainer" role="region" tabindex="0" aria-labelledby="betti-euler-heading">
+          <table id="BettiAndEulerTable" aria-labelledby="betti-euler-heading">
+            <colgroup span="{{ betti|length }}"></colgroup>
             <thead>
               <tr>
-                <th colspan="{{ betti|length }}">
-                  <span style="float: right; font-weight: normal; text-align: right; width: 6em;">
-                    [<input id="CollapseBettiAndEulerTable" type="button" onclick="collapseBettiAndEulerTable(this)" value="Hide">]
+                <th colspan="{{ betti|length }}" scope="colgroup">
+                  <div class="ResultTableHeading"><span style="float: right; font-weight: normal; text-align: right; width: 6em;">
+                    [<input id="CollapseBettiAndEulerTable" type="button" onclick="collapseBettiAndEulerTable(this)" value="Hide" aria-label="Hide Betti numbers and Euler characteristic table" data-table-label="Betti numbers and Euler characteristic table" aria-expanded="true" aria-controls="betti-euler-table-header betti-euler-table-body">]
                   </span>
-                  <h4>Betti numbers and Euler characteristic:</h4>
+                  <h2 class="ResultTableTitle" id="betti-euler-heading">Betti numbers and Euler characteristic:</h2></div>
                 </th>
               </tr>
               <tr class="BettiAndEulerHeadRow" id="betti-euler-table-header">
-                <th>Length</th>
-                <th id="betti-euler-table-last-header">Euler characteristic</th>
+                <th scope="col">Length</th>
+                <th id="betti-euler-table-last-header" scope="col">Euler characteristic</th>
               </tr>
             </thead>
             <tbody id="betti-euler-table-body"> 
@@ -34,24 +36,25 @@
       </section>
 
       <section class="Statistics">
-        <div class="StatisticsTableContainer">
-          <table id="StatisticsTable">
+        <div class="StatisticsTableContainer" role="region" tabindex="0" aria-labelledby="statistics-heading">
+          <table id="StatisticsTable" aria-labelledby="statistics-heading">
+            <colgroup span="6"></colgroup>
             <thead>
               <tr>
-                <th colspan="6">
-                  <span style="float: right; font-weight: normal; text-align: right; width: 6em;">
-                    [<input id="CollapseStatisticsTable" type="button" onclick="collapseStatisticsTable(this)" value="Hide">]
+                <th colspan="6" scope="colgroup">
+                  <div class="ResultTableHeading"><span style="float: right; font-weight: normal; text-align: right; width: 6em;">
+                    [<input id="CollapseStatisticsTable" type="button" onclick="collapseStatisticsTable(this)" value="Hide" aria-label="Hide Statistics table" data-table-label="Statistics table" aria-expanded="true" aria-controls="statistics-table-header statistics-body">]
                   </span>
-                  <h4>Statistics:</h4>
+                  <h2 class="ResultTableTitle" id="statistics-heading">Statistics:</h2></div>
                 </th>
               </tr>
-              <tr class="StatisticsHeadRow">
-                <th>Dimension</th>
-                <th>Number of features</th>
-                <th>Minimum length</th>
-                <th>Maximum nontrivial length</th>
-                <th>Mean length</th>
-                <th>Median length</th>
+              <tr class="StatisticsHeadRow" id="statistics-table-header">
+                <th scope="col">Dimension</th>
+                <th scope="col">Number of features</th>
+                <th scope="col">Minimum length</th>
+                <th scope="col">Maximum nontrivial length</th>
+                <th scope="col">Mean length</th>
+                <th scope="col">Median length</th>
               </tr>
             </thead>
             <tbody id="statistics-body">
@@ -60,19 +63,20 @@
         </div>
       </section>
 
-      <section class="RawData" id="raw-data-section">
-        <table id="RawDataTable">
+      <section class="RawData" id="raw-data-section" role="region" tabindex="0" aria-labelledby="raw-data-heading">
+        <table id="RawDataTable" aria-labelledby="raw-data-heading">
+          <colgroup span="1"></colgroup>
           <thead>
             <tr>
-              <th colspan="2">
-                <span style="float: right; font-weight: normal; text-align: right; width: 6em;">
-                  [<input id="CollapseRawDataTable" type="button" onclick="collapseRawDataTable(this)" value="Hide">]
+              <th colspan="1" scope="colgroup">
+                <div class="ResultTableHeading"><span style="float: right; font-weight: normal; text-align: right; width: 6em;">
+                  [<input id="CollapseRawDataTable" type="button" onclick="collapseRawDataTable(this)" value="Hide" aria-label="Hide NumPy arrays of lifetime data table" data-table-label="NumPy arrays of lifetime data table" aria-expanded="true" aria-controls="raw-data-table-header raw-data-table-body">]
                 </span>
-                <h4>NumPy arrays of lifetime data:</h4>
+                <h2 class="ResultTableTitle" id="raw-data-heading">NumPy arrays of lifetime data:</h2></div>
               </th>
             </tr>
-            <tr class="RawDataHeadRow">
-              <th>Raw Data</th>
+            <tr class="RawDataHeadRow" id="raw-data-table-header">
+              <th scope="col">Raw Data</th>
             </tr>
           </thead>
           <tbody id="raw-data-table-body">
@@ -90,6 +94,7 @@
           const lastHeaderColElem = document.getElementById("betti-euler-table-last-header");
           for (var i = 0; i < result.betti.length-2; i++) {
             const colHeaderElem = document.createElement("th");
+            colHeaderElem.setAttribute("scope", "col");
             const newContent = document.createTextNode("Betti " + i);
             colHeaderElem.appendChild(newContent);
             headerElem.insertBefore(colHeaderElem,lastHeaderColElem);
@@ -100,7 +105,8 @@
           for (var i = 0; i < result.betti[0].length; i++) {
             const rowElem = document.createElement("tr");
             rowElem.setAttribute("class", "BettiAndEulerBodyRow");
-            const firstColElem = document.createElement("td");
+            const firstColElem = document.createElement("th");
+            firstColElem.setAttribute("scope", "row");
             const firstColContent = document.createTextNode(result.betti[0][i]);
             firstColElem.appendChild(firstColContent);
             rowElem.appendChild(firstColElem);
@@ -119,7 +125,8 @@
           for (var i = 0; i < result.dim.length; i++) {
             const rowElem = document.createElement("tr");
             rowElem.setAttribute("class", "StatisticsBodyRow");
-            const firstColElem = document.createElement("td");
+            const firstColElem = document.createElement("th");
+            firstColElem.setAttribute("scope", "row");
             const firstColContent = document.createTextNode(result.dim[i]);
             firstColElem.appendChild(firstColContent);
             rowElem.appendChild(firstColElem);
@@ -147,26 +154,32 @@
           if(result.stats[1]){
             const sectionElem = document.createElement("section");
             sectionElem.setAttribute("class","Ratios");
+            sectionElem.setAttribute("role", "region");
+            sectionElem.setAttribute("tabindex", "0");
+            sectionElem.setAttribute("aria-labelledby", "ratios-heading");
             const tableElem = document.createElement("table");
             tableElem.setAttribute("id", "RatiosTable");
+            tableElem.setAttribute("aria-labelledby", "ratios-heading");
             tableElem.innerHTML = `
+              <colgroup span="3"></colgroup>
               <thead>
                 <tr>
-                  <th colspan="6">
-                    <span style="float: right; font-weight: normal; text-align: right; width: 6em;">
-                      [<input id="CollapseRatiosTable" type="button" onclick="collapseRatiosTable(this)" value="Hide">]
+                  <th colspan="3" scope="colgroup">
+                    <div class="ResultTableHeading"><span style="float: right; font-weight: normal; text-align: right; width: 6em;">
+                      [<input id="CollapseRatiosTable" type="button" onclick="collapseRatiosTable(this)" value="Hide" aria-label="Hide Ratios table" data-table-label="Ratios table" aria-expanded="true" aria-controls="ratios-table-header ratios-table-body">]
                     </span>
-                    <h4>Ratios:</h4>
+                    <h2 class="ResultTableTitle" id="ratios-heading">Ratios:</h2></div>
                   </th>
                 </tr>
-                <tr class="RatiosHeadRow">
-                  <th>Dimensions</th>
-                  <th>Ratio of number of features</th>
-                  <th>Ratio of mean feature length</th>
+                <tr class="RatiosHeadRow" id="ratios-table-header">
+                  <th scope="col">Dimensions</th>
+                  <th scope="col">Ratio of number of features</th>
+                  <th scope="col">Ratio of mean feature length</th>
                 </tr>
               </thead>
             `;
             const tableBodyElem = document.createElement("tbody");
+            tableBodyElem.setAttribute("id", "ratios-table-body");
             var k = 0;
             const stats = result.stats;
             for (var i = 0; i < result.dim.length; i++) {
@@ -174,7 +187,8 @@
                 if(j>i){
                   const rowElem = document.createElement("tr");
                   rowElem.setAttribute("class", "RatiosBodyRow");
-                  const col1Elem = document.createElement("td");
+                  const col1Elem = document.createElement("th");
+                  col1Elem.setAttribute("scope", "row");
                   const col2Elem = document.createElement("td");
                   const col3Elem = document.createElement("td");
                   const col1Content = document.createTextNode(result.dim[i]+":"+result.dim[j]);
@@ -216,7 +230,7 @@
         // Load result data to session storage if not already set
         if(window.sessionStorage.getItem("current-result") == null){
           window.sessionStorage.setItem(
-              "current-result", 
+              "current-result",
               document
                 .getElementById("latest-result")
                 .getAttribute("data-latest-result")

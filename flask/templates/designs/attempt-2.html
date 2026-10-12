@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="MainWelcomePage NotebookHome">
+  <section class="NotebookSpread">
+    <div class="NotebookIntro">
+      <h1><span class="NotebookWelcome">Welcome to</span> <span class="NotebookTDA">TDA</span> <span class="NotebookOnline">Online</span></h1>
+      <p>
+        TDA Online is a resource for students, educators, and researchers interested in topological data analysis, including server-side analysis of datasets of limited size.
+      </p>
+      <a href="{{ url_for('instructions') }}" class="btn">Read More</a>
+    </div>
+    <div class="NotebookGeometry">
+      <svg class="NotebookComplex" viewBox="0 0 760 650" fill="none" aria-hidden="true">
+        <g class="NotebookConstruction" stroke="#556b2f" stroke-width="1.5" stroke-dasharray="4 8">
+          <path d="M38 320H720M420 24V608M100 320 90 74 180 160M640 200 710 96 420 80M660 450 704 580 490 570"/>
+          <circle cx="381" cy="327" r="255"/>
+        </g>
+        <g class="NotebookFaces" stroke="#0f0f0f" stroke-width="2.2" stroke-linejoin="round">
+          <path d="M100 320 180 160 300 260Z" fill="#dcdcdc"/>
+          <path d="M180 160 420 80 300 260Z" fill="#556b2f" fill-opacity=".20"/>
+          <path class="NotebookFacePulse" d="M420 80 420 240 300 260Z" fill="#556b2f" fill-opacity=".85"/>
+          <path d="M420 80 640 200 420 240Z" fill="#dcdcdc"/>
+          <path d="M640 200 460 350 420 240Z" fill="#556b2f" fill-opacity=".42"/>
+          <path d="M640 200 660 450 460 350Z" fill="#556b2f" fill-opacity=".75"/>
+          <path d="M660 450 490 570 460 350Z" fill="#dcdcdc"/>
+          <path d="M490 570 340 410 460 350Z" fill="#556b2f" fill-opacity=".20"/>
+          <path d="M490 570 240 550 340 410Z" fill="#556b2f" fill-opacity=".70"/>
+          <path d="M240 550 100 320 340 410Z" fill="#dcdcdc"/>
+          <path d="M100 320 300 260 340 410Z" fill="#556b2f" fill-opacity=".40"/>
+        </g>
+        <g stroke="#0f0f0f" stroke-width="2.2" stroke-linecap="round">
+          <path d="M100 320 48 424M180 160 90 74M640 200 710 96M660 450 704 580"/>
+          <path d="M300 260 340 410 460 350 420 240Z" stroke-width="4"/>
+        </g>
+        <g fill="#f5f5f1" stroke="#0f0f0f" stroke-width="3">
+          <circle cx="100" cy="320" r="8"/>
+          <circle cx="180" cy="160" r="8"/>
+          <circle cx="420" cy="80" r="8"/>
+          <circle cx="640" cy="200" r="8"/>
+          <circle cx="660" cy="450" r="8"/>
+          <circle cx="490" cy="570" r="8"/>
+          <circle cx="240" cy="550" r="8"/>
+          <circle cx="300" cy="260" r="8"/>
+          <circle cx="420" cy="240" r="8"/>
+          <circle cx="460" cy="350" r="8"/>
+          <circle cx="340" cy="410" r="8"/>
+          <circle cx="48" cy="424" r="7"/>
+          <circle cx="90" cy="74" r="7"/>
+          <circle cx="710" cy="96" r="7"/>
+          <circle cx="704" cy="580" r="7"/>
+        </g>
+        <g fill="#556b2f">
+          <circle cx="35" cy="193" r="5"/>
+          <circle cx="562" cy="52" r="5"/>
+          <circle cx="731" cy="355" r="5"/>
+          <circle cx="72" cy="553" r="5"/>
+        </g>
+      </svg>
+      <figure class="NotebookPlot">
+        <img alt="Persistence graph" src="/static/img/graph.svg" width="650" role="presentation" />
+      </figure>
+    </div>
+  </section>
+</div>
+{% endblock %}

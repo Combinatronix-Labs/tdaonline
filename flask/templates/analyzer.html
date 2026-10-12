@@ -5,7 +5,7 @@
     messages %} {{ i }} {% endfor %} {% endif %} {% endwith %}
   </section>
   <section class="Analyzer" >
-    <p><a href="instructions">Tell me how it works!</a></p>
+    <h1 class="AnalyzerTitle"><a href="{{ url_for('instructions') }}">Tell me how it works!</a></h1>
     <form action="" target="_blank" method="POST" enctype="multipart/form-data" novalidate>
       {{ form.hidden_tag() }}
       <div class="AnalyzerFieldContainer">
@@ -46,9 +46,9 @@
         </div>
       </div>
       <div class="AnalyzerFieldContainer">
-        {{ captcha() }}<br />
-        Please type the numbers above in the box below.<br />
-        <input type="text" name="captcha" aria-label="Recaptcha input"/>
+        {{ captcha().replace('<img ', '<img alt="Numeric verification challenge" '|safe) }}<br />
+        <label for="captcha">Please type the numbers above in the box below.</label><br />
+        <input type="text" name="captcha" id="captcha" inputmode="numeric"/>
       </div>
       <div class="FormSumit">{{ form.submit }}</div>
     </form>

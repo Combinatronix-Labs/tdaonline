@@ -1,0 +1,164 @@
+/* Attempt 2: a simplicial field notebook, in the original olive and graphite. */
+body.design-attempt-2 {
+  --surface: #f5f5f1;
+  --line: #bfc1b8;
+  --shadow: none;
+  background-color: #dcdcdc;
+  background-image: linear-gradient(rgb(85 107 47 / 10%) 1px, transparent 1px), linear-gradient(90deg, rgb(85 107 47 / 10%) 1px, transparent 1px);
+  background-size: 24px 24px;
+  font-family: Arial, sans-serif;
+  line-height: 1.8;
+}
+.design-attempt-2 h1, .design-attempt-2 h2, .design-attempt-2 h3 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; letter-spacing: -.055em; }
+.design-attempt-2 .header { min-height: 104px; padding-top: 20px; padding-bottom: 20px; background: #f5f5f1; border-bottom: 1px solid #0f0f0f; }
+.design-attempt-2 #Brand { gap: 15px; }
+.design-attempt-2 #BrandLogo a { width: 52px; height: 52px; background: #556b2f; border-radius: 50%; }
+.design-attempt-2 #BrandLogo img { width: 36px; height: 36px; }
+.design-attempt-2 #BrandText { font: 700 23px/1.2 Georgia, "Times New Roman", serif; letter-spacing: -.045em; }
+.design-attempt-2 #BrandText a { color: #0f0f0f; }
+.design-attempt-2 .nav-items { gap: 38px; }
+.design-attempt-2 .nav-item a { color: #0f0f0f; padding: 8px 0; font-family: "Courier New", monospace; font-size: 14px; }
+.design-attempt-2 .nav-item:first-child a { min-width: 84px; padding: 8px 0; border: 0; border-bottom: 2px solid #556b2f; border-radius: 0; background: transparent; box-shadow: none; transform: none; }
+.design-attempt-2 .nav-item:first-child a::after { margin-left: 22px; font-size: 18px; }
+.design-attempt-2 .nav-item:first-child a:hover { transform: none; box-shadow: none; color: #556b2f; }
+.design-attempt-2 .nav-item:last-child a { font-family: Georgia, "Times New Roman", serif; font-style: italic; font-size: 18px; font-weight: 400; }
+.design-attempt-2 .header :focus-visible { outline-color: #556b2f; }
+.design-attempt-2 .menu-toggle { border: 1px solid #0f0f0f; border-radius: 0; background: transparent; box-shadow: none; }
+.design-attempt-2 .MainWelcomePage { width: min(100% - 80px, 1280px); }
+.NotebookSpread { display: grid; grid-template-columns: .9fr 1.25fr; gap: 24px; align-items: center; padding: 38px 0 55px; }
+.NotebookIntro { position: relative; z-index: 1; padding: 22px 0 24px 32px; border-left: 1px solid #556b2f; }
+.NotebookIntro::before, .NotebookIntro::after { content: ""; position: absolute; left: -4px; width: 7px; height: 7px; border-radius: 50%; background: #556b2f; }
+.NotebookIntro::before { top: 0; }
+.NotebookIntro::after { bottom: 0; }
+.NotebookIntro h1 { line-height: .9; }
+.NotebookWelcome { display: block; margin-bottom: 29px; font: italic 24px/1.3 Georgia, "Times New Roman", serif; letter-spacing: -.03em; }
+.NotebookTDA { display: block; font-size: clamp(92px, 10vw, 142px); letter-spacing: -.075em; }
+.NotebookOnline { display: inline-block; margin-top: 5px; padding-bottom: 7px; color: #556b2f; font-size: clamp(71px, 7.6vw, 108px); font-style: italic; letter-spacing: -.055em; }
+.NotebookIntro > p { max-width: 385px; margin: 29px 0 28px; color: #343832; font-size: 15px; line-height: 1.85; }
+.design-attempt-2 .btn, .design-attempt-2 .FormSumit input { min-height: 47px; padding: 10px 22px; border: 1px solid #0f0f0f; border-radius: 0; background: #556b2f; box-shadow: none; font-family: "Courier New", monospace; font-size: 14px; }
+.design-attempt-2 .btn::after { margin-left: 30px; font-size: 20px; }
+.design-attempt-2 .btn:hover, .design-attempt-2 .FormSumit input:hover { background: #3c4e20; transform: none; box-shadow: none; }
+.NotebookGeometry { position: relative; min-width: 0; }
+.NotebookComplex { width: 100%; height: auto; overflow: visible; }
+.NotebookFacePulse { animation: notebook-face 9s ease-in-out infinite; }
+.NotebookPlot { position: absolute; right: 1%; bottom: -2%; width: 38%; padding: 10px 8px; border: 1px solid #0f0f0f; background: white; box-shadow: 4px 4px 0 rgb(15 15 15 / 13%); transform: rotate(-4deg); }
+.NotebookPlot::before { content: ""; position: absolute; top: -8px; left: 48%; width: 37px; height: 13px; background: #dcdcdc; border: 1px solid #9b9d94; transform: rotate(9deg); }
+.NotebookPlot img { width: 100%; }
+@keyframes notebook-face { 0%, 100% { fill-opacity: .85; } 50% { fill-opacity: .35; } }
+
+/* Form controls arranged as a ruled page in the notebook. */
+.design-attempt-2 .MainAnalyzerPage { width: min(100% - 80px, 960px); margin: 48px auto 72px; }
+.design-attempt-2 .Analyzer > :is(p, h1) { margin-bottom: 30px; }
+.design-attempt-2 .Analyzer > :is(p, h1) a { color: #0f0f0f; font: italic 42px/1.25 Georgia, "Times New Roman", serif; letter-spacing: -.04em; text-decoration-thickness: 1px; text-underline-offset: 8px; }
+.design-attempt-2 .Analyzer form { position: relative; gap: 0 36px; padding: 22px 42px 32px 54px; border: 1px solid #0f0f0f; border-radius: 0; background: #f5f5f1; box-shadow: 5px 5px 0 rgb(15 15 15 / 12%); }
+.design-attempt-2 .Analyzer form::before { content: ""; position: absolute; inset: 0 auto 0 23px; width: 1px; background: #556b2f; }
+.design-attempt-2 .AnalyzerFieldContainer { padding: 26px 0; border-bottom: 1px solid #bfc1b8; }
+.design-attempt-2 .AnalyzerFieldContainer:first-of-type { margin: 0; padding: 20px 0 26px; border: 0; border-bottom: 2px solid #556b2f; border-radius: 0; background: transparent; }
+.design-attempt-2 .AnalyzerFieldContainer:first-of-type > label { font: 700 16px/1.6 "Courier New", monospace; }
+.design-attempt-2 .AnalyzerFieldContainer label { font-size: 14px; }
+.design-attempt-2 .AnalyzerFieldContainer select, .design-attempt-2 .AnalyzerFieldContainer input[type="text"] { border: 1px solid #0f0f0f; border-radius: 0; background: white; font-family: "Courier New", monospace; font-size: 14px; }
+.design-attempt-2 .AnalyzerFieldRow > select { font-size: 19px; }
+.design-attempt-2 .AnalyzerFieldContainer input[type="checkbox"] { width: 18px; height: 18px; }
+.design-attempt-2 .AnalyzerFieldContainer input[type="file"]::file-selector-button { padding: 10px 18px; border: 1px solid #0f0f0f; border-radius: 0; background: #556b2f; font: 700 13px/1.5 "Courier New", monospace; }
+.design-attempt-2 .FormSumit { padding-top: 10px; }
+
+/* Long pages use editorial headings, a margin rule and numbered annotations. */
+.design-attempt-2 .MainInstructionsPage { width: min(100% - 80px, 960px); margin: 48px auto 72px; }
+.design-attempt-2 .MainInstructionsPage > :is(h1, h2) { font-size: clamp(43px, 5.5vw, 68px); font-style: italic; margin-bottom: 26px; }
+.design-attempt-2 .MainInstructionsPage > p { max-width: 850px; color: #343832; font-size: 16px; }
+.design-attempt-2 .MainInstructionsPage section { padding: 36px 20px 36px 80px; border-top: 1px solid #0f0f0f; background: rgb(245 245 241 / 78%); }
+.design-attempt-2 .MainInstructionsPage section::before { top: 36px; left: 17px; font: italic 30px/1 Georgia, "Times New Roman", serif; transform: none; }
+.design-attempt-2 .MainInstructionsPage section :is(h2, h3) { font-size: 29px; font-weight: 400; letter-spacing: -.04em; }
+.design-attempt-2 .MainInstructionsPage section p { color: #343832; }
+.design-attempt-2 .MainInstructionsPage .ImageRow { border: 1px solid #bfc1b8; border-radius: 0; box-shadow: none; background: white; }
+.design-attempt-2 .MainInstructionsPage ol { color: #343832; }
+.design-attempt-2 .MainResultsPage { width: min(100% - 80px, 1200px); margin: 40px auto 64px; }
+.design-attempt-2 .ResultsGraphs { gap: 24px; }
+.design-attempt-2 .PersistanceGraph, .design-attempt-2 .BarcodeGraph { padding: 18px; border: 1px solid #0f0f0f; border-top: 1px solid #0f0f0f; border-radius: 0; box-shadow: 4px 4px 0 rgb(15 15 15 / 12%); }
+.design-attempt-2 .BettiAndEulerTableContainer, .design-attempt-2 .StatisticsTableContainer, .design-attempt-2 .Ratios, .design-attempt-2 .RawData { border: 1px solid #0f0f0f; border-radius: 0; background: #f5f5f1; }
+.design-attempt-2 .MainResultsPage table { font-size: 13px; }
+.design-attempt-2 .MainResultsPage :is(h2, h4) { font-family: Georgia, "Times New Roman", serif; font-size: 21px; font-weight: 400; letter-spacing: -.035em; }
+.design-attempt-2 .MainResultsPage thead tr:first-child th { border-left: 5px solid #556b2f; background: #0f0f0f; }
+.design-attempt-2 .MainResultsPage thead tr:nth-child(2) th { background: #e4e6df; border-bottom: 1px solid #0f0f0f; font-family: "Courier New", monospace; font-size: 12px; }
+.design-attempt-2 .MainResultsPage tbody tr:nth-child(even) { background: #eaece5; }
+.design-attempt-2 .MainResultsPage input[type="button"] { border-radius: 0; }
+.design-attempt-2 .MainResultsPage input[type="button"]:hover { background: #556b2f; }
+.design-attempt-2 .LegalPage { position: relative; width: min(100% - 80px, 960px); padding: 38px 45px 45px; border: 1px solid #0f0f0f; border-top: 1px solid #0f0f0f; border-radius: 0; background: #f5f5f1; box-shadow: 5px 5px 0 rgb(15 15 15 / 12%); }
+.design-attempt-2 .LegalPage::before { content: ""; position: absolute; top: 0; bottom: 0; left: 20px; width: 1px; background: #556b2f; }
+.design-attempt-2 .LegalPage [data-custom-class="title"], .design-attempt-2 .LegalPage [data-custom-class="title"] * { font-family: Georgia, "Times New Roman", serif !important; font-weight: 400; }
+.design-attempt-2 .LegalPage h1 { margin-bottom: 20px; }
+.design-attempt-2 .FlashMessage { border: 1px solid #0f0f0f; border-left: 5px solid #556b2f; }
+.design-attempt-2 .ErrorMainContent { border: 1px solid #0f0f0f; border-radius: 0; box-shadow: 5px 5px 0 rgb(15 15 15 / 12%); }
+.design-attempt-2 .GoToTopButton { border: 1px solid #0f0f0f; border-radius: 0; box-shadow: none; }
+.design-attempt-2 .FooterContainer { border-top: 1px solid #556b2f; box-shadow: inset 0 5px 0 #dcdcdc, inset 0 6px 0 #556b2f; }
+.design-attempt-2 .FooterInner { width: min(100% - 80px, 1280px); padding-top: 32px; }
+.design-attempt-2 .FooterNavWrapper { font-size: 11px; letter-spacing: .05em; }
+.design-attempt-2 .SqsBlockLegalLinks { font-family: "Courier New", monospace; font-size: 11px; }
+
+@media (min-width: 1450px) { .NotebookSpread { padding-top: 50px; padding-bottom: 68px; } }
+@media (max-width: 1000px) {
+  .NotebookSpread { grid-template-columns: .85fr 1.1fr; gap: 8px; padding-top: 48px; padding-bottom: 62px; }
+  .NotebookIntro { padding-left: 24px; }
+  .NotebookWelcome { font-size: 21px; margin-bottom: 22px; }
+  .NotebookTDA { font-size: 108px; }
+  .NotebookOnline { font-size: 85px; }
+  .NotebookIntro > p { font-size: 14px; }
+  .NotebookPlot { width: 42%; bottom: -7%; }
+}
+@media (max-width: 800px) {
+  .design-attempt-2 .header { min-height: 85px; padding: 15px 28px; }
+  .design-attempt-2 .mobile-menu { padding: 16px 28px 20px; border-bottom: 1px solid #0f0f0f; background: #f5f5f1; box-shadow: 0 5px 0 rgb(15 15 15 / 10%); }
+  .design-attempt-2 .mobile-menu a { color: #0f0f0f; font-family: "Courier New", monospace; font-size: 14px; }
+  .NotebookSpread { grid-template-columns: 1fr; gap: 6px; padding-top: 36px; padding-bottom: 56px; }
+  .NotebookIntro { max-width: 570px; padding: 14px 0 18px 26px; }
+  .NotebookIntro h1 { position: relative; }
+  .NotebookTDA { display: inline-block; margin-right: 12px; font-size: clamp(72px, 13vw, 106px); }
+  .NotebookOnline { display: inline-block; font-size: clamp(62px, 11vw, 94px); }
+  .NotebookWelcome { margin-bottom: 17px; }
+  .NotebookIntro > p { max-width: 515px; font-size: 15px; margin-top: 24px; }
+  .NotebookGeometry { width: min(100%, 610px); margin: 0 auto; }
+  .NotebookPlot { width: 34%; right: 5%; bottom: 0; }
+  .design-attempt-2 .Analyzer form { padding-right: 30px; padding-left: 46px; }
+  .design-attempt-2 .Analyzer form::before { left: 20px; }
+  .design-attempt-2 .AnalyzerFieldContainer:nth-of-type(4) { gap: 24px; }
+  .design-attempt-2 .MainInstructionsPage section { padding-right: 20px; }
+}
+@media (max-width: 520px) {
+  .design-attempt-2 { background-size: 20px 20px; }
+  .design-attempt-2 .header { min-height: 80px; padding: 12px 20px; }
+  .design-attempt-2 #Brand { gap: 11px; }
+  .design-attempt-2 #BrandLogo a { width: 44px; height: 44px; }
+  .design-attempt-2 #BrandLogo img { width: 31px; height: 31px; }
+  .design-attempt-2 #BrandText { font-size: 21px; }
+  .design-attempt-2 .MainWelcomePage, .design-attempt-2 .MainAnalyzerPage, .design-attempt-2 .MainInstructionsPage, .design-attempt-2 .MainResultsPage, .design-attempt-2 .FooterInner { width: calc(100% - 40px); }
+  .NotebookSpread { padding-top: 31px; padding-bottom: 37px; }
+  .NotebookIntro { padding-left: 19px; }
+  .NotebookWelcome { font-size: 20px; margin-bottom: 18px; }
+  .NotebookTDA { display: block; font-size: 101px; }
+  .NotebookOnline { display: block; margin-top: 0; font-size: 86px; }
+  .NotebookIntro > p { margin-top: 22px; font-size: 14px; line-height: 1.85; }
+  .NotebookGeometry { margin-top: 6px; }
+  .NotebookPlot { right: 0; bottom: -3%; width: 40%; padding: 7px 5px; }
+  .NotebookPlot::before { width: 28px; height: 11px; top: -6px; }
+  .design-attempt-2 .MainAnalyzerPage { margin-top: 32px; margin-bottom: 45px; }
+  .design-attempt-2 .Analyzer > :is(p, h1) a { font-size: 34px; }
+  .design-attempt-2 .Analyzer form { padding: 16px 20px 24px 31px; box-shadow: 3px 3px 0 rgb(15 15 15 / 12%); }
+  .design-attempt-2 .Analyzer form::before { left: 13px; }
+  .design-attempt-2 .AnalyzerFieldContainer { padding: 23px 0; }
+  .design-attempt-2 .AnalyzerFieldContainer:first-of-type { padding: 16px 0 23px; }
+  .design-attempt-2 .AnalyzerFieldContainer:nth-of-type(4) { gap: 20px; }
+  .design-attempt-2 .MainInstructionsPage { margin-top: 32px; }
+  .design-attempt-2 .MainInstructionsPage > :is(h1, h2) { font-size: 43px; }
+  .design-attempt-2 .MainInstructionsPage section { padding: 26px 17px 28px 44px; }
+  .design-attempt-2 .MainInstructionsPage section::before { top: 28px; left: 9px; font-size: 22px; }
+  .design-attempt-2 .MainInstructionsPage section :is(h2, h3) { font-size: 26px; }
+  .design-attempt-2 .MainInstructionsPage section p { font-size: 14px; }
+  .design-attempt-2 .MainResultsPage { margin-top: 24px; }
+  .design-attempt-2 .PersistanceGraph, .design-attempt-2 .BarcodeGraph { padding: 10px; }
+  .design-attempt-2 .MainResultsPage :is(h2, h4) { font-size: 17px; }
+  .design-attempt-2 .MainResultsPage th, .design-attempt-2 .MainResultsPage td { padding: 12px; }
+  .design-attempt-2 .LegalPage { width: calc(100% - 40px); margin: 30px auto 44px; padding: 26px 21px 28px 30px; }
+  .design-attempt-2 .LegalPage::before { left: 12px; }
+  .design-attempt-2 .FooterInner { padding-top: 27px; }
+}
+@media (prefers-reduced-motion: reduce) { .NotebookFacePulse { animation: none; } }
